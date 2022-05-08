@@ -1,0 +1,1286 @@
+@media screen and (min-width: 1025px) { /*ウィンドウ幅が1025px以上の場合に適用*/
+
+
+/*フォント*/
+@import url('https://fonts.googleapis.com/css2?family=Wire+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap');
+
+
+/*ページ*/
+#body
+{
+    margin:0;
+    background-color: rgb(33, 33, 33);  
+}
+
+
+/*メインコンテンツ*/
+#mainContents
+{
+    position: initial;
+    
+}
+
+
+.backgroundimage
+{
+    background-color: rgb(24, 24, 24);    
+
+}
+
+.mainContents_container
+{
+    display: flex;
+    padding-top: 55px;
+    display: -webkit-flex;
+}
+
+.mainContents_container_left
+{
+    width: 12.5%;    
+    color: white;
+    height: auto;
+}
+
+
+/*上にスペースをあける*/
+.mainContents_container_left div
+{
+    padding-top: 5px;
+}
+
+.mainContents_container_left div :hover
+{
+    cursor: pointer;
+    cursor: hand;
+}
+
+.sp_left_menu_h1{
+    display: none;
+}
+
+.left_menu_h1 img
+{
+    width: 100%;
+    margin:0px;/*上 左右 下*/
+    padding: 0px;
+    position: relative;
+    top: 0px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+    border-radius: 15px;
+    opacity:0.7;
+}
+
+
+
+
+/* Shine */
+.left_menu_h1:hover img{
+    opacity:1.0;
+    filter:alpha(opacity=70);
+    -ms-filter: “alpha( opacity=70 )”;
+}
+
+
+.left_menu_h2
+{
+    padding-top: 0px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgb(24, 24, 24);
+    height: 50px;
+    position: relative;
+
+}
+
+.endwalker
+{
+    display: none;
+}
+
+.shadowbringers
+{
+    display: none;
+}
+
+.stormblood
+{
+    display: none;
+}
+
+.heavensward
+{
+    display: none;
+}
+
+
+.arealmreborn
+{
+    display: none;
+}
+
+
+
+
+.left_menu_h2_span
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    padding-left: 20px;
+
+}
+
+.left_menu_ul
+{
+    display: none;
+
+    margin-left: -30px;
+    background-color: rgb(24, 24, 24);
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.left_menu_ul li
+{
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    list-style: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;    
+    
+}
+
+.left_menu_ul img{
+    width: 15%;
+    padding-right: 10px;
+    margin-left: -5px;
+}
+
+
+.menu_contact{
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+
+
+
+/*中央コンテンツ*/
+.mainContents_container_center
+{
+    margin-top: -15px;
+    width: 87.5%;
+    background-color: rgb(33, 33, 33);
+    color: white;
+
+}
+
+.movie_list_filter{
+    margin-left: -40px;
+}
+
+
+
+/*リストフィルター*/
+.movie_list_filter_ul
+{
+    display: flex;
+}
+
+.movie_list_filter_ul_div
+{
+    background-color: rgb(24, 24, 24);
+    list-style: none;
+    display: -webkit-flex;
+    display: flex;
+    margin: 0px auto;
+    padding: 13px 0px 13px 20px ;
+
+    border: 1px solid;
+    border-top-color: rgb(56, 56, 56);
+    border-bottom-color: rgb(56, 56, 56);
+    border-left: transparent;
+    border-right: transparent;
+
+    width: 100%;
+
+
+}
+
+.filter_div
+{
+
+}
+
+.sort_div
+{
+
+}
+
+
+.movie_list_filter_ul_div li.movie_list_filter_button{
+  color: #fff;
+  background-color:#444444;
+  border-radius: 100vh;
+  padding: 3px 15px;
+  margin-right: 10px;
+}
+
+
+.movie_list_filter_button:hover{
+    cursor: pointer;
+    cursor: hand;
+}
+
+.movie_list_filter_icon img
+{
+    width: 2.6vh;
+    height: auto;
+    margin: 0px;
+    padding-top: 2px;
+    padding-right: 5px;
+    
+}
+
+.movie_list_sort_icon{
+    padding-left: 20px;
+}
+
+
+.filter_play_job_menu{
+    position: fixed;
+    top:80px;
+    left: 350px;
+    width: 80vw;
+
+}
+
+
+.filter_play_job_menu > div
+{
+    display: none;
+}
+
+/*ジョブメニューの背景*/
+.filter_play_job_menu_div
+{
+    list-style: none;
+    position: absolute;
+    padding: 6px 10px 6px 10px;
+    margin-left: -90px;
+    margin-top: 35px;
+    background-color: #444444;
+}
+
+.filter_play_job_menu_div_top
+{
+    display: flex;
+}
+
+/*ロール毎の設定*/
+/*タンク*/
+.filter_play_job_menu_div_titletank
+{
+    background-color: rgb(25, 0, 134);
+    padding-left: 10px;
+    padding-top: 2px;
+    border-radius:7px;
+}
+
+.filter_play_job_menu_div_icontank ul
+{
+    display: flex;
+    list-style: none;
+    padding-left: 10px;
+}
+
+.filter_play_job_menu_div_icontank img
+{
+    width: 40px;
+}
+
+/*ヒーラー*/
+.filter_play_job_menu_div_healer
+{
+    padding-left: 10px;
+}
+
+.filter_play_job_menu_div_titlehealer
+{
+    background-color: rgb(0, 116, 35);
+    padding-left: 10px;
+    padding-top: 2px;
+    border-radius:7px;
+}
+
+.filter_play_job_menu_div_iconhealer ul
+{
+    display: flex;
+    list-style: none;
+    padding-left: 10px;
+}
+
+.filter_play_job_menu_div_iconhealer img
+{
+    width: 40px;
+}
+
+/*DPS*/
+/*近接*/
+.filter_play_job_menu_div_melee
+{
+    padding-left: 10px;
+}
+
+.filter_play_job_menu_div_titledps
+{
+    background-color: rgb(141, 0, 0);
+    padding-left: 10px;
+    padding-top: 2px;
+    margin-top: 10px;
+    border-radius:7px;
+}
+
+.filter_play_job_menu_div_titlemelee
+{
+    background-color: rgba(128, 0, 0, 0.5);
+    padding-left: 10px;
+    padding-top: 2px;
+    margin-top: 10px;
+    font-size: 12px;
+    border-radius:7px;
+}
+
+.filter_play_job_menu_div_iconmelee ul
+{
+    display: flex;
+    list-style: none;
+    padding-left: 0px;
+}
+
+.filter_play_job_menu_div_iconmelee img
+{
+    width: 40px;
+    margin-top: -5px;
+}
+
+.filter_play_job_menu_div_dps
+{
+    display: flex;
+}
+
+/*レンジ*/
+.filter_play_job_menu_div_range
+{
+    padding-left: 10px;
+}
+
+.filter_play_job_menu_div_titlerange
+{
+    background-color: rgba(128, 0, 0, 0.5);
+    padding-left: 10px;
+    padding-top: 2px;
+    margin-top: 10px;
+    font-size: 12px;
+    border-radius:7px;
+}
+
+.filter_play_job_menu_div_iconrange ul
+{
+    display: flex;
+    list-style: none;
+    padding-left: 0px;
+}
+
+.filter_play_job_menu_div_iconrange img
+{
+    width: 40px;
+    margin-top: -5px;
+}
+
+/*キャスター*/
+.filter_play_job_menu_div_bottom
+{
+    display: flex;
+}
+
+.filter_play_job_menu_div_caster
+{
+    padding-left: 10px;
+}
+
+.filter_play_job_menu_div_titlecaster
+{
+    background-color: rgba(128, 0, 0, 0.5);
+    padding-left: 10px;
+    padding-top: 2px;
+    margin-top: 10px;
+    font-size: 12px;
+    border-radius:7px;
+}
+
+.filter_play_job_menu_div_iconcaster ul
+{
+    display: flex;
+    list-style: none;
+    padding-left: 0px;
+}
+
+.filter_play_job_menu_div_iconcaster img
+{
+    width: 40px;
+    margin-top: -5px;
+}
+
+
+.filter_string_guide_menu{
+    position: fixed;
+    top:80px;
+    left: 610px;
+    width: 80vw;
+}
+
+
+.filter_string_guide_menu ul
+{
+    display: none;
+    list-style: none;
+    position: absolute;
+    padding: 6px 10px 6px 10px;
+    margin-left: -90px;
+    margin-top: 35px;
+    background-color: #444444;
+}
+
+.filter_string_guide_menu li
+{
+    padding: 3px 50px 3px 3px;
+}
+
+.filter_play_job_menu_all_button
+{
+
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.filter_play_job_menu_all_button_active_button
+{
+    background-color: rgba(255, 0, 0, 0.25);
+    padding-top: 2px;
+    border-radius:7px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.filter_play_job_menu_all_button_inactive
+{
+    padding-top: 5px;
+}
+
+.filter_play_job_menu_all_button_inactive_button
+{
+    background-color: rgba(4, 0, 255, 0.25);
+    padding-top: 2px;
+    border-radius:7px;
+    padding-left: 20px;
+    padding-right: 20px; 
+}
+
+.filter_play_job_menu_enter{
+    padding-top: 15px;
+    padding-left: 10px;
+}
+
+.filter_play_job_menu_enter_button{
+    background-color: rgba(255, 255, 255, 0.377);
+    color: black;
+    border-radius:7px;
+    padding: 17px 20px;
+    font-weight: bold;
+}
+
+
+
+/*ムービーリスト*/
+.movie_list
+{
+    width: 100%;
+}
+
+.movie_list_ul
+{
+    display: flex;
+    padding-right: 20px;
+}
+
+.movie_list_div
+{
+    width: 25%;
+}
+
+.movie_list_ul li
+{
+    list-style: none;
+    margin: 0px 10px 0px;
+}
+
+
+
+.movie_list_samneil img
+{
+    width: 38vh;
+    height: 21vh;
+    object-fit: cover;
+
+}
+
+.movie_list_detail
+{
+    display: flex;
+}
+
+.movie_list_detail_channelicon img
+{
+    border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+    width:  40px;       /* ※縦横を同値に */
+    height: 40px;       /* ※縦横を同値に */    
+}
+
+.movie_list_detail_text
+{
+    margin-left: 5px;
+}
+
+.movie_list_detail_text_title
+{
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+.movie_list_detail_text_channelname_div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.movie_list_detail_text_channelname
+{
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+    color: rgb(160, 160, 160);
+    font-size: 14px;
+}
+
+.movie_list_favorite
+{
+    padding-right: 20px;
+    color: rgb(107, 107, 107);
+    font-size: 15px;
+}
+
+.movie_list_favorite:hover
+{
+    cursor: pointer;
+    user-select: none;
+}
+
+
+
+
+.movie_list_detail_view_count
+{
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+    color: rgb(160, 160, 160);
+    font-size: 14px;
+}
+
+.movie_list_div a
+{
+    color : inherit;
+    text-decoration: none;
+}
+
+
+
+/* スクロールバー */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: rgb(24, 24, 24);    
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #c7c7c7;
+    border-radius: 5px;
+  }
+
+/* ポップ */
+  #pop{
+    display:inline-block;
+    position:absolute;
+    
+    margin-top:15px;
+    margin-left:5px;
+
+    background:rgba(0,0,0,0.8);
+    color:#FFF;
+
+    margin-top:15px;
+    text-align:left;
+    border-radius:3px;
+    padding:5px;
+}
+
+
+
+/* ハンバーガーメニューオフ */
+.hamburger{
+    display: none;
+}
+
+
+
+}/*ウィンドウ幅が1025px以上の場合に適用*/
+
+
+
+
+
+
+@media screen and (max-width : 599px) { /*ウィンドウ幅が最大599pxまでの場合に適用*/
+
+    /*総合トップのロゴを非表示*/
+    .main_top_header_menu_logo{
+        display: none;
+    }
+
+    #body{
+        margin: 0px 0px;
+    }
+    /* 各ページここまで定型 */
+
+
+
+    /*リストフィルター*/
+    .movie_list_filter_ul
+    {
+        display: flex;
+        margin: 0px;
+        padding: 0px;
+        overflow: auto;
+        /*テーブルを入れた場合、セル内の文字を折り返ししないようにします*/
+        white-space: nowrap;
+        /*惰性を与えてスムーズなスクロールにしますよ*/
+        -webkit-overflow-scrolling: touch;
+        background-color: rgb(24, 24, 24);        
+    }
+    
+
+    .movie_list_filter_ul{
+        border: 1px solid;
+        border-top-color: rgb(56, 56, 56);
+        border-bottom-color: rgb(56, 56, 56);
+        border-left: transparent;
+        border-right: transparent;
+    }
+
+    .movie_list_filter_ul_div
+    {
+        
+        list-style: none;
+        display: -webkit-flex;
+        display: flex;
+        margin: 0px auto;
+        padding: 10px 0px 10px 20px ;
+
+        width: 100%;
+    }
+
+
+
+    .filter_div
+    {
+
+    }
+
+    .sort_div
+    {
+
+    }
+
+
+    .movie_list_filter_ul_div li.movie_list_filter_button{
+        color: #fff;
+        background-color:#444444;
+        border-radius: 20px;
+        padding: 3px 15px;
+        margin-right: 10px;      
+        white-space: nowrap;
+    }
+
+
+
+    .movie_list_filter_icon img
+    {
+        width: 8vw;
+        height: auto;
+        margin: 0px;
+        padding-top: 2px;
+        padding-right: 5px;
+
+    }
+
+    .movie_list_sort_icon{
+        padding-left: 20px;
+    }    
+
+
+    .filter_play_job_menu > div
+    {
+        display: none;
+    }
+
+    /*ジョブメニューの背景*/
+    .filter_play_job_menu{
+        position: fixed;
+        top:48px;
+        left: 80px;
+        width: 80vw;    
+    }
+
+
+    .filter_play_job_menu_div
+    {
+        list-style: none;
+        
+        top: 0;
+        top: 46px;
+        left: 70px;
+        z-index: 3;
+        width: 100vw;
+
+        padding: 6px 10px 6px 10px;
+        margin-left: -90px;
+        margin-top: 33px;
+        background-color: #444444;
+        color: white;
+
+        transform: scale(0.83);
+
+    }
+
+    .filter_play_job_menu_div_top
+    {
+        display: flex;
+    }
+
+    /*ロール毎の設定*/
+    /*タンク*/
+    .filter_play_job_menu_div_titletank
+    {
+        background-color: rgb(25, 0, 134);
+        padding-left: 10px;
+        padding-top: 2px;
+        border-radius:7px;
+    }
+
+    .filter_play_job_menu_div_icontank ul
+    {
+        display: flex;
+        list-style: none;
+        padding-top: 10px;
+        padding-left: 10px;
+    }
+
+    .filter_play_job_menu_div_icontank img
+    {
+        width: 40px;
+    }
+
+    /*ヒーラー*/
+    .filter_play_job_menu_div_healer
+    {
+        padding-left: 10px;
+    }
+
+    .filter_play_job_menu_div_titlehealer
+    {
+        background-color: rgb(0, 116, 35);
+        padding-left: 10px;
+        padding-top: 2px;
+        border-radius:7px;
+    }
+
+    .filter_play_job_menu_div_iconhealer ul
+    {
+        display: flex;
+        list-style: none;
+        padding-top: 10px;
+        padding-left: 10px;
+    }
+
+    .filter_play_job_menu_div_iconhealer img
+    {
+        width: 40px;
+    }
+
+    /*DPS*/
+    /*近接*/
+    .filter_play_job_menu_div_melee
+    {
+        padding-left: 10px;
+    }
+
+    .filter_play_job_menu_div_titledps
+    {
+        background-color: rgb(141, 0, 0);
+        padding-left: 10px;
+        padding-top: 2px;
+        margin-top: 10px;
+        border-radius:7px;
+    }
+
+    .filter_play_job_menu_div_titlemelee
+    {
+        background-color: rgba(128, 0, 0, 0.5);
+        padding-left: 10px;
+        padding-top: 2px;
+        margin-top: 10px;
+        font-size: 12px;
+        border-radius:7px;
+    }
+
+    .filter_play_job_menu_div_iconmelee ul
+    {
+        display: flex;
+        list-style: none;
+        padding-top: 10px;
+        padding-left: 0px;
+    }
+
+    .filter_play_job_menu_div_iconmelee img
+    {
+        width: 40px;
+        margin-top: -5px;
+    }
+
+    .filter_play_job_menu_div_dps
+    {
+        display: flex;
+    }
+
+    /*レンジ*/
+    .filter_play_job_menu_div_range
+    {
+        padding-left: 10px;
+    }
+
+    .filter_play_job_menu_div_titlerange
+    {
+        background-color: rgba(128, 0, 0, 0.5);
+        padding-left: 10px;
+        padding-top: 2px;
+        margin-top: 10px;
+        font-size: 12px;
+        border-radius:7px;
+    }
+
+    .filter_play_job_menu_div_iconrange ul
+    {
+        display: flex;
+        list-style: none;
+        padding-top: 10px;
+        padding-left: 0px;
+    }
+
+    .filter_play_job_menu_div_iconrange img
+    {
+        width: 40px;
+        margin-top: -5px;
+    }
+
+    /*キャスター*/
+    .filter_play_job_menu_div_bottom
+    {
+        display: flex;
+    }
+
+    .filter_play_job_menu_div_caster
+    {
+        padding-left: 10px;
+    }
+
+    .filter_play_job_menu_div_titlecaster
+    {
+        background-color: rgba(128, 0, 0, 0.5);
+        padding-left: 10px;
+        padding-top: 2px;
+        margin-top: 10px;
+        font-size: 12px;
+        border-radius:7px;
+    }
+
+    .filter_play_job_menu_div_iconcaster ul
+    {
+        display: flex;
+        list-style: none;
+        padding-top: 10px;
+        padding-left: 0px;
+    }
+
+    .filter_play_job_menu_div_iconcaster img
+    {
+        width: 40px;
+        margin-top: -5px;
+    }
+
+    .filter_string_guide_menu{
+        position: fixed;
+        top: 0px;
+        left: 50px;
+        z-index: 3;
+        width: 100vw;
+    }
+
+
+
+
+    .filter_string_guide_menu ul
+    {
+        display: none;
+        list-style: none;
+        position: absolute;
+        top: 70px;
+        left: 140px;
+        
+        padding: 6px 10px 6px 10px;
+        margin-left: -90px;
+        margin-top: 35px;
+        background-color: #444444;
+
+        color: white;
+    }
+
+    .filter_string_guide_menu li
+    {
+        padding: 3px 70px 3px 23px;
+        border-bottom: 1px solid;
+        border-color: rgb(163, 163, 163);
+        border-right: transparent;
+        border-left: transparent;
+    }
+    
+
+
+
+    .filter_play_job_menu_all_button
+    {
+
+        margin-top: 15px;
+        margin-left: 15px;
+    }
+
+    .filter_play_job_menu_all_button_active_button
+    {
+        background-color: rgba(255, 0, 0, 0.25);
+        padding-top: 2px;
+        border-radius:7px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .filter_play_job_menu_all_button_inactive
+    {
+        padding-top: 5px;
+    }
+
+    .filter_play_job_menu_all_button_inactive_button
+    {
+        background-color: rgba(4, 0, 255, 0.25);
+        padding-top: 2px;
+        border-radius:7px;
+        padding-left: 20px;
+        padding-right: 20px; 
+    }
+
+    .filter_play_job_menu_enter{
+        padding-top: 15px;
+        padding-left: 10px;
+    }
+
+    .filter_play_job_menu_enter_button{
+        background-color: rgba(255, 255, 255, 0.377);
+        color: black;
+        border-radius:7px;
+        padding: 17px 20px;
+        font-weight: bold;
+    }
+
+
+
+    /*ムービーリスト*/
+    .movie_list
+    {
+
+    }
+
+    .movie_list_ul
+    {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .movie_list_div
+    {
+        background-color: rgb(33,33,33);
+        color: white;
+    }
+
+    .movie_list_ul li
+    {
+        list-style: none;
+
+    }
+
+
+
+    .movie_list_samneil img
+    {
+        width: 100%;
+    }
+
+    .movie_list_detail
+    {
+        display: flex;
+        padding-left: 5px;
+        padding-bottom: 15px;
+    }
+
+    .movie_list_detail_channelicon img
+    {
+        border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+        width:  40px;       /* ※縦横を同値に */
+        height: 40px;       /* ※縦横を同値に */    
+    }
+
+    .movie_list_detail_text
+    {
+        margin-left: 5px;
+    }
+
+    .movie_list_detail_text_title
+    {
+        display: -webkit-box;
+    	-webkit-box-orient: vertical;
+    	-webkit-line-clamp: 2;
+    	overflow: hidden;
+        font-size: 4vw;
+    }
+
+    .movie_list_detail_text_channelname_div{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .movie_list_detail_text_channelname
+    {
+        display: -webkit-box;
+    	-webkit-box-orient: vertical;
+    	-webkit-line-clamp: 1;
+    	overflow: hidden;
+        color: rgb(160, 160, 160);
+        font-size: 3vw;
+    }
+
+    .movie_list_favorite
+    {
+        padding-right: 20px;
+        color: rgb(107, 107, 107);
+        font-size: 4vw;
+    }
+
+    .movie_list_favorite:hover
+    {
+        cursor: pointer;
+        user-select: none;
+    }
+
+
+    .movie_list_detail_view_count
+    {
+        display: -webkit-box;
+    	-webkit-box-orient: vertical;
+    	-webkit-line-clamp: 1;
+    	overflow: hidden;
+        color: rgb(160, 160, 160);
+        font-size: 3vw;
+    }
+
+    .movie_list_div a
+    {
+        color : inherit;
+        text-decoration: none;
+    }
+
+
+
+    /* メインメニューCSS */
+    /*上にスペースをあける*/
+    .mainContents_container_left div
+    {
+        padding-top: 5px;
+    }
+
+    .mainContents_container_left div :hover
+    {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .pc_left_menu_h1{
+        display: none;
+    }
+
+    .left_menu_h1{
+        padding-bottom: 5px;
+    }
+
+
+    .left_menu_h1 img
+    {
+        width: 100%;
+        margin:0px;/*上 左右 下*/
+        padding: 0px;
+        position: relative;
+        top: 0px;
+        margin-top: -20px;
+        margin-bottom: -20px;
+        border-radius: 15px;
+        opacity:0.7;
+    }
+
+    /* Shine */
+    .left_menu_h1:hover img{
+        opacity:1.0;
+        filter:alpha(opacity=70);
+        -ms-filter: “alpha( opacity=70 )”;
+    }
+
+
+    .left_menu_h2
+    {
+        padding-top: 0px;
+        width: 100%;
+        margin: 0 auto;
+        background-color: rgb(24, 24, 24);
+        height: 50px;
+        position: relative;
+
+    }
+
+    .endwalker
+    {
+        display: none;
+    }
+
+    .shadowbringers
+    {
+        display: none;
+    }
+
+    .stormblood
+    {
+        display: none;
+    }
+
+    .heavensward
+    {
+        display: none;
+    }
+
+
+    .arealmreborn
+    {
+        display: none;
+    }
+
+
+
+
+    .left_menu_h2_span
+    {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 100%;
+    }
+
+    .left_menu_ul
+    {
+        display: none;        
+        background-color: rgb(24, 24, 24);
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+    }
+
+    .left_menu_ul li
+    {
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        list-style: none;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;    
+
+    }
+
+    .left_menu_ul img{
+        width: 15%;
+        padding-right: 10px;
+        margin-left: -5px;
+    }
+
+
+    .menu_contact{
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    #pop{
+        display: none;
+    }
+
+
+
+    
+
+
+
+
+}/*ウィンドウ幅が最大479pxまでの場合に適用*/
+
+

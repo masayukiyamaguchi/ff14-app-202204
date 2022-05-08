@@ -1,0 +1,47 @@
+@media screen and (min-width: 767px) { /*ウィンドウ幅が767px以上の場合に適用*/
+
+
+/*フッター*/
+#main_top_footer
+{
+    padding-top: 10px;
+    margin-top: 200px;
+    padding-bottom: 10px;
+    position: static;
+    width: 100%;
+    background-color: rgb(24, 24, 24);
+}
+
+.main_top_footer
+{
+    text-align: center;
+    color: white;
+
+}
+
+.footer_privacy{
+    margin-bottom: -10px;
+    font-size:12px;
+}
+
+
+}/*ウィンドウ幅が767px以上の場合に適用*/
+
+
+
+@media screen and (max-width : 599px) { /*ウィンドウ幅が最大479pxまでの場合に適用*/
+
+.main_top_footer{
+    background-color: rgb(24,24,24);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.main_top_copyrights{
+    text-align: center;
+    color: white;
+    font-size: 3vw;
+}
+
+
+}/*ウィンドウ幅が最大479pxまでの場合に適用*/

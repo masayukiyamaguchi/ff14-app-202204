@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+
+#container{
+	width: 500px;
+  margin-top: -15px;
+}
+
+.widget{
+	background-color: #fff;  
+}
+.new-widget{
+	margin: 0px;
+	border: 1px solid #ddd;
+  	border-top: 0;
+	background-color: rgb(44, 44, 44);
+	/*padding: 7px;*/
+	width: 100%;
+	clear: both;
+	height:680px ;
+	color: white;
+}
+.new-widget ul{
+	/* display: none; */
+	/* なにか不具合あればココ復活 */
+}
+
+.tab-wrapper{
+
+ /*  margin-left: 1px; */
+  
+  width: 1000px;
+  padding: 0;
+ /*  height: 0px; */
+  
+
+ 
+ /*  background: #1abc9c;  */
+
+
+}
+
+
+.tab{
+ /* width: 100px;*/
+  padding: 8px 10px;
+  margin-right: 5px;
+  font-size: 0.9em;
+/*   border: 1px solid red; */
+	border-radius: 10px 10px 0 0;
+  /* height: 33px; */
+	float: left;
+	background: #eee;
+	text-transform: capitalize;
+	color: #333;
+	text-align: center;
+	/* line-height: 2.0em; */
+	cursor: pointer;
+	list-style: none!important;
+  transition: all 200ms;
+/*   border-right: 0.125rem solid #16a085; */
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+
+
+}
+
+.tab:hover {
+  background: #f0554a;
+  color: #fff;
+}
+
+.active-tab{
+	background: #f0554a;
+  color: #fff;
+}
+
+.active-tab:hover {
+
+
+}
+
+.tab-content {
+  padding: 0 0;
+}
+
+
+
+
+

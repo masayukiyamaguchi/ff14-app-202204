@@ -1,0 +1,134 @@
+@media screen and (min-width: 767px) { /*ウィンドウ幅が767px以上の場合に適用*/
+
+/*メインメニュー*/
+.left_main_menu{
+    border: 1px solid;    
+    border-bottom-color: rgb(56, 56, 56);
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.left_menu_home{
+    margin-top: 5px;
+}
+
+.left_menu_home_text{
+    display: flex;
+    padding-bottom: 8px;
+    margin-top: -2px;
+    margin-left: 20px;
+}
+.left_menu_home:hover,.left_menu_favorite:hover{
+    background-color: rgb(56, 56, 56);
+}
+.left_menu_home_text div{
+    margin-top: -3px;
+    padding-left: 20px;
+}
+
+.left_menu_favorite{
+
+}
+.left_menu_favorite_text{
+    display: flex;
+    padding-bottom: 8px;
+    margin-top: -10px;
+    margin-left: 20px;
+}
+.left_menu_favorite_text div{
+    margin-top: -3px;
+    padding-left: 20px;
+}
+
+#favoritelist{
+
+}
+
+a{    
+    color : inherit;
+    text-decoration: none;
+}
+
+#favoritelist img{
+    width: 97%;
+}
+
+
+}/*ウィンドウ幅が767px以上の場合に適用*/
+
+
+
+@media screen and (max-width : 599px) { /*ウィンドウ幅が最大479pxまでの場合に適用*/
+
+    /*メインメニュー*/
+    .left_main_menu{
+        border: 1px solid;    
+        border-bottom-color: rgb(56, 56, 56);
+        border-top: transparent;
+        border-left: transparent;
+        border-right: transparent;
+
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+
+    .left_menu_home{
+        margin-top: 5px;
+    }
+
+    .left_menu_home_text{
+        display: flex;
+        padding-bottom: 8px;
+        margin-top: -2px;
+        margin-left: 20px;
+    }
+    .left_menu_home:hover,.left_menu_favorite:hover{
+        background-color: rgb(56, 56, 56);
+    }
+    .left_menu_home_text div{
+        margin-top: -3px;
+        padding-left: 20px;
+    }
+
+    .left_menu_favorite{
+
+    }
+    .left_menu_favorite_text{
+        display: flex;
+        padding-bottom: 8px;
+        margin-top: -10px;
+        margin-left: 20px;
+    }
+    .left_menu_favorite_text div{
+        margin-top: -3px;
+        padding-left: 20px;
+    }
+
+    #favoritelist{
+
+    }
+
+    a{    
+        color : inherit;
+        text-decoration: none;
+    }
+
+    #favoritelist img{
+        width: 97%;
+    }
+
+    .main_top_header_menu_logo_sp{
+        text-align: center;
+    }
+
+    #pop{
+        display: none;
+    }
+
+
+
+}/*ウィンドウ幅が最大479pxまでの場合に適用*/

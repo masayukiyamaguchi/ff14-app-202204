@@ -1,0 +1,227 @@
+@media screen and (min-width: 767px) {
+    /*ウィンドウ幅が767px以上の場合に適用*/
+
+
+    .mainContents_container {
+        height: 60vh;
+    }
+
+    /*レフトコンテンツ*/
+    .mainContents_container_left {
+        width: 10%;
+    }
+
+    .left_menu {
+        text-align: center;
+        color: white;
+        margin-top: 20px;
+    }
+
+    .left_menu div {
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    .left_menu_active {
+        background-color: rgb(87, 87, 87);
+        color: rgb(255, 255, 255);
+    }
+
+    .left_menu div:hover {
+        transition: 0.3s;
+        background-color: rgb(87, 87, 87);
+        color: rgb(255, 255, 255);
+        cursor: pointer
+    }
+
+
+
+
+
+    /*中央コンテンツ*/
+
+    input {
+        text-align: center;
+    }
+
+    .mainContents_container_center {
+        width: 90%;
+        background-color: rgb(87, 87, 87);
+    }
+
+    .contents_display_none {
+        display: none;
+    }
+
+
+    .contents0_div {
+        display: -webkit-flex;
+        display: flex;
+        text-align: center;
+        color: white;
+    }
+
+    .contents0_div>div {
+        padding: 10px;
+    }
+
+    .member_heder {
+        color: red;
+    }
+
+    .member_job {
+        margin-top: 10px;
+    }
+
+    .member_hp {
+        margin-top: 20px;
+    }
+
+    .member_ten {
+        margin-top: 20px;
+    }
+
+    button[class^="member_button"] {
+        margin-top: 20px;
+    }
+
+
+
+
+    .contents1 {}
+
+    .contents1_div {
+        display: -webkit-flex;
+        display: flex;
+        text-align: center;
+        color: white;
+    }
+
+    .contents1_div>div {
+        padding: 10px;
+    }
+
+    .member_Rhp {
+        margin-top: 20px;
+    }
+
+    .member_skl {}
+
+    .use_skl {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-align-items: center;
+        align-items: center;
+        margin-top: 20px;
+
+    }
+
+    button[class^="use_skl_button"] {
+        height: 20px;
+    }
+
+    div[class^="use_skl_list"] {
+        position: fixed;
+        top: 240px;
+        z-index: 10;
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: rgb(42, 42, 42);
+        height: 150px;
+
+    }
+
+    div[class^="use_skl_list"]>div {
+        display: flex;
+    }
+
+    div[class^="use_skl_list"]>div:first-child {
+        padding-top: 10px;
+    }
+
+    .use_skl_click {
+        width: 26px !important;
+        height: 26px !important;
+        opacity: 1.0 !important;
+        border: 2px solid #ff0000 !important;
+    }
+
+    div[class^="use_skl_list"] img {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+        opacity: 0.5;
+    }
+
+
+    .skill_icon img:hover {
+        width: 26px;
+        height: 26px;
+        opacity: 1.0;
+        border: 2px solid #ff0000;
+    }
+
+    .skl_icon_sub {
+        visibility: hidden;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        z-index: 12;
+    }
+
+    .skl_icon_sub img {
+        width: 400px;
+    }
+
+
+
+    div[class^="use_skl_bg"] {
+        display: none;
+    }
+
+    .use_skl_done_button {
+        position: absolute;
+        height: 20px;
+        width: 40px;
+        font-size: 3px;
+        right: 65px;
+        bottom: 8px;
+
+    }
+
+
+
+
+
+    .input_info {
+        padding-top: 20px;
+        padding-left: 20px;
+    }
+
+
+
+    /*ライトコンテンツ*/
+    .mainContents_container_right {
+        width: 0%;
+    }
+
+
+
+
+}
+
+/*ウィンドウ幅が767px以上の場合に適用*/
+
+
+
+@media screen and (max-width: 479px) {
+    /*ウィンドウ幅が最大479pxまでの場合に適用*/
+
+
+
+
+}
+
+/*ウィンドウ幅が最大479pxまでの場合に適用*/

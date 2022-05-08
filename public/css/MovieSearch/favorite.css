@@ -1,0 +1,575 @@
+@media screen and (min-width: 767px) { /*ウィンドウ幅が767px以上の場合に適用*/
+
+
+/*フォント*/
+@import url('https://fonts.googleapis.com/css2?family=Wire+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap');
+
+
+/*見出し*/
+.sp_h1{
+    display: none;
+}
+
+.contents_header {
+    position: relative;
+    padding: 1rem .5rem;
+  }
+  
+.contents_header:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    content: '';
+    border-radius: 3px;
+    background-image: -webkit-gradient(linear, right top, left top, from(#2af598), to(#009efd));
+    background-image: -webkit-linear-gradient(right, #2af598 0%, #009efd 100%);
+    background-image: linear-gradient(to left, #2af598 0%, #009efd 100%);
+  }
+
+/*ページ*/
+#body
+{
+    margin:0;
+    background-color: rgb(33, 33, 33);  
+}
+
+
+/*メインコンテンツ*/
+#mainContents
+{
+    position: initial;
+}
+
+.backgroundimage
+{
+    background-color: rgb(24, 24, 24);    
+
+}
+
+.mainContents_container
+{
+    display: flex;
+    padding-top: 55px;
+    display: -webkit-flex;
+}
+
+.mainContents_container_left
+{
+    width: 12.5%;
+    min-height: 1500px;
+    color: white;
+
+}
+
+/*上にスペースをあける*/
+.mainContents_container_left div
+{
+    padding-top: 5px;
+}
+
+
+
+.left_menu_h2
+{
+    padding-top: 0px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgb(24, 24, 24);
+    height: 50px;
+    position: relative;
+
+}
+
+
+.left_menu_h2_span
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    padding-left: 20px;
+
+}
+
+.left_menu_ul
+{
+    margin-left: -30px;
+    background-color: rgb(24, 24, 24);
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;    
+
+
+}
+
+
+.left_menu_ul li
+{
+    list-style: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;  
+    font-size: 15px;
+    text-align: left;
+    
+    border-bottom:solid 1px rgb(97, 97, 97);   
+    
+}
+
+.left_menu_ul li:hover{
+    background-color: rgb(56, 56, 56);
+}
+
+.favorite_share_url input{
+    width: 80%;
+}
+
+.list_id_div{
+    text-align: center;
+}
+
+
+
+
+
+
+
+/*中央コンテンツ*/
+.mainContents_container_center
+{
+    width: 87.5%;
+    background-color: rgb(33, 33, 33);
+    color: white;
+
+}
+
+
+/*ムービーリスト*/
+.movie_list
+{
+    width: 100%;
+}
+
+.movie_list_ul
+{
+    display: flex;
+    padding-right: 20px;
+}
+
+.movie_list_div
+{
+    width: 20%;
+}
+
+.movie_list_ul li
+{
+    list-style: none;
+    margin: 0px 10px 0px;
+}
+
+
+
+.movie_list_samneil img
+{
+    width: 30vh;
+    height: 16.5vh;
+    object-fit: cover;
+
+}
+
+.movie_list_detail
+{
+    display: flex;
+}
+
+.movie_list_detail_channelicon img
+{
+    border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+    width:  40px;       /* ※縦横を同値に */
+    height: 40px;       /* ※縦横を同値に */    
+}
+
+.movie_list_detail_text
+{
+    margin-left: 5px;
+}
+
+.movie_list_detail_text_title
+{
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+.movie_list_detail_text_channelname_div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.movie_list_detail_text_channelname
+{
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+    color: rgb(160, 160, 160);
+    font-size: 14px;
+}
+
+.movie_list_favorite
+{
+    padding-right: 20px;
+    color: rgb(107, 107, 107);
+    font-size: 15px;
+}
+
+.movie_list_favorite:hover
+{
+    cursor: pointer;
+    user-select: none;
+}
+
+
+
+
+.movie_list_detail_view_count
+{
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+    color: rgb(160, 160, 160);
+    font-size: 14px;
+}
+
+.movie_list_div a
+{
+    color : inherit;
+    text-decoration: none;
+}
+
+
+
+/* スクロールバー */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: rgb(24, 24, 24);    
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #c7c7c7;
+    border-radius: 5px;
+  }
+
+/* ポップ */
+  #pop{
+    display:inline-block;
+    position:absolute;
+    
+    margin-top:15px;
+    margin-left:5px;
+
+    background:rgba(0,0,0,0.8);
+    color:#FFF;
+
+    margin-top:15px;
+    text-align:center;
+    border-radius:3px;
+    padding:5px;
+}
+
+
+
+}/*ウィンドウ幅が767px以上の場合に適用*/
+
+
+
+@media screen and (max-width : 599px) { /*ウィンドウ幅が最大479pxまでの場合に適用*/
+
+
+    /*総合トップのロゴを非表示*/
+    .main_top_header_menu_logo{
+        display: none;
+    }
+
+    #body{
+        margin: 0px 0px;
+    }
+    /* 各ページここまで定型 */
+
+
+
+    /*メインコンテンツ*/
+
+
+    /*見出し*/
+    .sp_h1{
+        padding-top: 5px;
+        text-align: center;
+        font-size: 6vw;
+        color: white;
+    }
+
+    .sp_h1_listid{
+        font-size: 4vw;
+    }
+
+    .contents_header {
+        position: relative;
+        padding: 1rem .5rem;
+      }
+
+    .contents_header:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        content: '';
+        border-radius: 3px;
+        background-image: -webkit-gradient(linear, right top, left top, from(#2af598), to(#009efd));
+        background-image: -webkit-linear-gradient(right, #2af598 0%, #009efd 100%);
+        background-image: linear-gradient(to left, #2af598 0%, #009efd 100%);
+      }
+
+
+
+
+    #mainContents
+    {
+        position: initial;
+    }
+
+    .backgroundimage
+    {
+        background-color: rgb(24, 24, 24);    
+
+    }
+
+    .mainContents_container
+    {
+        display: flex;
+        padding-top: 10x;
+        display: -webkit-flex;
+    }
+
+    .mainContents_container_left
+    {
+        width: 100%;
+        min-height: 1500px;
+        color: white;
+
+    }
+
+    /*上にスペースをあける*/
+    .mainContents_container_left div
+    {
+        padding-top: 5px;
+    }
+
+
+    /* レフトメニュー */
+    .left_menu_h2
+    {
+        padding-top: 0px;
+        width: 100%;
+        margin: 0 auto;
+        background-color: rgb(24, 24, 24);
+        height: 50px;
+        position: relative;
+
+    }
+
+
+    .left_menu_h2_span
+    {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 100%;
+        padding-left: 20px;
+
+    }
+
+    .left_menu_ul
+    {
+        margin-left: -30px;
+        background-color: rgb(24, 24, 24);
+        margin-top: 0px;
+        margin-bottom: 0px;
+
+        padding-top: 10px;
+        padding-bottom: 10px;    
+
+
+    }
+
+
+    .left_menu_ul li
+    {
+        list-style: none;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;  
+        font-size: 15px;
+        text-align: left;
+
+        border-bottom:solid 1px rgb(97, 97, 97);   
+
+    }
+
+    .left_menu_ul li:hover{
+        background-color: rgb(56, 56, 56);
+    }
+
+    .favorite_share_url input{
+        width: 80%;
+    }
+
+    .list_id_div{
+        text-align: center;
+    }
+
+
+
+
+
+
+
+    /*中央コンテンツ*/
+    .mainContents_container_center
+    {
+        width: 100%;
+        background-color: rgb(33, 33, 33);
+        color: white;
+
+    }
+
+
+    /*ムービーリスト*/
+    .movie_list
+    {
+        width: 100%;
+    }
+
+    .movie_list_ul
+    {
+        padding: 0px;
+    }
+
+    .movie_list_div li
+    {
+        display: flex;
+        width: 100%;
+    }
+
+    .movie_list_ul li
+    {
+        list-style: none;
+        
+    }
+
+
+
+    .movie_list_samneil img
+    {
+        width: 40vw;
+        height: 22vw;
+        object-fit: cover;
+    }
+
+    .movie_list_detail
+    {
+        display: flex;
+    }
+
+    .movie_list_detail_channelicon{
+        padding-left: 5px;
+    }
+
+    .movie_list_detail_channelicon img
+    {
+        border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+        width:  30px;       /* ※縦横を同値に */
+        height: 30px;       /* ※縦横を同値に */    
+    }
+
+    .movie_list_detail_text
+    {
+        margin-left: 5px;        
+    }
+
+    .movie_list_detail_text_title
+    {
+        display: -webkit-box;
+    	-webkit-box-orient: vertical;
+    	-webkit-line-clamp: 2;
+    	overflow: hidden;
+        
+    }
+
+    .movie_list_detail_text_channelname_div{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .movie_list_detail_text_channelname
+    {
+        display: -webkit-box;
+    	-webkit-box-orient: vertical;
+    	-webkit-line-clamp: 1;
+    	overflow: hidden;
+        color: rgb(160, 160, 160);
+        font-size: 4vw;
+    }
+
+    .movie_list_favorite
+    {
+        padding-right: 20px;
+        color: rgb(107, 107, 107);
+        font-size: 4vw;
+    }
+
+    .movie_list_favorite:hover
+    {
+        cursor: pointer;
+        user-select: none;
+    }
+
+
+
+
+    .movie_list_detail_view_count
+    {
+        display: -webkit-box;
+    	-webkit-box-orient: vertical;
+    	-webkit-line-clamp: 1;
+    	overflow: hidden;
+        color: rgb(160, 160, 160);
+        font-size: 3vw;
+    }
+
+    .movie_list_div a
+    {
+        color : inherit;
+        text-decoration: none;
+    }
+
+    #pop{
+        display: none;
+    }
+
+
+
+
+}/*ウィンドウ幅が最大479pxまでの場合に適用*/

@@ -1,0 +1,938 @@
+@media screen and (min-width:927px) { /*ウィンドウ幅が813px以上の場合に適用*/
+
+
+/*ページ*/
+#body
+{
+    margin:0;
+    background-color: rgb(33, 33, 33);  
+}
+
+
+/*メインコンテンツ*/
+#mainContents
+{
+    position: initial;
+
+}
+
+.backgroundimage
+{
+    background-color: rgb(33, 33, 33);  
+
+}
+
+.mainContents_container
+{
+    display: flex;
+    padding-top: 55px;
+    display: -webkit-flex;
+}
+
+
+/*レフトコンテンツ*/
+.mainContents_container_left
+{
+    width: 74%;
+    color: white;
+
+}
+
+.mainContents_container_left_contents
+{
+    padding-left: 100px;
+    padding-top: 25px;
+
+}
+.main_movie_iflame_wrap{
+    max-width: 98%; /* ここに動画の横幅を指定 */
+}
+
+.main_movie_iflame
+{
+    position: relative;
+    width:100%; /* 横幅は100%にしておく(ここを変えたい場合は実装コード2の方法を確認してください) */
+    height:0; /* 高さは0にしておく(padding-topで高さを指定するため) */
+    padding-top: 56.25%; /* 高さを指定(16:9) */
+    margin-bottom: 15px;
+}
+
+.main_movie_iflame iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+
+
+.main_movie_detail
+{
+    width: 640px;
+}
+
+.main_movie_detail_title
+{
+    font-size: 18px;
+    padding-top: 5px;
+}
+
+.main_movie_detail_undertitle{
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.main_movie_detail_view_count
+{
+    font-size: 15px;
+    color: rgb(160, 160, 160);    
+}
+
+.movie_list_favorite{
+    margin-left: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+    color:rgb(255, 255, 255);
+    background-color: rgb(165, 42, 42);
+    cursor: pointer;
+    user-select: none;
+    
+}
+
+
+.main_movie_detail_channelinfo
+{
+    display:inline-flex;
+    padding-top: 5px;
+    
+}
+
+.main_movie_detail_channelinfo_channelicon img
+{
+    border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+    width:  40px;       /* ※縦横を同値に */
+    height: 40px;       /* ※縦横を同値に */    
+
+}
+
+.main_movie_detail_channelinfo_text
+{
+    
+    padding-left: 10px;
+}
+
+.main_movie_detail_channelinfo_text_channelname
+{
+    font-size: 15px;
+}
+
+.main_movie_detail_channelinfo_member_num
+{
+    font-size: 12.5px;
+    color: rgb(160, 160, 160);
+}
+
+
+
+.main_movie_detail_channelinfo_text_moviediscription
+{
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.channelinfo_text_moviediscription_display_button{
+    display: none;
+}
+
+
+
+
+
+
+
+/*中央コンテンツ*/
+.mainContents_container_center
+{
+    width: 26%;
+    background-color: rgb(33, 33, 33);
+    color: white;
+
+}
+
+.searchlist{
+    border-color: rgb(172, 172, 172);
+    border: 1px solid;
+}
+
+.searchlist
+{
+    margin-top: 25px;
+    height: 685px;
+    overflow-y: scroll;    
+
+}
+
+.searchlist_h1{
+    padding-top: 25px;
+    margin-bottom: -10px;
+}
+
+
+
+
+
+.searchlist_contents
+{
+    padding-right: 20px;
+}
+
+.searchlist_contents_one
+{
+    display:inline-flex;
+
+    padding-top: 5px;
+    padding-left: 5px;
+    position: relative;
+}
+
+.searchlist_contents_index{
+    position: absolute;
+    top: 50%;
+    -webkit-transform : translateY(-50%);
+    transform : translateY(-50%);
+    font-size: 10px;
+}
+
+.searchlist_contents_samenil{
+    margin-left: 15px;
+}
+
+.searchlist_contents_samenil img{
+    width: 170px;
+}
+
+.searchlist_contents_detail{
+    padding-left: 10px;
+}
+
+.searchlist_contents_title{
+    font-size: 16px;
+    
+}
+
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: white;
+}
+
+
+.searchlist_contents :hover
+{
+    background-color: rgb(92, 92, 92);
+}
+
+
+.searchlist_contents_channelname
+{
+    font-size: 13px;
+    color: rgb(160, 160, 160);
+}
+
+.searchlist_contents_view_count
+{
+    font-size: 13px;
+    color: rgb(160, 160, 160);
+}
+
+.searchlist_contents_title
+{
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+.searchlist_contents_samenil img
+{
+    width: 19vh;
+    height: 10.5vh;
+    object-fit: cover;
+
+}
+
+
+/*ムービーリスト*/
+.channel_list_div{
+    width: 100%;
+    margin-top: 50px;
+}
+
+
+.channel_list
+{
+    width: 100%;
+}
+
+
+.channel_channelname{
+    margin-top: 20px;
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-bottom: 15px;
+    background-color: rgb(70, 70, 70);
+
+}
+
+.channel_channelname_detail{
+    display: flex;
+}
+
+.channel_channelname_detail_text{
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.channel_channelname_detail_text_channelname{
+    font-size: 25px;
+}
+
+.movie_list_num{
+    padding-top: 10px;
+    padding-left: 30px;
+}
+
+
+
+.channel_channelname_detail_samneil img
+{
+    border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+    width:  80px;       /* ※縦横を同値に */
+    height: 80px;       /* ※縦横を同値に */    
+
+}
+
+
+
+.movie_list_ul
+{
+    display: flex;
+    padding-right: 20px;
+}
+
+.movie_list_div
+{
+    width: 20%;
+}
+
+.movie_list_ul li
+{
+    list-style: none;
+    margin: 0px 10px 0px;
+}
+
+
+
+.movie_list_samneil img
+{
+    width: 23vh;
+    height: 12.65vh;
+    object-fit: cover;
+
+}
+
+.movie_list_detail
+{
+    display: flex;
+}
+
+.movie_list_detail_channelicon img
+{
+    border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+    width:  40px;       /* ※縦横を同値に */
+    height: 40px;       /* ※縦横を同値に */    
+}
+
+.movie_list_detail_text
+{
+    margin-left: 5px;
+}
+
+.movie_list_detail_text_title
+{
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+.movie_list_detail_text_channelname_div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.movie_list_detail_text_channelname
+{
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+    color: rgb(160, 160, 160);
+    font-size: 14px;
+}
+
+.movie_list_favoritestar
+{
+    padding-right: 20px;
+    color: rgb(107, 107, 107);
+    font-size: 15px;
+}
+
+.movie_list_favoritestar:hover
+{
+    cursor: pointer;
+    user-select: none;
+}
+
+
+
+
+.movie_list_detail_view_count
+{
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+    color: rgb(160, 160, 160);
+    font-size: 14px;
+}
+
+.movie_list_div a
+{
+    color : inherit;
+    text-decoration: none;
+}
+
+
+
+
+
+/* スクロールバー */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: rgb(24, 24, 24);    
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #c7c7c7;
+    border-radius: 5px;
+  }
+
+
+  /* ポップ */
+  #pop{
+    display:inline-block;
+    position:absolute;
+    
+    margin-top:15px;
+    margin-left:5px;
+
+    background:rgba(0,0,0,0.8);
+    color:#FFF;
+
+    margin-top:15px;
+    text-align:center;
+    border-radius:3px;
+    padding:5px;
+}
+
+#iflame_null_div,.iflame_fullscreen_guide{
+    display: none;
+}
+
+
+
+}/*ウィンドウ幅が813px以上の場合に適用*/
+
+
+
+
+
+
+
+
+@media screen and (max-width : 599px) { /*ウィンドウ幅が最大599pxまでの場合に適用*/
+
+
+    /*総合トップのロゴを非表示*/
+    .main_top_header{
+        display: none;
+    }
+
+    #body{
+        margin: 0px 0px;
+    }
+
+
+
+
+    /*メインコンテンツ*/
+    #mainContents
+    {
+        position: initial;
+
+    }
+
+    .backgroundimage
+    {
+        background-color: rgb(33, 33, 33);  
+
+    }
+
+    .mainContents_container
+    {
+
+    }
+
+
+    /*レフトコンテンツ*/
+    .mainContents_container_left
+    {
+        color: white;
+    }
+
+    .mainContents_container_left_contents
+    {
+
+
+    }
+
+ 
+    .main_movie_iflame
+    {
+        position: fixed;
+        z-index: 10;
+        width:100%; /* 横幅は100%にしておく(ここを変えたい場合は実装コード2の方法を確認してください) */
+        height:0; /* 高さは0にしておく(padding-topで高さを指定するため) */
+        padding-top: 56.25%; /* 高さを指定(16:9) */
+        margin-bottom: 15px;
+    }
+
+    .main_movie_iflame iframe{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+
+
+    .main_movie_detail
+    {
+        padding-top: 33vw;
+        width: 100vw;
+    }
+
+    .main_movie_detail_title
+    {
+        font-size: 4vw;
+        padding-left: 10px;
+
+    }
+
+    .main_movie_detail_undertitle{
+        margin-top: -5px;
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 10px;
+    }
+
+
+    .main_movie_detail_view_count
+    {
+        font-size: 3vw;
+        color: rgb(160, 160, 160);    
+    }
+
+    .movie_list_favorite{    
+        width: 35vw;
+        text-align: center;   
+        margin-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 10px;
+        color:rgb(255, 255, 255);
+        background-color: rgb(165, 42, 42);
+        cursor: pointer;
+        user-select: none;
+    }
+
+
+    .main_movie_detail_channelinfo
+    {
+        display:inline-flex;
+        padding-top: 5px;
+        margin-left: 10px;       
+    }
+    .main_movie_detail_channelinfo_border{
+        border: 1px solid;
+        border-color: rgb(61, 61, 61);
+        border-left: transparent;
+        border-right: transparent;
+    }
+
+    .main_movie_detail_channelinfo_channelicon img
+    {
+        border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+        width:  40px;       /* ※縦横を同値に */
+        height: 40px;       /* ※縦横を同値に */    
+
+    }
+
+    .main_movie_detail_channelinfo_text
+    {
+
+        padding-left: 10px;
+    }
+
+    .main_movie_detail_channelinfo_text_channelname
+    {
+        font-size: 4vw;
+    }
+
+    .main_movie_detail_channelinfo_member_num
+    {
+        font-size: 3vw;
+        color: rgb(160, 160, 160);
+    }
+
+
+
+    .main_movie_detail_channelinfo_text_moviediscription
+    {
+        display: none;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 4vw;
+        padding-right: 20px;
+    }
+
+    .channelinfo_text_moviediscription_display_button{
+        padding-top: 5px;
+        font-size: 3vw;
+        padding-bottom: 5px;
+    }
+
+
+
+
+
+    /*中央コンテンツ*/
+    .mainContents_container_center
+    {
+        width: 100%;
+        background-color: rgb(33, 33, 33);
+        color: white;
+    }
+
+    .searchlist
+    {
+        margin-top: 25px;
+    }
+
+    .searchlist_h1{
+        padding-top: 10px;
+        padding-left: 10px;
+        margin-bottom: -20px;
+    }
+
+
+    .searchlist_contents
+    {
+        padding-right: 20px;
+    }
+
+    .searchlist_contents_one
+    {
+        display:inline-flex;
+
+        padding-top: 5px;
+        padding-left: 5px;
+        position: relative;
+    }
+
+    .searchlist_contents_index{
+        position: absolute;
+        top: 50%;
+        -webkit-transform : translateY(-50%);
+        transform : translateY(-50%);
+        font-size: 10px;
+    }
+
+    .searchlist_contents_samenil{
+        margin-left: 15px;
+    }
+
+    .searchlist_contents_samenil img{
+        width: 170px;
+    }
+
+    .searchlist_contents_detail{
+        padding-left: 10px;
+    }
+
+    .searchlist_contents_title{
+        font-size: 3vw;
+
+    }
+
+    a:link, a:visited, a:hover, a:active {
+        text-decoration: none;
+        color: white;
+    }
+
+
+    .searchlist_contents :hover
+    {
+        background-color: rgb(92, 92, 92);
+    }
+
+
+    .searchlist_contents_channelname
+    {
+        font-size: 3vw;
+        color: rgb(160, 160, 160);
+    }
+
+    .searchlist_contents_view_count
+    {
+        font-size: 3vw;
+        color: rgb(160, 160, 160);
+    }
+
+    .searchlist_contents_title
+    {
+        display: -webkit-box;
+    	-webkit-box-orient: vertical;
+    	-webkit-line-clamp: 2;
+    	overflow: hidden;
+    }
+
+    .searchlist_contents_samenil img
+    {
+        width: 19vh;
+        height: 10.5vh;
+        object-fit: cover;
+
+    }
+
+
+    /*ムービーリスト*/
+    .channel_list_div{
+        display: none;
+    }
+
+
+
+    .movie_list_num{
+        padding-top: 10px;
+        padding-left: 30px;
+    }
+
+
+
+
+    .movie_list_ul
+    {
+        display: flex;
+        padding-right: 20px;
+    }
+
+    .movie_list_div
+    {
+        width: 20%;
+    }
+
+    .movie_list_ul li
+    {
+        list-style: none;
+        margin: 0px 10px 0px;
+    }
+
+
+
+    .movie_list_samneil img
+    {
+        width: 23vh;
+        height: 12.65vh;
+        object-fit: cover;
+
+    }
+
+    .movie_list_detail
+    {
+        display: flex;
+    }
+
+    .movie_list_detail_channelicon img
+    {
+        border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+        width:  40px;       /* ※縦横を同値に */
+        height: 40px;       /* ※縦横を同値に */    
+    }
+
+    .movie_list_detail_text
+    {
+        margin-left: 5px;
+    }
+
+    .movie_list_detail_text_title
+    {
+        display: -webkit-box;
+    	-webkit-box-orient: vertical;
+    	-webkit-line-clamp: 2;
+    	overflow: hidden;
+    }
+
+    .movie_list_detail_text_channelname_div{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .movie_list_detail_text_channelname
+    {
+        display: -webkit-box;
+    	-webkit-box-orient: vertical;
+    	-webkit-line-clamp: 1;
+    	overflow: hidden;
+        color: rgb(160, 160, 160);
+        font-size: 14px;
+    }
+
+    .movie_list_favoritestar
+    {
+        padding-right: 20px;
+        color: rgb(107, 107, 107);
+        font-size: 15px;
+    }
+
+    .movie_list_favoritestar:hover
+    {
+        cursor: pointer;
+        user-select: none;
+    }
+
+
+
+
+    .movie_list_detail_view_count
+    {
+        display: -webkit-box;
+    	-webkit-box-orient: vertical;
+    	-webkit-line-clamp: 1;
+    	overflow: hidden;
+        color: rgb(160, 160, 160);
+        font-size: 14px;
+    }
+
+    .movie_list_div a
+    {
+        color : inherit;
+        text-decoration: none;
+    }
+
+    #pop{
+        display: none;
+    }
+
+    #iflame_null_div{
+        position: fixed;
+        width: 100%;
+        height: 39vw;
+        background-color: rgba(255, 38, 0,0);
+        z-index: 10;
+        font-size: 2vw
+    }
+
+
+}/*ウィンドウ幅が最大599pxまでの場合に適用*/
+
+
+/* 横向き */
+@media screen and (min-width:600px) { 
+    @media screen and (max-width:926px) {
+    
+        #main_top_header{
+            display: none;
+        }
+        
+        .main_movie_detail,.channel_list_div,.mainContents_container_center{
+            display:none;
+        
+        }
+        
+        .main_top_footer{
+            display:none;
+        }
+    
+        #body{
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        .iflame_null_div{
+            display: none;
+        }
+
+        html, body{
+            /* overflow: hidden; */
+        }
+
+        #iflame_null_div{
+            display: none;
+        }
+
+        
+        /* iphoneXの場合だけここおかしいかも */
+        .main_movie_iflame_wrap {
+            max-width: 80vw; /* ここに動画の横幅を指定 */
+            margin: 0 auto;
+        }
+
+        .main_movie_iflame
+        {
+            position: relative;
+
+            z-index: 10;
+            width:100%; /* 横幅は100%にしておく(ここを変えたい場合は実装コード2の方法を確認してください) */
+            height:0; /* 高さは0にしておく(padding-topで高さを指定するため) */
+            padding-top: 56.25%; /* 高さを指定(16:9) */
+            margin-bottom: 15px;
+        }
+    
+        .main_movie_iflame iframe{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+          }
+
+        .iflame_fullscreen_guide{
+            position: fixed;
+            top:15vw;
+            left:91vw; 
+            color: red;
+            z-index: 11;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+    }}
+
+    

@@ -1,0 +1,39 @@
+@media screen and (min-width: 767px) { /*ウィンドウ幅が767px以上の場合に適用*/
+    
+    /*レフトコンテンツ*/
+    .mainContents_container_left
+    {
+      width: 15%;
+    }
+    
+    /*中央コンテンツ*/
+    .mainContents_container_center
+    {
+        color: white;
+        width: 70%;
+        background-color: rgb(45, 45, 45);
+    }
+
+    .mainContents_container_center_div{
+        margin-left:20px;
+    }
+    
+    /*ライトコンテンツ*/
+    .mainContents_container_right
+    {
+      width: 15%;
+    }
+    
+      
+    
+    
+    }/*ウィンドウ幅が767px以上の場合に適用*/
+    
+    
+    
+    @media screen and (max-width: 479px) { /*ウィンドウ幅が最大479pxまでの場合に適用*/
+ 
+      
+    
+    
+    }/*ウィンドウ幅が最大479pxまでの場合に適用*/

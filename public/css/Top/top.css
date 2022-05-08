@@ -1,0 +1,181 @@
+@media screen and (min-width: 767px) {
+    /*ウィンドウ幅が767px以上の場合に適用*/
+
+    /*フォント*/
+    @import url('https://fonts.googleapis.com/css2?family=Wire+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap');
+
+
+    /*ページ*/
+    #body {
+        margin: 0;
+        background-color: rgb(33, 33, 33);
+    }
+
+
+    /*メインコンテンツ*/
+    #mainContents {
+        position: initial;
+    }
+
+    .backgroundimage {
+        background: linear-gradient(to top, rgba(0, 0, 0, 1.0) 0%, rgba(255, 255, 255, 0.0) 100%), url("/images/Top/backgroundimage.png");
+        background-attachment: fixed;
+        background-size: cover;
+
+    }
+
+    .mainContents_container {
+        display: flex;
+        padding-top: 55px;
+        display: -webkit-flex;
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+    }
+
+    .mainContents_container_left {}
+
+
+    /*中央コンテンツ*/
+    .mainContents_container_center {
+        width: 67.7%;
+        background-color: rgb(45, 45, 45);
+        color: white;
+    }
+
+    .mainContents_container_center_outer {
+        padding-left: 15px;
+        padding-bottom: 20px;
+
+    }
+
+    .mainContents_container_center_outer h1 {
+        font-family: 'Wire One', sans-serif;
+        letter-spacing: 2px;
+    }
+
+    .mainContents_container_center_inner {
+        background-color: rgb(68, 68, 68);
+        padding-top: 3px;
+        width: 98.5%;
+        padding-bottom: 10px;
+
+    }
+
+    .contents_card {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+        list-style-type: none !important;
+        padding-left: 0px;
+    }
+
+    .contents_card li {
+        width: 23%;
+        background-color: rgb(54, 54, 54);
+    }
+
+    .contents_card li img {
+        width: 100%;
+
+    }
+
+    .contents_card li h2 {
+        font-family: 'Noto Sans JP', sans-serif;
+        margin-top: -10px;
+        margin-left: 5px;
+        font-size: 15px;
+    }
+
+    .contents_card li h2:first-letter {
+        color: rgb(217, 143, 64);
+        font-size: 20px;
+    }
+
+
+    .contents_card li p {
+        font-family: 'Noto Sans JP', sans-serif;
+        margin-top: -10px;
+        margin-left: 5px;
+        font-size: 12px;
+        color: rgb(204, 204, 204);
+    }
+
+
+
+    .mainContents_container_right {}
+
+
+}/*ウィンドウ幅が767px以上の場合に適用*/
+
+
+
+/*ヘッダー*/
+@media screen and (max-width : 599px) {
+    /*ウィンドウ幅が最大479pxまでの場合に適用*/
+
+    #body {
+        background-color: rgb(45, 45, 45);
+        margin: 0px 0px;
+    }
+
+    .mainContents_container_center_outer h1 {
+        font-size: 3vh;
+        text-align: center;
+        color: white;
+    }
+
+
+    /*レフト*/
+    .mainContents_container_left {
+        display: none;
+    }
+
+
+
+    /*センター*/
+    .mainContents_container_center_outer {
+        width: 100%;
+    }
+
+    .mainContents_container_center_inner ul {
+        padding-left: 0px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .contents_card_li {
+        list-style: none;
+        background-color: rgb(68, 68, 68);
+    }
+
+    .contents_card_li img {
+        width: 100%;
+    }
+
+    .contents_card_li h2 {
+        color: white;
+        font-size: 15px;
+        margin-top: -8px;
+        margin-left: 5px;
+    }
+
+    .contents_card_li h2:first-letter {
+        color: rgb(218, 142, 53);
+        font-size: 20px;
+    }
+
+    .contents_card_li p {
+        color: white;
+        font-size: 13px;
+        margin-top: -8px;
+        margin-left: 5px;
+        padding-bottom: 10px;
+    }
+
+
+}
+
+/*ウィンドウ幅が最大479pxまでの場合に適用*/

@@ -1,0 +1,230 @@
+@media screen and (min-width: 767px) {
+  /*ウィンドウ幅が767px以上の場合に適用*/
+
+
+  /*ページ*/
+  #body {
+    margin: 0;
+    background-color: rgb(33, 33, 33);
+  }
+
+  /*ヘッダー*/
+  #main_top_header {
+    position: fixed;
+    width: 100%;
+    z-index: 1
+  }
+
+  .main_top_header {
+    height: 55px;
+    background-color: rgb(24, 24, 24);
+    display: flex;
+    justify-content: center;
+  }
+
+  .main_top_header_menu {
+    width: 1300px;
+    display: flex;
+  }
+
+
+  .main_top_header_menu_button {}
+
+  .main_top_header_menu_button_ul li {
+    display: inline-block;
+    color: white;
+  }
+
+  .main_top_header_menu_logo {
+    position: absolute;
+    left: 20px;
+  }
+
+  .main_top_header_menu_logo_img {
+    padding-top: 4px;
+    margin-left: -10px;
+    width: 120px;
+  }
+
+  .main_top_header_menu_logo_sp {
+    display: none;
+  }
+
+
+  .main_top_header_menu_logo_movieseach {}
+
+  .main_top_header_menu_logo_img_movieseach {
+    position: absolute;
+    left: 257px;
+    padding-top: 4px;
+    width: 20vh;
+
+  }
+
+
+
+
+
+  /*メインコンテンツ*/
+  #mainContents {
+    position: initial;
+  }
+
+  .backgroundimage {}
+
+  .mainContents_container {
+    display: flex;
+    padding-top: 55px;
+    display: -webkit-flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+  }
+
+
+
+
+}
+
+/*ウィンドウ幅が767px以上の場合に適用*/
+
+
+
+@media screen and (max-width : 599px) {
+  /*ウィンドウ幅が最大479pxまでの場合に適用*/
+
+  /*ヘッダー*/
+  #body {
+    background-color: rgb(45, 45, 45);
+    margin: 0px 0px;
+  }
+
+  .main_top_header_menu {
+    display: flex;
+    width: 100%;
+    background-color: rgb(24, 24, 24);
+
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+
+  }
+
+  .main_top_header_menu_logo {
+    background-color: rgb(24, 24, 24);
+  }
+
+  .main_top_header_menu_logo_img {
+    width: 20vh;
+    margin-top: 5px;
+
+  }
+
+  .main_top_header_menu_logo_movieseach {
+    background-color: rgb(24, 24, 24);
+  }
+
+  .main_top_header_menu_logo_img_movieseach {
+    width: 20vh;
+    margin-top: 5px;
+    padding-left: 2px;
+
+  }
+
+  .main_top_header_menu_button {
+    display: none;
+  }
+
+
+
+  /* ムービーサーチ */
+  /* ハンバーガーメニュー */
+  .hamburger {
+    display: block;
+    position: fixed;
+    z-index: 3;
+    right: 5px;
+    top: 3px;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    text-align: center;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    transition: 0.5s all;
+  }
+
+  .hamburger span {
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    left: 6px;
+    background: rgb(255, 255, 255);
+  }
+
+  .hamburger span:nth-child(1) {
+    top: 10px;
+  }
+
+  .hamburger span:nth-child(2) {
+    top: 20px;
+  }
+
+  .hamburger span:nth-child(3) {
+    top: 30px;
+  }
+
+  /* ナビ開いてる時のボタン */
+  .hamburger.active {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+
+  .hamburger.active span:nth-child(1) {
+    top: 16px;
+    left: 6px;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    top: 16px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .hamburger.active span:nth-child(3) {
+    opacity: 0;
+  }
+
+
+  .globalMenuSp {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+
+    background-color: rgb(24, 24, 24);
+    color: white;
+    transform: translateX(100%);
+    transition: all 0.6s;
+    width: 100%;
+
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+    height: 100vh;
+
+  }
+
+
+  /* このクラスを、jQueryで付与・削除する */
+  div.globalMenuSp.active {
+    transform: translateX(0%);
+  }
+
+
+
+
+}
+
+/*ウィンドウ幅が最大479pxまでの場合に適用*/

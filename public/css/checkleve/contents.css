@@ -1,0 +1,739 @@
+@media screen and (min-width: 767px) {
+
+  .backgroundimage {
+    background-image: url("/images/checkleve/backgroundimage.png");
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+
+  /*レフトコンテンツ*/
+  .mainContents_container_left {
+    width: 10%;
+    height: 80vh;
+  }
+
+  /*中央コンテンツ*/
+  .mainContents_container_center {
+    width: 80%;
+    background-color: rgba(248, 221, 192, 0.8);
+    padding-left: 20px;
+  }
+
+  .mainContents_container_center div {
+    text-align: center;
+  }
+
+  .center_h0 {
+    background-color: rgb(122, 106, 80);
+    margin-right: 20px;
+    margin-top: 30px;
+    height: 100px;
+    border-radius: 10px;
+  }
+
+  .center_h0 div {
+    display: inline-block;
+  }
+
+  .center_h0_text {
+    font-size: 50px;
+    margin-top: 10px;
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  .center_h0_text_sp {
+    display: none !important;
+  }
+
+  .center_h0 img {
+    width: 50px;
+    margin-bottom: -10px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+
+
+  .center_h1 {
+
+    background-color: #ffa72b;
+    width: 40vw;
+    color: white;
+    font-size: 33px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: 60px;
+    padding-top: 5px;
+    border-radius: 20px;
+    font-family: 'Hachi Maru Pop', cursive;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+
+  .input_area {
+    margin: 0 auto;
+  }
+
+  .input {
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .input_area {
+    color: white;
+    font-size: 30px;
+    margin-top: -12px;
+  }
+
+  #leave_num {
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    font-size: 40px;
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: bold;
+  }
+
+  input {
+    text-align: center;
+  }
+
+
+  .input_floatleft_text {
+    display: block;
+    font-size: 50px;
+    margin-top: -12px;
+    margin-left: 10px;
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: bold;
+    color: #351b04;
+  }
+
+  .input_floatleft_button {
+    margin-top: 30px;
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+  .input_area_text_none {
+    display: none;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    font-size: 40px;
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: bold;
+    color: black;
+
+    background-color: white;
+    width: 100px;
+    height: 50px;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+  }
+
+
+  /*ボタンCSS*/
+  .button {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding: .65em 4em;
+    border: 2px solid #333;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    transition: .3s ease-in-out;
+  }
+
+  .button span {
+    position: relative;
+    z-index: 2;
+  }
+
+  .button::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    content: '';
+    width: 100%;
+    height: 100%;
+    border: 2px solid #333;
+  }
+
+  .button::after {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    content: '';
+    width: 101%;
+    height: 105%;
+    background-color: #fe5f95;
+    transition: .3s ease-in-out;
+  }
+
+  .button:hover {
+    color: #fff;
+  }
+
+  .button:hover::after {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+
+
+
+  /*ライトコンテンツ*/
+  .mainContents_container_right {
+    width: 10%;
+  }
+
+  .message_panel {
+    display: none;
+  }
+
+  .message_div {
+    text-align: center;
+    background-image: url("/images/checkleve/checkleve_comment.png");
+    height: 184px;
+    width: 731px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+  }
+
+  .message_icon {
+    position: absolute;
+    left: 15vw;
+    margin-top: -50px;
+  }
+
+
+  #desired_date {
+    margin-top: -130px;
+    margin-left: 50px;
+    font-size: 40px;
+    color: rgb(255, 147, 217);
+    font-family: 'Hachi Maru Pop', cursive;
+
+  }
+
+
+  #coffee_c_input {
+    width: 80px;
+  }
+
+  .coffee_cookie_num_table th {
+    padding-left: 10px;
+  }
+
+  .coffee_cookie_num_table td {
+    padding-left: 10px;
+    padding-bottom: 5px;
+  }
+
+  [id$="neces"] {
+    text-align: center;
+  }
+
+
+  /* フッター */
+  .checkleve_footer {
+    text-align: center;
+  }
+
+  .checkleve_footer img {
+    width: 100px;
+    opacity: 0.8;
+  }
+
+  .checkleve_footer img:hover {
+    opacity: 1.0;
+    cursor: pointer;
+  }
+
+  .download_button_sp {
+    display: none;
+  }
+
+  /* メール通知 */
+  .mailform {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(64, 64, 64, 0.5);
+  }
+
+  .mailform_main {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 200px;
+    border: solid 5px;
+    border-color: #ffa083;
+    background-color: rgb(255, 242, 191);
+
+    text-align: center;
+
+  }
+
+  .mailform_h1 {
+    margin-top: 30px;
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: bold;
+    color: black;
+  }
+
+  .mailform_input input {
+    margin-top: 30px;
+    width: 300px;
+  }
+
+  .mailform_button {
+    margin-top: 30px;
+  }
+
+  .close_button {
+    position: fixed;
+    text-align: center;
+    top: 0px;
+    right: 0px;
+    transform: translate(50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: rgb(255, 255, 255);
+    border: solid 5px;
+    border-color: #ffa083;
+    border-radius: 100%;
+    font-size: 30px;
+  }
+
+  .area_data,
+  .area_time,
+  .area_count {
+    position: fixed;
+    visibility: hidden;
+  }
+
+  .downloaderror {
+    display: none;
+  }
+
+
+  /* スクロールロック */
+  body.scroll-rock {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+  }
+
+
+
+
+
+}
+
+/*ウィンドウ幅が767px以上の場合に適用*/
+
+
+
+@media screen and (max-width : 599px) {
+
+  .backgroundimage {
+    background-image: url("/images/checkleve/backgroundimage.png");
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+
+  /*レフトコンテンツ*/
+  .mainContents_container_left {}
+
+  /*中央コンテンツ*/
+  .mainContents_container_center {
+    width: 100%;
+    background-color: rgba(248, 221, 192, 0.8);
+    height: 72vw;
+  }
+
+  .mainContents_container_center div {
+    text-align: center;
+  }
+
+  .center_h0 {
+    background-color: rgb(122, 106, 80);
+    margin-right: 20px;
+    margin-top: 20px;
+    height: 50px;
+    border-radius: 20px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .center_h0 div {
+    display: inline-block;
+  }
+
+  .center_h0_text {
+    display: none !important;
+    ;
+  }
+
+  .center_h0_text_sp {
+    font-size: 15px;
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: bold;
+    color: #ffffff;
+    width: 300px;
+  }
+
+  .center_h0 img {
+    display: none;
+  }
+
+
+
+  .center_h1 {
+
+    background-color: #ffa72b;
+    width: 80vw;
+    color: white;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+
+    height: 30px;
+    border-radius: 20px;
+    font-family: 'Hachi Maru Pop', cursive;
+    margin-right: auto;
+    margin-left: auto;
+
+  }
+
+
+  .input_area {
+    margin: 0 auto;
+  }
+
+  .input {
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .input_area {
+    color: white;
+    font-size: 30px;
+    margin-top: -12px;
+  }
+
+  #leave_num {
+    width: 50px;
+    height: 20px;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    font-size: 15px;
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: bold;
+  }
+
+  input {
+    text-align: center;
+  }
+
+
+  .input_floatleft_text {
+    display: block;
+    font-size: 20px;
+    margin-top: 11px;
+    margin-left: 10px;
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: bold;
+    color: #351b04;
+  }
+
+  .input_floatleft_button {
+    margin-top: 5px;
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  .input_area_text_none {
+    display: none;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    font-size: 15px;
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: bold;
+    color: black;
+
+    background-color: white;
+    width: 55px;
+    height: 20px;
+    margin-top: 13px;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+  }
+
+
+  /*ボタンCSS*/
+  .button {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding: .65em 4em;
+    border: 2px solid #333;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    transition: .3s ease-in-out;
+  }
+
+  .button span {
+    position: relative;
+    z-index: 2;
+  }
+
+  .button::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    content: '';
+    width: 100%;
+    height: 100%;
+    border: 2px solid #333;
+  }
+
+  .button::after {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    content: '';
+    width: 101%;
+    height: 105%;
+    background-color: #fe5f95;
+    transition: .3s ease-in-out;
+  }
+
+  /* .button:hover {
+    color: #fff;
+  }
+
+  .button:hover::after {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  } */
+
+
+
+
+  /*ライトコンテンツ*/
+  .mainContents_container_right {}
+
+  .message_panel {
+    display: none;
+  }
+
+  .message_div {
+    text-align: center;
+    background-image: url("/images/checkleve/checkleve_comment_sp.png");
+    height: 60px;
+    width: 260px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+  }
+
+  .message_icon {
+    position: absolute;
+    left: 4vw;
+    margin-top: -35px;
+  }
+
+  .message_icon img {
+    width: 20vw;
+  }
+
+
+  #desired_date {
+    margin-top: -43px;
+    margin-left: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(255, 147, 217);
+    font-family: 'Hachi Maru Pop', cursive;
+
+  }
+
+
+  #coffee_c_input {
+    width: 80px;
+  }
+
+  .coffee_cookie_num_table th {
+    padding-left: 10px;
+  }
+
+  .coffee_cookie_num_table td {
+    padding-left: 10px;
+    padding-bottom: 5px;
+  }
+
+  [id$="neces"] {
+    text-align: center;
+  }
+
+
+  /* フッター */
+  .checkleve_footer {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .checkleve_footer img {
+    width: 70px;
+    opacity: 0.8;
+  }
+
+  .checkleve_footer img:hover {
+    opacity: 1.0;
+    cursor: pointer;
+  }
+
+  .main_top_footer {
+    padding-top: 100px;
+  }
+
+  .download_button {
+    display: none;
+  }
+
+  /* メール通知 */
+  .mailform {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(64, 64, 64, 0.5);
+  }
+
+  .mailform_main {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 250px;
+    border: solid 5px;
+    border-color: #ffa083;
+    background-color: rgb(255, 242, 191);
+
+    text-align: center;
+
+  }
+
+  .mailform_h1 {
+    margin-top: 30px;
+    font-family: 'Hachi Maru Pop', cursive;
+    font-weight: bold;
+    color: black;
+  }
+
+  .mailform_input input {
+    margin-top: 30px;
+    width: 250px;
+  }
+
+  .mailform_button {
+    margin-top: 30px;
+  }
+
+  .close_button {
+    position: fixed;
+    text-align: center;
+    top: 0px;
+    right: 0px;
+    transform: translate(50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: rgb(255, 255, 255);
+    border: solid 5px;
+    border-color: #ffa083;
+    border-radius: 100%;
+    font-size: 30px;
+  }
+
+  .area_data,
+  .area_time,
+  .area_count {
+    position: fixed;
+    visibility: hidden;
+  }
+
+  .downloaderror {
+    text-decoration: none;
+    display: none;
+    font-size: 10px;
+  }
+
+  .downloaderror a{
+    text-decoration: none;
+    color: white;
+  }
+
+
+
+
+  /* スクロールロック */
+  body.scroll-rock {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+  }
+
+
+
+
+
+
+}
+
+/*ウィンドウ幅が599px以上の場合に適用*/
