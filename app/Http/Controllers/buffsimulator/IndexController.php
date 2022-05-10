@@ -11,7 +11,13 @@ class IndexController extends Controller
     //top
     public function Index()
     {
-        return view("buffsimulator.index");
+
+        $array_joblist = [
+            "paladin", "warrior", "darkknight", "gunbreaker", "monk", "dragoon", "ninja", "samurai", "reaper", "bard", "machinist", "dancer", "blackmage", "summoner", "redmage", "bluemage", "whitemage", "scholar", "astrologian", "sage"
+        ];
+
+
+        return view("buffsimulator.index", compact("array_joblist"));
     }
 
     public function Ajax_access(Request $request)

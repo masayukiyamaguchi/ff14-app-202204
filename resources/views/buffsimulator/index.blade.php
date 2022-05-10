@@ -144,57 +144,45 @@
                                             <div class="use_skl_list{{ $i }}">
                                                 <div>
                                                     <div class="skill_icon skill_icon{{ $i }}">
-                                                        <img src="\images\buffsimulator\skillicon\darkknight1.png"
-                                                            alt="">
+                                                        <img src="" alt="">
                                                     </div>
                                                     <div class="skill_icon skill_icon{{ $i }}">
-                                                        <img src="\images\buffsimulator\skillicon\darkknight2.png"
-                                                            alt="">
+                                                        <img src="" alt="">
                                                     </div>
                                                     <div class="skill_icon skill_icon{{ $i }}">
-                                                        <img src="\images\buffsimulator\skillicon\darkknight3.png"
-                                                            alt="">
+                                                        <img src="" alt="">
                                                     </div>
                                                     <div class="skill_icon skill_icon{{ $i }}">
-                                                        <img src="\images\buffsimulator\skillicon\darkknight4.png"
-                                                            alt="">
+                                                        <img src="" alt="">
                                                     </div>
                                                 </div>
                                                 <div>
                                                     <div class="skill_icon skill_icon{{ $i }}">
-                                                        <img src="\images\buffsimulator\skillicon\darkknight5.png"
-                                                            alt="">
+                                                        <img src="" alt="">
                                                     </div>
                                                     <div class="skill_icon skill_icon{{ $i }}">
-                                                        <img src="\images\buffsimulator\skillicon\darkknight6.png"
-                                                            alt="">
+                                                        <img src="" alt="">
                                                     </div>
                                                     <div class="skill_icon skill_icon{{ $i }}">
-                                                        <img src="\images\buffsimulator\skillicon\darkknight7.png"
-                                                            alt="">
+                                                        <img src="" alt="">
                                                     </div>
                                                     <div class="skill_icon skill_icon{{ $i }}">
-                                                        <img src="\images\buffsimulator\skillicon\darkknight8.png"
-                                                            alt="">
+                                                        <img src="" alt="">
                                                     </div>
                                                 </div>
 
                                                 <div>
                                                     <div class="skill_icon skill_icon{{ $i }}">
-                                                        <img src="\images\buffsimulator\skillicon\darkknight9.png"
-                                                            alt="">
+                                                        <img src="" alt="">
                                                     </div>
                                                     <div class="skill_icon skill_icon{{ $i }}">
-                                                        <img src="\images\buffsimulator\skillicon\darkknight10.png"
-                                                            alt="">
+                                                        <img src="" alt="">
                                                     </div>
                                                     <div class="skill_icon skill_icon{{ $i }}">
-                                                        <img src="\images\buffsimulator\skillicon\darkknight11.png"
-                                                            alt="">
+                                                        <img src="" alt="">
                                                     </div>
                                                     <div class="skill_icon skill_icon{{ $i }}">
-                                                        <img src="\images\buffsimulator\skillicon\darkknight12.png"
-                                                            alt="">
+                                                        <img src="" alt="">
                                                     </div>
                                                 </div>
 

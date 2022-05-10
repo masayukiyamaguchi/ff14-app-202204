@@ -77,11 +77,33 @@ $(function () {
 
     // メニュー１クリック
     $(".left_menu1").click(function () {
-        for (i = 1; i < 9; i++) {
-            var job_name = $("[name=pt_member" + i + "_job] option:selected").text();
 
+
+        for (i = 1; i < 9; i++) {
+            // PTメンバートップがジョブの名前になる
+            var job_name = $("[name=pt_member" + i + "_job] option:selected").text();
             $(".contents1_job" + i).text(job_name);
+
+            //スキルアイコン読み込み
+            var dase_ual = "/images/buffsimulator/skillicon/";
+            var job_eng = $("[name=pt_member" + i + "_job]").val();
+
+            console.log(job_eng);
+
+            //あとはここを1-12で回して、画像を設置する
+            for (j = 1; j < 13; j++) {
+                $(".skill_icon" + i).eq(j - 1).children("img").attr("src", dase_ual + job_eng + j + ".png");
+
+            }
+
+
+
         }
+
+
+
+
+
 
     })
 
@@ -89,11 +111,16 @@ $(function () {
     // スキルボタンクリック
     $('button[class^="use_skl_button"]').click(function () {
 
+        //クリックされたパーティーのナンバーを取得
         var pt_num = $(this).attr("class").substr(-1);
+
+
+        //画像があるかどうか確認
         var skl_list_bool = $(".use_skl_bg" + pt_num).css("display");
 
         // 無い画像要素は削除
         judgeExistImage($("[name=pt_member" + pt_num + "_job]").val(), pt_num);
+
 
 
         if (skl_list_bool == "none") {
@@ -193,15 +220,14 @@ $(function () {
             img_array.push(base_url + job_name + i + ".png");
         }
 
-
         for (var i = 0; i < img_array.length; i++) {
 
             var image = new Image();
             image.src = img_array[i];
             var result = image.width;
 
-            if (!result) {
 
+            if (!result) {
                 $(".skill_icon" + pt_num).eq(i).css("display", "none");
                 //$(".skill_icon").eq(i).children("img").attr("src", "/images/buffsimulator/skillicon/null.png");
             }
