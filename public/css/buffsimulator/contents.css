@@ -2,9 +2,7 @@
     /*ウィンドウ幅が767px以上の場合に適用*/
 
 
-    .mainContents_container {
-        height: 60vh;
-    }
+    .mainContents_container {}
 
     /*レフトコンテンツ*/
     .mainContents_container_left {
@@ -47,6 +45,7 @@
     .mainContents_container_center {
         width: 90%;
         background-color: rgb(87, 87, 87);
+
     }
 
     .contents_display_none {
@@ -189,8 +188,40 @@
         font-size: 3px;
         right: 65px;
         bottom: 8px;
-
     }
+
+    .skill_list_div {
+        padding-top: 10px;
+        text-align: left;
+        height: 570px;
+    }
+
+    .skill_list_div>div {
+        /* display: none; */
+    }
+
+    .skill_list_target {
+        padding-left: 5px;
+        font-size: 12px;
+        display: none;
+    }
+
+    .skill_list_ {
+        display: none;
+    }
+
+
+
+    .skill_list_one_select {
+        width: 70px;
+        font-size: 12px;
+    }
+
+
+    .skill_list_one {
+        display: flex;
+    }
+
 
 
 

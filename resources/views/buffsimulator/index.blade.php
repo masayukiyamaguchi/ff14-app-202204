@@ -59,7 +59,7 @@
                                     <div class="pt_member_h member_heder">メンバー{{ $i }}</div>
                                     <div class="pt_member_h member_job">ジョブ</div>
 
-                                    <select name="pt_member{{ $i }}_job">
+                                    <select class="pt_membere_select" name="pt_member{{ $i }}_job">
                                         <option value="" selected disabled></option>
                                         <option class="tank" value="paladin">ナイト</option>
                                         <option class="tank" value="warrior">戦士</option>
@@ -120,6 +120,7 @@
 
                             @for ($i = 1; $i < 9; $i++)
                                 <div class="contents1_container{{ $i }}">
+
                                     <div class="pt_member_h member_heder">メンバー{{ $i }}</div>
                                     <div class="contents1_job{{ $i }} member_job">ジョブ</div>
 
@@ -196,8 +197,53 @@
 
                                     </div>
 
+                                    <div class="skill_list_div">
+
+                                        @for ($j = 0; $j < 13; $j++)
+                                            <div class="skill_icon_list{{ $i }}">
+                                                <div class="skill_list_one">
+
+                                                    <div>
+                                                        <img class="skill_icon_l" src="" alt="">
+                                                    </div>
+
+                                                    <div class="skill_list_one_contents">
+
+                                                        <div class="skill_list_target">
+                                                            <div>
+                                                                対象：
+                                                            </div>
+                                                            <div>
+                                                                <select class="skill_list_one_select"
+                                                                    name="skill_list_one_select_name">
+                                                                    <option value="" selected disabled></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="skill_list_">
+                                                            <div>
+                                                                対象：
+                                                            </div>
+                                                            <div>
+                                                                <select class="skill_list_one_select"
+                                                                    name="skill_list_one_select_name">
+                                                                    <option value="" selected disabled></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
 
 
+                                                    </div>
+
+
+
+
+                                                </div>
+                                            </div>
+                                        @endfor
+
+                                    </div>
 
 
                                 </div>
@@ -207,11 +253,27 @@
 
                         </div>
 
-                        <div class="input_info">
-                            <button class="input_info_button">情報をブラウザに保存</button>
+
+                        <div class="result_conteiner">
+                            <div class="result_button">
+                                <button class="result_button_done">元ダメージ計算</button>
+                            </div>
+
+                            <div class="damage_att">
+                                <div class="damage_att_text">ダメージ属性：</div>
+                                <div class="damage_att_select_div"><select name="damage_att_select_name"
+                                        id="damage_att_select_id">
+                                        <option value="magic">魔法</option>
+                                        <option value="physics">物理</option>
+                                    </select></div>
+                            </div>
+
+
+                            <div class="result_text">
+                                元ダメージ：<div class="result_text_num"></div>
+                            </div>
+
                         </div>
-
-
 
 
 
