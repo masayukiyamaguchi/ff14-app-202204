@@ -197,7 +197,7 @@
     }
 
     .skill_list_div>div {
-        /* display: none; */
+        display: none;
     }
 
     .skill_list_target {

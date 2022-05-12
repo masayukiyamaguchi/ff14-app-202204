@@ -26,7 +26,6 @@ $(function () {
             }
         }
 
-        console.log(array_select_job);
 
         if (existsSameValue(array_select_job)) {
             alert("ジョブの重複は対応していません");
@@ -191,19 +190,15 @@ $(function () {
         var pt_num = $(this).attr("class").substr(-1);
 
         // スキルNO
-        var click_skill = $(this).children("img").attr("src");
-        click_skill = click_skill.slice(0, -4);
+        var click_skill_url = $(this).children("img").attr("src");
 
-        //2桁判定
-        var skill_no = click_skill.substr(-2);
-        if (!Number.isInteger(Number(skill_no))) {
-            skill_no = skill_no.substr(-1);
-        }
+        var skill_no = skillNumberSearch(click_skill_url);
+
 
         if ($(this).children("img").hasClass("use_skl_click")) {
             $(this).children("img").removeClass("use_skl_click");
 
-            // リストに表示
+            // リストから消す
             $(".skill_icon_list" + pt_num).eq(skill_no - 1).css("display", "none");
 
         } else {
@@ -211,10 +206,26 @@ $(function () {
 
             // リストに表示
             $(".skill_icon_list" + pt_num).eq(skill_no - 1).css("display", "block");
-
         }
 
     })
+
+    // URLを拾ってNOを返す
+    function skillNumberSearch(click_skill_url) {
+
+        click_skill_url = click_skill_url.slice(0, -4);
+
+        //2桁判定
+        var skill_no = click_skill_url.substr(-2);
+
+        if (!Number.isInteger(Number(skill_no))) {
+            skill_no = skill_no.substr(-1);
+        }
+
+        return skill_no;
+    }
+
+
 
 
     // マウスの位置を監視
@@ -271,6 +282,34 @@ $(function () {
     // 元ダメージ計算
     $(".result_button_done").click(function () {
 
+        // どのスキルが選択されているかを抽出
+        var all_done_skill_list = [];
+
+        for (i = 1; i < 9; i++) {
+
+            var job_name = $(".pt_membere_select").eq(i - 1).val();
+            var skill_no_list = [];
+
+            $(".skill_icon_list" + i).each(function () {
+
+                if ($(this).css("display") == "block") {
+                    var skill_url = $(this).find(".skill_icon_l").attr("src")
+                    var skill_no = skillNumberSearch(skill_url);
+
+                    skill_no_list.push(skill_no);
+                }
+
+            });
+
+            // 配列作成とallにpush
+            var dict = { [job_name]: skill_no_list };
+            all_done_skill_list.push(dict);
+
+        }
+
+
+
+
         // ログのダメージ（基本は最大HP-残HP）
         var damage_log = $("[name=pt_member1_hit_point]").val() - $("[name=pt_member1_Remain_hit_point]").val();
 
@@ -293,23 +332,47 @@ $(function () {
         var f_RND = 1;
 
         //ダメージ軽減バフ
-        var f_BUF = [1, 1, 1, 1];
+        var f_BUF = [1];
 
         //与ダメ低下デバフ
-        var f_DBUF = [1, 1, 1, 1];
+        var f_DBUF = [0.7, 0.8];
 
         //バリア
-        var f_BAR = [0, 0, 0, 0];
-
-        // 次回このあたりのダメージ計算
-        // 特に、バフデバフの考慮
-
-        var original_damage_noBuff = Math.round(Math.round(damage_log / (1 - f_DEF) / (2 - f_TEN)) / f_RND);
+        var f_BAR = 1000;
 
 
+        // ダメージ名命名
+        var damage_original_DEF_TEN_RND_BUF_DBUF_BAR = damage_log;
 
+        // バリア量適応ダメージ
+        var damage_original_DEF_TEN_RND_BUF_DBUF = damage_original_DEF_TEN_RND_BUF_DBUF_BAR + f_BAR;
 
+        // バフなしダメージ計算
+        var damage_original_TEN_RND_BUF_DBUF = Math.round(Math.round(damage_original_DEF_TEN_RND_BUF_DBUF / (1 - f_DEF) / (2 - f_TEN), 0) / f_RND, 0);
 
+        //バフ軽減適応
+        var temp_damage = damage_original_TEN_RND_BUF_DBUF;
+        f_BUF.forEach(element => {
+
+            temp_damage = Math.round(temp_damage / element, 0);
+
+        });
+        var damage_original_TEN_RND_DBUF = temp_damage;
+
+        //与ダメ軽減適応
+        var temp_damage = damage_original_TEN_RND_DBUF;
+        f_DBUF.forEach(element => {
+
+            temp_damage = Math.round(temp_damage / element, 0);
+
+        });
+        var damage_original_TEN_RND = temp_damage;
+
+        // 不屈適応
+        var damage_original_RND = Math.round(damage_original_TEN_RND * f_TEN, 0);
+
+        // 乱数適応
+        var damage_original = Math.round(damage_original_RND * f_RND, 0);
 
 
     });
