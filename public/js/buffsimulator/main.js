@@ -307,6 +307,36 @@ $(function () {
 
         }
 
+        //ajaxでデータを受け渡し
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+        $.ajax({
+            //POST通信
+            type: "post",
+            //ここでデータの送信先URLを指定します。
+            url: "/buffsimulator/ajax_access_skilldata",
+            dataType: "json",
+            data: {
+                all_done_skill_list,
+            },
+        })
+            // Ajaxリクエスト成功時の処理
+            .done(function (data) {
+                // Laravel内で処理された結果がdataに入って返ってくる
+
+                console.log(data);
+
+
+            })
+            // Ajaxリクエスト失敗時の処理
+            .fail(function (data) {
+                console.log("fall");
+
+            });
+
 
 
 
