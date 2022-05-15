@@ -284,12 +284,22 @@ $(function () {
 
         // どのスキルが選択されているかを抽出
         var all_done_skill_list = [];
+        var all_done_skill_list_sub = [];
+        var job_name_list = [];
+        var damage_element = $("#damage_att_select_id").val();
+
+
 
         for (i = 1; i < 9; i++) {
 
             var job_name = $(".pt_membere_select").eq(i - 1).val();
             var skill_no_list = [];
+            var skill_no_list_sub = [];
 
+            //ジョブ名だけリスト化し渡す。
+            job_name_list.push(job_name);
+
+            // 表示されているスキルアイコンをもとに抽出
             $(".skill_icon_list" + i).each(function () {
 
                 if ($(this).css("display") == "block") {
@@ -297,6 +307,18 @@ $(function () {
                     var skill_no = skillNumberSearch(skill_url);
 
                     skill_no_list.push(skill_no);
+
+                    // 補助項目の有無
+                    if ($(this).find(".skill_list_target").css("display") == "flex") {
+                        // 内容取得
+                        var target = $(this).find(".skill_list_one_select").val();
+                        var dict = { [skill_no]: target };
+                        skill_no_list_sub.push(dict);
+
+
+                    }
+
+
                 }
 
             });
@@ -305,7 +327,12 @@ $(function () {
             var dict = { [job_name]: skill_no_list };
             all_done_skill_list.push(dict);
 
+            var dict = { [job_name]: skill_no_list_sub };
+            all_done_skill_list_sub.push(dict);
+
         }
+
+
 
         //ajaxでデータを受け渡し
         $.ajaxSetup({
@@ -321,6 +348,9 @@ $(function () {
             dataType: "json",
             data: {
                 all_done_skill_list,
+                all_done_skill_list_sub,
+                job_name_list,
+                damage_element,
             },
         })
             // Ajaxリクエスト成功時の処理
