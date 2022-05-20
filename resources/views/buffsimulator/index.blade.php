@@ -93,7 +93,9 @@
                                     <input name="pt_member{{ $i }}_magical_defenses">
                                     <div class="pt_member_h member_ten">不屈(TEN)</div>
                                     <input name="pt_member{{ $i }}_tenacity">
-                                    <div class="pt_member_h">精神力(MND)</div>
+                                    <div class="pt_member_h member_det">意志力(DET)</div>
+                                    <input name="pt_member{{ $i }}_determination">
+                                    <div class="pt_member_h">メインステータス</div>
                                     <input name="pt_member{{ $i }}_mind">
                                     <div class="pt_member_h">物理（魔法）基本性能</div>
                                     <input name="pt_member{{ $i }}_weapon_damage">

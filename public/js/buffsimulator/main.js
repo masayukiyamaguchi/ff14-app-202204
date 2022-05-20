@@ -70,6 +70,7 @@ $(function () {
                 $("[name=pt_member" + pt_num + "_physical_defenses]").val(data["pd"]);
                 $("[name=pt_member" + pt_num + "_magical_defenses]").val(data["md"]);
                 $("[name=pt_member" + pt_num + "_tenacity]").val(data["ten"]);
+                $("[name=pt_member" + pt_num + "_determination]").val(data["det"]);
                 $("[name=pt_member" + pt_num + "_mind]").val(data["mnd"]);
                 $("[name=pt_member" + pt_num + "_weapon_damage]").val(data["wd"]);
 
@@ -93,6 +94,7 @@ $(function () {
             localStorage.setItem("bs_pt_member" + i + "_physical_defenses", $("[name=pt_member" + i + "_physical_defenses]").val());
             localStorage.setItem("bs_pt_member" + i + "_magical_defenses", $("[name=pt_member" + i + "_magical_defenses]").val());
             localStorage.setItem("bs_pt_member" + i + "_tenacity", $("[name=pt_member" + i + "_tenacity]").val());
+            localStorage.setItem("bs_pt_member" + i + "_determination", $("[name=pt_member" + i + "_determination]").val());
             localStorage.setItem("bs_pt_member" + i + "_mind", $("[name=pt_member" + i + "_mind]").val());
             localStorage.setItem("bs_pt_member" + i + "_weapon_damage", $("[name=pt_member" + i + "_weapon_damage]").val());
         }
@@ -286,6 +288,7 @@ $(function () {
         var all_done_skill_list = [];
         var all_done_skill_list_sub = [];
         var job_name_list = [];
+        var all_job_status = {};
         var damage_element = $("#damage_att_select_id").val();
 
 
@@ -323,6 +326,25 @@ $(function () {
 
             });
 
+            // PTジョブ設定の値を配列化
+            var hit_point = $("[name='pt_member" + i + "_hit_point']").val();
+            var physical_defenses = $("[name='pt_member" + i + "_physical_defenses']").val();
+            var magical_defenses = $("[name='pt_member" + i + "_magical_defenses']").val();
+            var tenacity = $("[name='pt_member" + i + "_tenacity']").val();
+            var determination = $("[name='pt_member" + i + "_determination']").val();
+            var mind = $("[name='pt_member" + i + "_mind']").val();
+            var weapon_damage = $("[name='pt_member" + i + "_weapon_damage']").val();
+
+            all_job_status[job_name] = {};
+            all_job_status[job_name]["hit_point"] = hit_point;
+            all_job_status[job_name]["physical_defenses"] = physical_defenses;
+            all_job_status[job_name]["magical_defenses"] = magical_defenses;
+            all_job_status[job_name]["tenacity"] = tenacity;
+            all_job_status[job_name]["determination"] = determination;
+            all_job_status[job_name]["mind"] = mind;
+            all_job_status[job_name]["weapon_damage"] = weapon_damage;
+
+
             // 配列作成とallにpush
             var dict = { [job_name]: skill_no_list };
             all_done_skill_list.push(dict);
@@ -331,7 +353,6 @@ $(function () {
             all_done_skill_list_sub.push(dict);
 
         }
-
 
 
         //ajaxでデータを受け渡し
@@ -351,6 +372,7 @@ $(function () {
                 all_done_skill_list_sub,
                 job_name_list,
                 damage_element,
+                all_job_status,
             },
         })
             // Ajaxリクエスト成功時の処理
@@ -459,6 +481,7 @@ $(function () {
         $("[name=pt_member" + i + "_physical_defenses]").val(localStorage.getItem("bs_pt_member" + i + "_physical_defenses"));
         $("[name=pt_member" + i + "_magical_defenses]").val(localStorage.getItem("bs_pt_member" + i + "_magical_defenses"));
         $("[name=pt_member" + i + "_tenacity]").val(localStorage.getItem("bs_pt_member" + i + "_tenacity"));
+        $("[name=pt_member" + i + "_determination]").val(localStorage.getItem("bs_pt_member" + i + "_determination"));
         $("[name=pt_member" + i + "_mind]").val(localStorage.getItem("bs_pt_member" + i + "_mind"));
         $("[name=pt_member" + i + "_weapon_damage]").val(localStorage.getItem("bs_pt_member" + i + "_weapon_damage"));
     }
