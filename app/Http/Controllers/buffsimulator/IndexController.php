@@ -85,7 +85,6 @@ class IndexController extends Controller
 
 
 
-
         // 選択されたスキルだけデータベースから情報を選別して抽出
         foreach ($datas["all_done_skill_list"] as $data) {
 
@@ -109,10 +108,12 @@ class IndexController extends Controller
         foreach ($select_skill_data_alljob as $data) {
             $job_e = $data["job_e"];
             $skill_no = $data["skill_no"];
+
             if ($data["target"] == "pt_target" || $data["target"] == "other_than_oneself") {
                 $data["target_one"] = $select_skill_subs[$job_e][$skill_no];
             }
         }
+
 
 
         // 魔法物理判断による調整
@@ -178,8 +179,9 @@ class IndexController extends Controller
 
 
         // バフ類一覧などを定義
-        $buff_base_list = ["f_BUF" => [], "f_BAR" => [], "f_HP" => [], "f_HEALE" => [], "f_HEALV" => [], "f_BRR" => []];
+        $buff_base_list = ["f_BUF" => [], "f_BAR" => [], "f_HP" => [], "f_HEALE" => [], "f_HEALV" => [], "f_BRR" => [], "f_BRR" => []];
         $de_buff_boss = ["f_DBUF" => []];
+        $f_ten = [];
         $heal_status = ["f_PTC" => 1, "f_WD" => 1, "f_HMP" => 1, "f_DET" => 1, "f_TNC" => 1, "f_SP" => 1, "f_CHR" => 1, "f_RND" => 1];
         $all_buff_list = [];
         $barrier_lists = [];
@@ -188,19 +190,39 @@ class IndexController extends Controller
         foreach ($datas["job_name_list"] as $job_name) {
             $array_temp = [$job_name => $buff_base_list];
             $all_buff_list += $array_temp;
+
+            //不屈
+            $ten = $datas["all_job_status"][$job_name]["tenacity"];
+            $status_data = Buffsimulator_statusdata::where("TEN_stat", "<=", $ten)->orderByDesc("TEN_stat")->select("f_TEN")->first();
+            $ten_gain = $status_data["f_TEN"];
+            array_push($f_ten, $ten_gain);
         }
 
 
+        $special_skill_flags = [];
 
         // リターンするデータ
         foreach ($select_skill_data_alljob as $skill_data_list) {
-
             //特別スキルのデータ調整
             $temp = $this->specialSkillAdjust($skill_data_list, $select_skill_data_alljob, $all_buff_list);
             // 取り出し
             $skill_data_list = $temp[0];
             $all_buff_list = $temp[1];
 
+            // 調整結果をもとに調整フラグ（秘策など）
+            if ($skill_data_list["skill_name"] == "秘策") {
+                if ($skill_data_list["heal"] == 1) {
+                    array_push($special_skill_flags, "1_hisaku1");
+                } else if ($skill_data_list["heal"] == 2) {
+                    array_push($special_skill_flags, "1_hisaku2");
+                }
+            }
+
+            if ($skill_data_list["skill_name"] == "展開戦術") {
+                if ($skill_data_list["heal"] == 1) {
+                    array_push($special_skill_flags, "2_tenkai1");
+                }
+            }
 
             // 誰が
             $who =  $skill_data_list["job_e"];
@@ -250,6 +272,41 @@ class IndexController extends Controller
             }
         }
 
+        // 優先順で並び替え
+        asort($special_skill_flags);
+
+        // スペシャルアビリティーのためにもう一度回す
+        foreach ($special_skill_flags as $special_skill_flag) {
+            switch ($special_skill_flag) {
+                case "1_hisaku1":
+                    $nameArray  = array_column($barrier_lists, "skill_name");
+                    $result = array_search("鼓舞激励の策", $nameArray);
+                    $barrier_lists[$result]["crit"] = 1;
+                    $barrier_lists[$result + 1]["crit"] = 1; //激励分もクリティカル扱いは不明
+                    $barrier_lists[$result + 1]["efect_size"] = 1.8;
+                    break;
+
+                case "1_hisaku2":
+                    $nameArray  = array_column($barrier_lists, "skill_name");
+                    $result = array_search("士気高揚の策", $nameArray);
+                    $barrier_lists[$result]["crit"] = 1;
+                    break;
+
+                case "2_tenkai1":
+                    $nameArray  = array_column($barrier_lists, "skill_name");
+                    $kobu = array_search("鼓舞激励の策", $nameArray);
+                    $nameArray  = array_column($barrier_lists, "skill_name");
+                    $tenkai = array_search("展開戦術", $nameArray);
+
+                    $barrier_lists[$tenkai]["heal"] = $barrier_lists[$kobu]["heal"]; //鼓舞の状態を展開にコピー
+                    $barrier_lists[$tenkai]["crit"] = $barrier_lists[$kobu]["crit"];
+                    $barrier_lists[$tenkai]["efect_size"] = $barrier_lists[$kobu]["efect_size"];
+                    $barrier_lists[$tenkai]["efect_time"] = $barrier_lists[$kobu]["efect_time"];
+                    $barrier_lists[$tenkai]["target_one"] = $barrier_lists[$kobu]["target_one"];
+                    break;
+            }
+        }
+
         // バリア計算あとからやる
         foreach ($barrier_lists as $barrier_list) {
             // 誰が
@@ -262,6 +319,8 @@ class IndexController extends Controller
             $target_one = $barrier_list["target_one"];
             // 回復力
             $heal = $barrier_list["heal"];
+            // クリティカル
+            $crit = $barrier_list["crit"];
             // メインステータス（いったんmindのままで進行）
             $main_st = $datas["all_job_status"][$who]["mind"];
             //物理（魔法）基本性能
@@ -273,10 +332,12 @@ class IndexController extends Controller
             //スキル名
             $skill_name = $barrier_list["skill_name"];
 
+
+
             if ($barrier_list["element"] == "barrier") {
 
                 // 回復量計算
-                $recovery_amount_nobuff =  $this->CalculateRecoveryAmount($basic_p, $heal, $who, $main_st, $det, $ten);
+                $recovery_amount_nobuff =  $this->CalculateRecoveryAmount($basic_p, $heal, $who, $main_st, $det, $ten, $crit);
 
                 //回復量アップバフ計算
                 if ($barrier_list["attack_type"] == "magic") {
@@ -290,22 +351,27 @@ class IndexController extends Controller
 
                 //dump($recovery_amount_barrier);
 
-                $all_buff_list = $this->skillUseBarrier($who, $target, $target_one, $datas["job_name_list"], $all_buff_list, $recovery_amount_barrier);
+                $all_buff_list = $this->skillUseBarrier($who, $target, $target_one, $datas["job_name_list"], $all_buff_list, $recovery_amount_barrier, $skill_name);
             } else if ($barrier_list["element"] == "barrier_hp") {
                 // hp依存バリア
                 $all_buff_list = $this->skillUseBarrierHP($who, $target, $target_one, $efect_size, $datas["job_name_list"], $all_buff_list, $datas["all_job_status"], $skill_name);
             }
         }
 
-        dump($all_buff_list);
+        //dump($all_buff_list);
 
-        return 0;
+        $return_data = [
+            "all_buff_list" => $all_buff_list,
+            "de_buff_boss" =>  $de_buff_boss,
+            "f_ten" =>  $f_ten,
+        ];
+
+        return $return_data;
     }
 
     // 回復量計算
-    public function CalculateRecoveryAmount($basic_p, $heal, $who, $main_st, $det, $ten)
+    public function CalculateRecoveryAmount($basic_p, $heal, $who, $main_st, $det, $ten, $crit)
     {
-
         $basic_performance = $basic_p; //基本性能
 
         $job_data = Buffsimulator_jobdata::where("job", $who)->first();
@@ -322,9 +388,14 @@ class IndexController extends Controller
         $heal_status["f_TEN"] = $status_data["f_TEN"];
 
         $heal_status["f_SP"] = $job_data["sp"];
-        $heal_status["f_CHR"] = 1.0;
-        $heal_status["f_RND"] = 1.0;
 
+        if ($crit == 1) {
+            $heal_status["f_CHR"] = 1.6; //クリティカル2300相当（最終装備参考）
+        } else {
+            $heal_status["f_CHR"] = 1.0;
+        }
+
+        $heal_status["f_RND"] = 1.0;
         $recovery_amount_samp = floor($heal_status["f_PTC"] * $heal_status["f_WD"] * $heal_status["f_HMP"] * $heal_status["f_DET"] * $heal_status["f_TEN"]);
         $recovery_amount_samp = floor($recovery_amount_samp * $heal_status["f_CHR"]);
         $recovery_amount_samp = floor($recovery_amount_samp * $heal_status["f_SP"]);
@@ -388,7 +459,7 @@ class IndexController extends Controller
         }
     }
 
-    public function skillUseBarrier($who, $target, $target_one, $pt_job_lists, $all_buff_list, $recovery_amount_barrier)
+    public function skillUseBarrier($who, $target, $target_one, $pt_job_lists, $all_buff_list, $recovery_amount_barrier, $skill_name)
     {
         $barrier_val = $recovery_amount_barrier;
 
@@ -411,16 +482,28 @@ class IndexController extends Controller
 
 
             case  "pt_member":
+                if ($skill_name == "展開戦術") {
+
+                    foreach ($pt_job_lists as $pt_job) {
+                        $barrier_val = $recovery_amount_barrier;
+                        foreach ($all_buff_list[$pt_job]["f_HEALE"] as $val) {
+                            $barrier_val = floor($barrier_val * $val);
+                        }
+                        if ($pt_job != $target_one) {
+                            array_push($all_buff_list[$pt_job]["f_BRR"], $barrier_val);
+                        }
+                    }
+                    return  $all_buff_list;
+                }
+
+                //通常バフの場合
                 foreach ($pt_job_lists as $pt_job) {
-
                     $barrier_val = $recovery_amount_barrier;
-
                     foreach ($all_buff_list[$pt_job]["f_HEALE"] as $val) {
                         $barrier_val = floor($barrier_val * $val);
                     }
                     array_push($all_buff_list[$pt_job]["f_BRR"], $barrier_val);
                 }
-
                 return  $all_buff_list;
         }
     }
@@ -454,7 +537,6 @@ class IndexController extends Controller
                 return  $all_buff_list;
 
             case  "pt_member":
-
                 if ($skill_name == "ディヴァインヴェール") {
                     // HPアップ適応
                     $max_hp = $all_pt_status[$who]["hit_point"];
@@ -585,6 +667,75 @@ class IndexController extends Controller
                     }
                 }
 
+                $array_temp = [$skill_data_list, $all_buff_list];
+                return $array_temp;
+
+            case "ハート・オブ・コランダム":
+                if ($skill_data_list["efect_size"] == 0) {
+                    $key1 = array_search('ブルータルシェル', array_column($select_skill_data_alljob, 'skill_name'));
+                    if ($key1 > -1) {
+                        $skill_data_list["efect_size"] = 1;
+                    }
+                }
+                $array_temp = [$skill_data_list, $all_buff_list];
+                return $array_temp;
+
+            case "インプロビゼーション・フィニッシュ":
+                switch ($skill_data_list["target_one"]) {
+                    case "0":
+                        $skill_data_list["efect_size"] = 0.05;
+                        break;
+                    case "1":
+                        $skill_data_list["efect_size"] = 0.06;
+                        break;
+                    case "2":
+                        $skill_data_list["efect_size"] = 0.07;
+                        break;
+                    case "3":
+                        $skill_data_list["efect_size"] = 0.08;
+                        break;
+                    case "4":
+                        $skill_data_list["efect_size"] = 0.1;
+                        break;
+                }
+                $array_temp = [$skill_data_list, $all_buff_list];
+                return $array_temp;
+
+            case "秘策":
+                $key1 = array_search('鼓舞激励の策', array_column($select_skill_data_alljob, 'skill_name'));
+                $key2 = array_search('士気高揚の策', array_column($select_skill_data_alljob, 'skill_name'));
+                if ($key1 > -1) {
+                    $skill_data_list["heal"] = 1;
+                } else if ($key2 > -1) {
+                    $skill_data_list["heal"] = 2;
+                }
+                $array_temp = [$skill_data_list, $all_buff_list];
+                return $array_temp;
+
+            case "展開戦術":
+                $key1 = array_search('鼓舞激励の策', array_column($select_skill_data_alljob, 'skill_name'));
+                if ($key1 > -1) {
+                    $skill_data_list["heal"] = 1;
+                }
+
+                $array_temp = [$skill_data_list, $all_buff_list];
+                return $array_temp;
+
+            case "アスペクト・ベネフィク":
+            case "アスペクト・ヘリオス":
+                $key1 = array_search('ニュートラルセクト', array_column($select_skill_data_alljob, 'skill_name'));
+                if ($key1 > -1) {
+
+                    $skill_data_list["heal"] = 250;
+                }
+                $array_temp = [$skill_data_list, $all_buff_list];
+                return $array_temp;
+
+            case "タウロコレ":
+                $key1 = array_search('ケーラコレ', array_column($select_skill_data_alljob, 'skill_name'));
+                if ($key1 > -1) {
+                    $skill_data_list["efect_size"] = 0;
+                }
                 $array_temp = [$skill_data_list, $all_buff_list];
                 return $array_temp;
         }

@@ -212,7 +212,7 @@
                                                     <div class="skill_list_one_contents">
 
                                                         <div class="skill_list_target">
-                                                            <div>
+                                                            <div class="skill_list_target_text">
                                                                 対象：
                                                             </div>
                                                             <div>
@@ -224,7 +224,7 @@
                                                         </div>
 
                                                         <div class="skill_list_">
-                                                            <div>
+                                                            <div class="skill_list_target_text">
                                                                 対象：
                                                             </div>
                                                             <div>

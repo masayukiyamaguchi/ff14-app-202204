@@ -97,6 +97,7 @@ $(function () {
             localStorage.setItem("bs_pt_member" + i + "_determination", $("[name=pt_member" + i + "_determination]").val());
             localStorage.setItem("bs_pt_member" + i + "_mind", $("[name=pt_member" + i + "_mind]").val());
             localStorage.setItem("bs_pt_member" + i + "_weapon_damage", $("[name=pt_member" + i + "_weapon_damage]").val());
+            localStorage.setItem("bs_pt_member" + i + "_Remain_hit_point", $("[name=pt_member" + i + "_Remain_hit_point]").val());
         }
 
     })
@@ -379,10 +380,77 @@ $(function () {
             .done(function (data) {
                 // Laravel内で処理された結果がdataに入って返ってくる
 
-                console.log(data);
+                console.log("done");
 
+                var all_buff_list = data["all_buff_list"];
+                var de_buff_boss = data["de_buff_boss"];
+                var f_ten = data["f_ten"];
+                var index = 1;
+                var original_damage = [];
+
+                job_name_list.forEach(job_name => {
+                    // 最大HP
+                    var max_hp = $("[name=pt_member" + index + "_hit_point]").val();
+                    all_buff_list[job_name]["f_HP"].forEach(f_HP => {
+                        max_hp *= Number(f_HP);
+                    });
+
+                    var Remain_hp = $("[name=pt_member" + index + "_Remain_hit_point]").val();
+                    var barrier = 0;
+                    var hit_damage;
+
+                    all_buff_list[job_name]["f_BRR"].forEach(val => {
+                        barrier += Number(val);
+                    });
+
+                    // ヒットダメージ
+                    hit_damage = barrier + Number(max_hp) - Number(Remain_hp);
+
+                    // 防御効果計算
+                    var damage_att = $("#damage_att_select_id").val();
+                    if (damage_att == "magic") {
+                        var damage_att_defense = $("[name=pt_member" + index + "_physical_defenses]").val()
+                    } else {
+                        var damage_att_defense = $("[name=pt_member" + index + "_magical_defenses]").val()
+                    }
+                    var f_DEF = Math.round(15 * damage_att_defense / 1900, 0) / 100;
+
+                    var f_TNC = f_ten[index - 1];
+                    var f_RND = 1;
+                    var f_BUF = all_buff_list[job_name]["f_BUF"];
+                    var f_DBUF = de_buff_boss["f_DBUF"];
+
+                    // バフ入りダメージ
+                    var damage_onbuff = Math.ceil(hit_damage / (1 - f_DEF) / (2 - f_TNC));
+                    damage_onbuff = Math.ceil(damage_onbuff * f_RND);
+
+                    // バフ/デバフを抜く
+                    var damage_nobuff = damage_onbuff;
+                    f_BUF.forEach(buf => {
+                        damage_nobuff = Math.ceil(damage_nobuff / buf);
+                    });
+
+                    f_DBUF.forEach(dbuf => {
+                        damage_nobuff = Math.ceil(damage_nobuff / dbuf);
+                    });
+
+                    original_damage.push(damage_nobuff);
+
+                    index++;
+
+                });
+
+                // 平均値計算
+                let sum = 0;
+                original_damage.forEach(function (v) {
+                    sum += v;
+                });
+                avr_original_damage = Math.ceil(sum / original_damage.length);
+                $(".result_text_num").text(avr_original_damage);
 
             })
+
+
             // Ajaxリクエスト失敗時の処理
             .fail(function (data) {
                 console.log("fall");
@@ -392,81 +460,80 @@ $(function () {
 
 
 
+
+
+
+
+
+
+
+
         // ログのダメージ（基本は最大HP-残HP）
-        var damage_log = $("[name=pt_member1_hit_point]").val() - $("[name=pt_member1_Remain_hit_point]").val();
+        //var damage_log = $("[name=pt_member1_hit_point]").val() - $("[name=pt_member1_Remain_hit_point]").val();
 
-        // ダメージの属性
-        var damage_att = $("#damage_att_select_id").val();
-        // 属性に伴う防御力
-        if (damage_att == "magic") {
-            var damage_att_defense = $("[name=pt_member1_physical_defenses]").val()
-        } else {
-            var damage_att_defense = $("[name=pt_member1_magical_defenses]").val()
-        }
+        // // ダメージの属性
+        // var damage_att = $("#damage_att_select_id").val();
+        // // 属性に伴う防御力
+        // if (damage_att == "magic") {
+        //     var damage_att_defense = $("[name=pt_member1_physical_defenses]").val()
+        // } else {
+        //     var damage_att_defense = $("[name=pt_member1_magical_defenses]").val()
+        // }
 
-        //防御力軽減率
-        var f_DEF = Math.round(15 * damage_att_defense / 1900, 0) / 100
+        // //防御力軽減率
+        // var f_DEF = Math.round(15 * damage_att_defense / 1900, 0) / 100
 
-        //不屈軽減率
-        var f_TEN = 1;
+        // //不屈軽減率
+        // var f_TEN = 1;
 
-        //ダメージ乱数
-        var f_RND = 1;
+        // //ダメージ乱数
+        // var f_RND = 1;
 
-        //ダメージ軽減バフ
-        var f_BUF = [1];
+        // //ダメージ軽減バフ
+        // var f_BUF = [1];
 
-        //与ダメ低下デバフ
-        var f_DBUF = [0.7, 0.8];
+        // //与ダメ低下デバフ
+        // var f_DBUF = [0.7, 0.8];
 
-        //バリア
-        var f_BAR = 1000;
+        // //バリア
+        // var f_BAR = 1000;
 
 
-        // ダメージ名命名
-        var damage_original_DEF_TEN_RND_BUF_DBUF_BAR = damage_log;
+        // // ダメージ名命名
+        // var damage_original_DEF_TEN_RND_BUF_DBUF_BAR = damage_log;
 
-        // バリア量適応ダメージ
-        var damage_original_DEF_TEN_RND_BUF_DBUF = damage_original_DEF_TEN_RND_BUF_DBUF_BAR + f_BAR;
+        // // バリア量適応ダメージ
+        // var damage_original_DEF_TEN_RND_BUF_DBUF = damage_original_DEF_TEN_RND_BUF_DBUF_BAR + f_BAR;
 
-        // バフなしダメージ計算
-        var damage_original_TEN_RND_BUF_DBUF = Math.round(Math.round(damage_original_DEF_TEN_RND_BUF_DBUF / (1 - f_DEF) / (2 - f_TEN), 0) / f_RND, 0);
+        // // バフなしダメージ計算
+        // var damage_original_TEN_RND_BUF_DBUF = Math.round(Math.round(damage_original_DEF_TEN_RND_BUF_DBUF / (1 - f_DEF) / (2 - f_TEN), 0) / f_RND, 0);
 
-        //バフ軽減適応
-        var temp_damage = damage_original_TEN_RND_BUF_DBUF;
-        f_BUF.forEach(element => {
+        // //バフ軽減適応
+        // var temp_damage = damage_original_TEN_RND_BUF_DBUF;
+        // f_BUF.forEach(element => {
 
-            temp_damage = Math.round(temp_damage / element, 0);
+        //     temp_damage = Math.round(temp_damage / element, 0);
 
-        });
-        var damage_original_TEN_RND_DBUF = temp_damage;
+        // });
+        // var damage_original_TEN_RND_DBUF = temp_damage;
 
-        //与ダメ軽減適応
-        var temp_damage = damage_original_TEN_RND_DBUF;
-        f_DBUF.forEach(element => {
+        // //与ダメ軽減適応
+        // var temp_damage = damage_original_TEN_RND_DBUF;
+        // f_DBUF.forEach(element => {
 
-            temp_damage = Math.round(temp_damage / element, 0);
+        //     temp_damage = Math.round(temp_damage / element, 0);
 
-        });
-        var damage_original_TEN_RND = temp_damage;
+        // });
+        // var damage_original_TEN_RND = temp_damage;
 
-        // 不屈適応
-        var damage_original_RND = Math.round(damage_original_TEN_RND * f_TEN, 0);
+        // // 不屈適応
+        // var damage_original_RND = Math.round(damage_original_TEN_RND * f_TEN, 0);
 
-        // 乱数適応
-        var damage_original = Math.round(damage_original_RND * f_RND, 0);
+        // // 乱数適応
+        // var damage_original = Math.round(damage_original_RND * f_RND, 0);
 
 
     });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -484,8 +551,9 @@ $(function () {
         $("[name=pt_member" + i + "_determination]").val(localStorage.getItem("bs_pt_member" + i + "_determination"));
         $("[name=pt_member" + i + "_mind]").val(localStorage.getItem("bs_pt_member" + i + "_mind"));
         $("[name=pt_member" + i + "_weapon_damage]").val(localStorage.getItem("bs_pt_member" + i + "_weapon_damage"));
-    }
+        $("[name=pt_member" + i + "_Remain_hit_point]").val(localStorage.getItem("bs_pt_member" + i + "_Remain_hit_point"));
 
+    }
 
 
     // スキル一覧
@@ -526,14 +594,15 @@ $(function () {
                     case "darkknight5":
                     case "gunbreaker5":
                     case "bard2":
+                    case "dancer2":
                     case "whitemage2":
                     case "whitemage4":
                     case "scholar1":
                     case "scholar9":
                     case "scholar11":
-                    case "astrologian3":
-                    case "astrologian4":
+                    case "astrologian1":
                     case "astrologian5":
+                    case "astrologian7":
                     case "sage1":
                     case "sage6":
                     case "sage7":
@@ -584,6 +653,28 @@ $(function () {
 
         }
     }
+
+
+    // 選択肢調整
+    $(".skill_icon").click(function () {
+        var src = $(this).children("img").attr("src");
+
+        // 踊り子インプロ
+        if (src == "/images/buffsimulator/skillicon/dancer2.png") {
+            var pt_lit_no = $(this).attr("class").slice(-1);
+            $(".skill_icon_list" + pt_lit_no).find(".skill_list_one_select > option").remove();
+            $(".skill_icon_list" + pt_lit_no).find(".skill_list_one_select").append($('<option>').html("0").val("0"));
+            $(".skill_icon_list" + pt_lit_no).find(".skill_list_one_select").append($('<option>').html("1").val("1"));
+            $(".skill_icon_list" + pt_lit_no).find(".skill_list_one_select").append($('<option>').html("2").val("2"));
+            $(".skill_icon_list" + pt_lit_no).find(".skill_list_one_select").append($('<option>').html("3").val("3"));
+            $(".skill_icon_list" + pt_lit_no).find(".skill_list_one_select").append($('<option>').html("4").val("4"));
+
+            $(".skill_icon_list" + pt_lit_no).find(".skill_list_target_text").text("ｽﾀｯｸ：")
+
+        }
+
+
+    })
 
 
 
