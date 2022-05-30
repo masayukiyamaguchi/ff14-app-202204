@@ -52,6 +52,19 @@
         display: none;
     }
 
+    .contents_display_block {
+        display: block;
+    }
+
+    .contents_visibility_hidden {
+        visibility: hidden;
+    }
+
+    .contents_visibility_visible {
+        visibility: visible;
+    }
+
+
 
     .contents0_div {
         display: -webkit-flex;
@@ -222,15 +235,45 @@
         display: flex;
     }
 
-
-
-
-
-
     .input_info {
         padding-top: 20px;
         padding-left: 20px;
     }
+
+
+
+
+    .damage_target {
+        display: flex;
+    }
+
+    .damage_att {
+        display: flex;
+    }
+
+    .result_text {
+        display: flex;
+    }
+
+
+    .result_sim_div {
+        display: flex;
+    }
+
+    .result_sim_div_text {
+        margin-right: 10px;
+    }
+
+    .damage_att_sim {
+        display: flex;
+    }
+
+
+    #damage_log_list_text_id {
+        margin-top: -110px;
+        display: none;
+    }
+
 
 
 

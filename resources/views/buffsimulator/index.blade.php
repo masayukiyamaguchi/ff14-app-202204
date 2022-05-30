@@ -248,6 +248,12 @@
                                     </div>
 
 
+                                    <div class="pt_member_remain_hp">
+                                        <div class="pt_member_remain_hp_text">残HP</div>
+                                        <div class="pt_member_remain_hp_num{{ $i }}">-</div>
+                                    </div>
+
+
                                 </div>
                             @endfor
 
@@ -256,11 +262,7 @@
                         </div>
 
 
-                        <div class="result_conteiner">
-                            <div class="result_button">
-                                <button class="result_button_done">元ダメージ計算</button>
-                            </div>
-
+                        <div class="result_conteiner1">
                             <div class="damage_att">
                                 <div class="damage_att_text">ダメージ属性：</div>
                                 <div class="damage_att_select_div"><select name="damage_att_select_name"
@@ -270,10 +272,45 @@
                                     </select></div>
                             </div>
 
+                            <div class="damage_target">
+                                <div class="damage_target_text">攻撃対象：</div>
+                                <div class="damage_target_select_div">
+                                    <select name="damage_target_select_name" id="damage_target_select_id"></select>
+                                </div>
+                                <div class="damage_log_list"><button class="damage_log_list_button">★</button></div>
+                                <textarea name="damage_log_list_text_name" id="damage_log_list_text_id" cols="30" rows="10"></textarea>
+                            </div>
+
+                            <div class="result_button">
+                                <button class="result_button_done">元ダメージ計算</button>
+                            </div>
+
 
                             <div class="result_text">
                                 元ダメージ：<div class="result_text_num"></div>
                             </div>
+
+                        </div>
+
+                        <div class="result_conteiner2 contents_display_none">
+                            <div class="result_sim_div">
+                                <div class="result_sim_div_text">元ダメージ</div>
+                                <input class="result_sim" type="text">
+                            </div>
+
+                            <div class="damage_att_sim">
+                                <div class="damage_att_sim_text">ダメージ属性：</div>
+                                <div class="damage_att_sim_select_div"><select name="damage_att_select_name"
+                                        id="damage_att_sim_select_id">
+                                        <option value="magic">魔法</option>
+                                        <option value="physics">物理</option>
+                                    </select></div>
+                            </div>
+
+                            <div class="result_button_sim_damage">
+                                <button class="result_button_sim_damage_done">ダメージ模擬計算</button>
+                            </div>
+
 
                         </div>
 
@@ -289,30 +326,8 @@
 
 
                     <div class="contents2 contents_display_none">
-
-
-                        <div class="contents1_container1">
-
-                            <div>物理防御力</div>
-                            <input type="physical_defenses">
-
-                            <div>魔法防御力</div>
-                            <input type="magical_defenses">
-
-                            <div>不屈</div>
-                            <input type="tenacity">
-
-                            <div class="original_damage">元ダメージ量</div>
-                            <input type="physical_defenses">
-
-                            <div>攻撃属性</div>
-                            <select name="attribute">
-                                <option value="physical">物理</option>
-                                <option value="magical">魔法</option>
-                            </select>
-
-                        </div>
                     </div>
+
                     <div class="contents3 contents_display_none">contents3</div>
                     <div class="contents4 contents_display_none">contents4</div>
 

@@ -19,6 +19,7 @@
         "xivapi/xivapi-php": "dev-master"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.6",
         "beyondcode/laravel-dump-server": "^1.7",
         "facade/ignition": "^2.3.6",
         "fakerphp/faker": "^1.9.1",

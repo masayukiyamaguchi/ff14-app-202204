@@ -83,8 +83,6 @@ class IndexController extends Controller
             $count++;
         }
 
-
-
         // 選択されたスキルだけデータベースから情報を選別して抽出
         foreach ($datas["all_done_skill_list"] as $data) {
 
@@ -109,7 +107,7 @@ class IndexController extends Controller
             $job_e = $data["job_e"];
             $skill_no = $data["skill_no"];
 
-            if ($data["target"] == "pt_target" || $data["target"] == "other_than_oneself") {
+            if ($data["target"] == "pt_target") {
                 $data["target_one"] = $select_skill_subs[$job_e][$skill_no];
             }
         }
@@ -358,7 +356,7 @@ class IndexController extends Controller
             }
         }
 
-        //dump($all_buff_list);
+        dump($all_buff_list);
 
         $return_data = [
             "all_buff_list" => $all_buff_list,
@@ -445,8 +443,15 @@ class IndexController extends Controller
                 return  $all_buff_list;
 
             case "pt_target":
-            case "other_than_oneself":
                 array_push($all_buff_list[$target_one]["f_BUF"], $efect_size);
+                return  $all_buff_list;
+
+            case "other_than_oneself":
+                foreach ($pt_job_lists as $pt_job) {
+                    if ($pt_job != $who) {
+                        array_push($all_buff_list[$pt_job]["f_BUF"], $efect_size);
+                    }
+                }
                 return  $all_buff_list;
 
 
