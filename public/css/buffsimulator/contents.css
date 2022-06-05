@@ -276,6 +276,108 @@
 
 
 
+    /* 軽減タイムライン */
+    .contents4 {
+        padding-left: 10px;
+        padding-top: 10px;
+        color: white;
+    }
+
+    .timeline_select_contents4 {
+        display: flex;
+        padding-bottom: 10px;
+    }
+
+    .time_line_timekeyper tr:nth-child(odd) {
+        background-color: rgb(108, 108, 108)
+    }
+
+    .time_line_timekeyper td {
+        position: relative;
+    }
+
+    div[class^="tline_skl_list"] {
+        position: fixed;
+        z-index: 10;
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: rgb(42, 42, 42);
+        height: 150px;
+        width: 150px;
+        display: none;
+
+    }
+
+    div[class^="tline_skl_list"]>div {
+        display: flex;
+    }
+
+    div[class^="tline_skl_list"]>div:first-child {
+        padding-top: 10px;
+    }
+
+    div[class^="tline_skl_list"] img {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+        opacity: 0.5;
+    }
+
+
+
+
+
+    /* 元ダメージリスト */
+    .contents5 {
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+
+    .timeline_table {
+        text-align: center;
+        color: white;
+    }
+
+    .timeline_table_table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .timeline_table_table td {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    .timeline_select_contents {
+        display: flex;
+    }
+
+    .timeline_select_phase_div {
+        display: flex;
+    }
+
+    .timeline_table_table tr:nth-child(odd) {
+        background-color: rgb(108, 108, 108)
+    }
+
+    .timeline_select_phase select:not(:first-child) {
+        display: none;
+    }
+
+
+
+
+    /* 軽減タイムライン */
+    .time_line_timekeyper_table img {
+        width: 30px;
+        padding: 0px;
+    }
+
+
+
+
+
 
     /*ライトコンテンツ*/
     .mainContents_container_right {

@@ -137,7 +137,11 @@ $(function () {
         // スキルリストの情報を読み込み
         skillIconListFirstDone();
         damageTargetListDone();
+        skillDisplay();
 
+    })
+
+    function skillDisplay() {
         // スキル対象リストを初期化
         $("[name=skill_list_one_select_name] > option").remove();
         $("[name=skill_list_one_select_name]").append($('<option selected disabled>').html("").val(""));
@@ -161,11 +165,7 @@ $(function () {
 
             }
         }
-
-
-
-
-    })
+    }
 
 
     // スキルボタンクリック
@@ -435,8 +435,7 @@ $(function () {
                 var index = 1;
                 var original_damage = [];
                 var job_name_list_pub = [];
-
-
+                var one_job_damage = [];
 
 
 
@@ -457,48 +456,23 @@ $(function () {
                     });
 
 
-                    // テキストエリアに入力がある場合(次回ここから、以下はループで回したいけど、elseは１回だけ)
-                    if (damage_log_bool) {
+                    // テキストエリアに入力がある場合
+                    var attack_target_job = $("#damage_target_select_id").val();
+
+                    if (damage_log_bool && job_name == attack_target_job) {
                         damage_log_array.forEach(damage_log => {
-                            hit_damage = damage_log + barrier;
+                            hit_damage = Number(damage_log) + barrier;
+
+                            var damage_nobuff = oparateDamageNoBuff(hit_damage, f_ten, all_buff_list, de_buff_boss, index, job_name);
+                            one_job_damage.push(damage_nobuff);
                         });
+
                     } else {
                         // ヒットダメージ
                         hit_damage = barrier + Number(max_hp) - Number(Remain_hp);
                     }
 
-                    // 防御効果計算
-                    var damage_att = $("#damage_att_select_id").val();
-                    if (damage_att == "magic") {
-                        var damage_att_defense = $("[name=pt_member" + index + "_magical_defenses]").val();
-                    } else {
-                        var damage_att_defense = $("[name=pt_member" + index + "_physical_defenses]").val();
-                    }
-                    var f_DEF = Math.floor(15 * damage_att_defense / 1900, 0) / 100;
-                    var f_TNC = f_ten[index - 1];
-                    var f_RND = 1;
-                    var f_BUF = all_buff_list[job_name]["f_BUF"];
-                    var f_DBUF = de_buff_boss["f_DBUF"];
-
-                    // console.log(job_name);
-                    // console.log("f_DEF:" + f_DEF);
-                    // console.log("f_TNC:" + f_TNC);
-                    // console.log("f_BUF:" + f_BUF);
-                    // console.log("f_DBUF:" + f_DBUF);
-
-                    // バフ入りダメージ
-                    var damage_onbuff = Math.ceil(hit_damage / (1 - f_DEF) / (2 - f_TNC));
-                    damage_onbuff = Math.ceil(damage_onbuff * f_RND);
-
-                    // バフ/デバフを抜く
-                    var damage_nobuff = damage_onbuff;
-                    f_BUF.forEach(buf => {
-                        damage_nobuff = Math.ceil(damage_nobuff / buf);
-                    });
-
-                    f_DBUF.forEach(dbuf => {
-                        damage_nobuff = Math.ceil(damage_nobuff / dbuf);
-                    });
+                    var damage_nobuff = oparateDamageNoBuff(hit_damage, f_ten, all_buff_list, de_buff_boss, index, job_name);
 
                     original_damage.push(damage_nobuff);
                     job_name_list_pub.push(job_name);
@@ -512,18 +486,21 @@ $(function () {
                 var job_num = $.inArray(damage_target, job_name_list_pub);
 
                 if (damage_target == "all") {
-                    let sum = 0;
-                    original_damage.forEach(function (v) {
-                        sum += v;
-                    });
-                    avr_original_damage = Math.ceil(sum / original_damage.length);
+                    avr_original_damage = oparateAVR(original_damage);
                     $(".result_text_num").text(avr_original_damage);
+
+                } else if (damage_log_bool) {
+                    // テキストエリアに入力がある場合
+                    avr_one_job_damage = oparateAVR(one_job_damage);
+                    median_one_job_damage = oparateMedian(one_job_damage)
+                    //$(".result_text_num").text(avr_one_job_damage);　//平均値
+                    $(".result_text_num").text(median_one_job_damage); //中央値
+
                 } else {
                     // 対象が１人の場合
                     var damage_nobuff = original_damage[job_num];
                     $(".result_text_num").text(damage_nobuff);
                 }
-
 
             })
 
@@ -535,7 +512,73 @@ $(function () {
             });
     });
 
+    // ダメージを計算
+    function oparateDamageNoBuff(hit_damage, f_ten, all_buff_list, de_buff_boss, index, job_name) {
+        // 防御効果計算
+        var damage_att = $("#damage_att_select_id").val();
+        if (damage_att == "magic") {
+            var damage_att_defense = $("[name=pt_member" + index + "_magical_defenses]").val();
+        } else {
+            var damage_att_defense = $("[name=pt_member" + index + "_physical_defenses]").val();
+        }
+        var f_DEF = Math.floor(15 * damage_att_defense / 1900, 0) / 100;
+        var f_TNC = f_ten[index - 1];
+        var f_RND = 1;
+        var f_BUF = all_buff_list[job_name]["f_BUF"];
+        var f_DBUF = de_buff_boss["f_DBUF"];
 
+        // console.log(job_name);
+        // console.log("f_DEF:" + f_DEF);
+        // console.log("f_TNC:" + f_TNC);
+        // console.log("f_BUF:" + f_BUF);
+        // console.log("f_DBUF:" + f_DBUF);
+
+        // バフ入りダメージ
+        var damage_onbuff = Math.ceil(hit_damage / (1 - f_DEF) / (2 - f_TNC));
+        damage_onbuff = Math.ceil(damage_onbuff * f_RND);
+
+        // バフ/デバフを抜く
+        var damage_nobuff = damage_onbuff;
+        f_BUF.forEach(buf => {
+            damage_nobuff = Math.ceil(damage_nobuff / buf);
+        });
+
+        f_DBUF.forEach(dbuf => {
+            damage_nobuff = Math.ceil(damage_nobuff / dbuf);
+        });
+
+        return damage_nobuff;
+    }
+
+    // 平均値を計算
+    function oparateAVR(job_damage) {
+        let sum = 0;
+        job_damage.forEach(function (v) {
+            sum += v;
+        });
+        avr_original_damage = Math.ceil(sum / job_damage.length);
+
+        return avr_original_damage;
+    }
+
+    // 中央値を計算
+    function oparateMedian(array) {
+        if (array.length === 0) {
+            return 0;
+        }
+
+        array.sort(function (a, b) {
+            return a - b;
+        });
+
+        var half = Math.floor(array.length / 2);
+
+        if (array.length % 2) {
+            return array[half];
+        } else {
+            return (array[half - 1] + array[half]) / 2;
+        }
+    };
 
 
     // ダメージ模擬計算
@@ -695,8 +738,12 @@ $(function () {
                     var Remain_hp = max_hp - damage_nobuff + barrier;
                     $(".pt_member_remain_hp_num" + index).text(Remain_hp);
 
-
-
+                    //マイナスなら色を赤くする
+                    if (Remain_hp < 0) {
+                        $(".pt_member_remain_hp_num" + index).css("color", "red");
+                    } else {
+                        $(".pt_member_remain_hp_num" + index).css("color", "white");
+                    }
 
                     index++;
 
@@ -719,12 +766,6 @@ $(function () {
 
 
 
-
-
-
-
-
-
     //ロード時の処理
     for (i = 1; i < 9; i++) {
         $("[name=pt_member" + i + "_job]").val(localStorage.getItem("bs_pt_member" + i + "_job"));
@@ -738,6 +779,11 @@ $(function () {
         $("[name=pt_member" + i + "_Remain_hit_point]").val(localStorage.getItem("bs_pt_member" + i + "_Remain_hit_point"));
 
     }
+
+    //タイムライン初期設置
+    timeLineDisplay($(".timeline_select_phase").children("select").val());
+
+
 
 
     // スキル一覧
@@ -827,8 +873,6 @@ $(function () {
 
     function judgeExistImage(job_name, pt_num) {
 
-
-
         var base_url = "/images/buffsimulator/skillicon/";
 
         var img_array = new Array();
@@ -884,6 +928,234 @@ $(function () {
     })
 
 
+    // 軽減タイムライン
+
+
+
+
+    //元ダメージリスト
+    // コンテンツに変更があると、内容を変更する
+    $(".timeline_select_contents").children("select").change(function () {
+        var content_name = $(this).val();
+        $(".timeline_select_phase").children("select").css("display", "none");
+        $("#" + content_name).css("display", "inline-block");
+
+        // 初期化
+        $(".timeline_table_table").empty();
+        $("#" + content_name).val("");
+
+    })
+
+    // フェーズに変更があると、内容を変更する
+    $(".timeline_select_phase").children("select").change(function () {
+        timeLineDisplay($(this).val());
+
+    })
+
+
+    // データベースにアクセスしタイムラインをリターン
+    function timeLineDisplay(phase_name) {
+
+        //ajaxでデータを受け渡し
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+        $.ajax({
+            //POST通信
+            type: "post",
+            //ここでデータの送信先URLを指定します。
+            url: "/buffsimulator/ajax_access_timeline",
+            dataType: "json",
+            data: {
+                phase_name,
+            },
+        })
+            // Ajaxリクエスト成功時の処理
+            .done(function (data) {
+
+                // 初期化
+                $(".timeline_table_table").empty();
+
+                // ヘッダー
+                $(".timeline_table_table").append("<tr>");
+                $(".timeline_table_table").children("tr").last().append(
+                    "<td>時間</td>",
+                    "<td>スキル名</td>",
+                    "<td>元ダメージ</td>",
+                    "<td>解説</td>",
+                );
+
+                //データを表にする
+                data.forEach(timeline => {
+
+                    if (timeline["damage"] == 0) {
+                        timeline["damage"] = "NoData";
+                    }
+
+                    $(".timeline_table_table").append("<tr>");
+                    $(".timeline_table_table").children("tr").last().append(
+                        "<td>" + timeline["time"] + "</td>",
+                        "<td>" + timeline["skill"] + "</td>",
+                        "<td>" + timeline["damage"] + "</td>",
+                        "<td>" + timeline["detail"] + "</td>",
+                    );
+                });
+
+
+            })
+            // Ajaxリクエスト失敗時の処理
+            .fail(function (data) {
+                console.log("fall");
+            });
+
+
+
+    }
+
+
+    //軽減タイムライン
+    $(".left_menu4").one("click", function () {
+
+        var job_name_list_eng = [];
+        var job_name_list = [];
+
+        for (i = 1; i < 9; i++) {
+
+            var job_name = $(".pt_membere_select option:selected").eq(i - 1).text();
+            var job_name_eng = $(".pt_membere_select").eq(i - 1).val();
+            var skill_no_list = [];
+            var skill_no_list_sub = [];
+
+            //ジョブ名だけリスト化し渡す。
+            job_name_list.push(job_name);
+
+
+        }
+
+        // ヘッダーリストの調整
+        job_name_list.unshift("time", "スキル名");
+
+
+        for (j = 1; j < 11; j++) {
+            $(".tr0td" + j).text(job_name_list[j - 1]);
+        }
+
+        for (i = 1; i < 10; i++) {
+            for (j = 1; j < 11; j++) {
+                if (j == 1) {
+                    $(".tr" + i + "td" + j).text(i);
+                } else if (j == 2) {
+                    $(".tr" + i + "td" + j).text("アスカロンメルシー");
+                }
+            }
+        }
+
+        //スキルアイコン読み込み
+        for (i = 1; i < 9; i++) {
+            var dase_ual = "/images/buffsimulator/skillicon/";
+            var job_eng = $("[name=pt_member" + i + "_job]").val();
+
+            //あとはここを1-12で回して、画像を設置する
+            for (j = 1; j < 13; j++) {
+
+                // imgUrl = dase_ual + job_eng + j + ".png"
+
+                // var xhr;
+                // xhr = new XMLHttpRequest();
+                // xhr.open("HEAD", imgUrl, false);
+                // xhr.send(null);
+                // var status = xhr.status;
+
+                // if (status == 404) {
+                //     break;
+                // }
+
+                $(".tline_skill_icon" + i).eq(j - 1).append($("<img src=" + dase_ual + job_eng + j + ".png" + " >"));
+            }
+        }
+
+
+    })
+
+
+    // アクティブにしたスキルリスﾄの位置を記録
+    var active_tline_trtd = "";
+
+    // スキル選択のテーブルをクリック
+    $(".time_line_timekeyper_table").find("td").click(function () {
+
+        // 同じ場所をクリックしても初期化しない
+        if (active_tline_trtd != $(this).attr("class")) {
+            $("[class^=tline_skl_list]").find("img").removeClass("use_skl_click"); //リスト初期化
+        }
+
+        // ジョブ名リスト作成
+        var job_name_list = [];
+        for (i = 1; i < 9; i++) {
+
+            var job_name = $(".pt_membere_select option:selected").eq(i - 1).text();
+            //ジョブ名だけリスト化し渡す。
+            job_name_list.push(job_name);
+        }
+
+        // 行を取得
+        var table_class = $(this).attr("class");
+        active_tline_trtd = table_class;
+
+        var pt_num = table_class.slice(-2);
+        if (Number(pt_num) > 9) {
+        } else {
+            var pt_num = table_class.slice(-1);
+        }
+
+        // 行に対応するスキルリストを表示
+        var h_pt_num = $(".tr0td" + pt_num).text();
+        var job_num = job_name_list.indexOf(h_pt_num) + 1;
+
+        var off = $(this).offset();
+
+        // ほかのリストは非表示
+        $("[class^=tline_skl_list]").css("display", "none");
+
+        // リスト表示
+        $(".tline_skl_list" + job_num).css("top", off.top + 33);
+        $(".tline_skl_list" + job_num).css("left", off.left);
+        $(".tline_skl_list" + job_num).css("display", "block");
+    })
+
+
+    // 決定ボタンの動作
+    $("[class^=use_tline_done_button]").click(function () {
+        var pt_num = $(this).attr("class").slice(-1);
+        $(".tline_skl_list" + pt_num).css("display", "none");
+    })
+
+
+    //特定エリア以外のクリックで実行
+    $(".mainContents_container_center").on('click', function (e) {
+        if (!$(e.target).closest('[class^= "tr"]').length) {
+            if (!$(e.target).closest('div[class^= "tline_skl_list"]').length) {
+                // ターゲット要素の外側をクリックした時の操作
+                $("[class^=tline_skl_list]").css("display", "none");
+            } else {
+                // ターゲット要素をクリックした時の操作
+            }
+        } else {
+            // ターゲット要素をクリックした時の操作
+        }
+
+    });
+
+
+    // スキルアイコンクリック時の動作
+    $("[class*=tline_skill_icon]").click(function () {
+
+        var image_url = $(this).children("img").attr("src");
+        $("." + active_tline_trtd).append($("<img src=" + image_url + ">"));
+
+    });
 
 
 

@@ -42,6 +42,7 @@
                         <div class="left_menu2" tags="contents2">ダメージ模擬計算</div>
                         <div class="left_menu3" tags="contents3">軽減比較</div>
                         <div class="left_menu4" tags="contents4">軽減タイムライン</div>
+                        <div class="left_menu5" tags="contents5">元ダメージリスト</div>
                     </div>
 
                 </div>
@@ -328,8 +329,128 @@
                     <div class="contents2 contents_display_none">
                     </div>
 
-                    <div class="contents3 contents_display_none">contents3</div>
-                    <div class="contents4 contents_display_none">contents4</div>
+                    <div class="contents3 contents_display_none">準備中1</div>
+                    <div class="contents4 contents_display_none">
+
+                        <div class="timeline_select_contents4">
+                            <div>コンテンツ選択：</div>
+                            <select name="timeline_select_contents4" id="timeline_select_contents4">
+                                <option value="Dragonsongs_Reprise">絶竜詩戦争</option>
+                                <option value="test">テスト</option>
+                            </select>
+                        </div>
+
+                        {{-- スキルリスト待機 --}}
+                        @for ($i = 1; $i < 9; $i++)
+                            <div class="tline_skl_list{{ $i }}">
+                                <div>
+                                    <div class="skill_icon tline_skill_icon{{ $i }}">
+                                    </div>
+                                    <div class="skill_icon tline_skill_icon{{ $i }}">
+                                    </div>
+                                    <div class="skill_icon tline_skill_icon{{ $i }}">
+                                    </div>
+                                    <div class="skill_icon tline_skill_icon{{ $i }}">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="skill_icon tline_skill_icon{{ $i }}">
+                                    </div>
+                                    <div class="skill_icon tline_skill_icon{{ $i }}">
+                                    </div>
+                                    <div class="skill_icon tline_skill_icon{{ $i }}">
+                                    </div>
+                                    <div class="skill_icon tline_skill_icon{{ $i }}">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="skill_icon tline_skill_icon{{ $i }}">
+                                    </div>
+                                    <div class="skill_icon tline_skill_icon{{ $i }}">
+                                    </div>
+                                    <div class="skill_icon tline_skill_icon{{ $i }}">
+                                    </div>
+                                    <div class="skill_icon tline_skill_icon{{ $i }}">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <button class="use_tline_done_button{{ $i }}">決定</button>
+                                </div>
+
+                            </div>
+                        @endfor
+
+
+                        <div class="timeline_div">
+                            <div class="time_line_timekeyper">
+                                <table class="time_line_timekeyper_table">
+
+                                    @for ($i = 0; $i < 10; $i++)
+                                        <tr class="tr{{ $i }}">
+                                            @for ($j = 1; $j < 11; $j++)
+                                                <td class="tr{{ $i }}td{{ $j }}"></td>
+                                            @endfor
+                                        </tr>
+                                    @endfor
+
+
+
+                                </table>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+
+                    <div class="contents5 contents_display_none">
+
+                        <div class="timeline_select_contents">
+                            <div>コンテンツ選択：</div>
+                            <select name="timeline_select_contents" id="timeline_select_contents">
+                                <option value="Dragonsongs_Reprise">絶竜詩戦争</option>
+                                <option value="test">テスト</option>
+                            </select>
+                        </div>
+
+                        <div class="timeline_select_phase_div">
+                            <div>フェーズ選択：</div>
+                            <div class="timeline_select_phase">
+                                <select name="Dragonsongs_Reprise" id="Dragonsongs_Reprise">
+                                    <option value="kyoukou1">教皇庁</option>
+                                    <option value="toldan1">トールダン</option>
+                                    <option value="neaz">ニーズヘッグ</option>
+                                    <option value="jagan">邪眼</option>
+                                    <option value="kyoukouif">教皇庁if</option>
+                                    <option value="giten">偽典</option>
+                                    <option value="niten">二天竜</option>
+                                    <option value="toldan2">Pトールダン</option>
+                                </select>
+                                <select name="test" id="test">
+                                    <option value="test">テスト</option>
+                                    <option value="test">テスト</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="timeline_table">
+                            <table class="timeline_table_table">
+
+                            </table>
+                        </div>
+
+
+
+
+
+
+
+                    </div>
 
                 </div>
 

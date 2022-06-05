@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\buffsimulator\Buffsimulator_jobdata;
 use App\Models\buffsimulator\Buffsimulator_skilldata;
 use App\Models\buffsimulator\Buffsimulator_statusdata;
+use App\Models\buffsimulator\Buffsimulator_timeline;
 use LengthException;
 
 class IndexController extends Controller
@@ -356,7 +357,7 @@ class IndexController extends Controller
             }
         }
 
-        dump($all_buff_list);
+        //dump($all_buff_list);
 
         $return_data = [
             "all_buff_list" => $all_buff_list,
@@ -746,5 +747,17 @@ class IndexController extends Controller
         }
         $array_temp = [$skill_data_list, $all_buff_list];
         return $array_temp;
+    }
+
+    public function Ajax_access_timeline(Request $request)
+    {
+        // リクエストからデータを取得
+        $data = $request->all();
+        $phase_name = $data["phase_name"];
+
+        // データベースにアクセス
+        $search_data = Buffsimulator_timeline::where("contents", $phase_name)->get();
+
+        return $search_data;
     }
 }

@@ -71,3 +71,5 @@ Route::post('/checkleve/post', "checkleve\IndexController@post");
 Route::get('/buffsimulator', "buffsimulator\IndexController@index");
 Route::post('/buffsimulator/ajax_access', "buffsimulator\IndexController@Ajax_access");
 Route::post('/buffsimulator/ajax_access_skilldata', "buffsimulator\IndexController@Ajax_access_skilldata");
+Route::post('/buffsimulator/ajax_access_timeline', "buffsimulator\IndexController@Ajax_access_timeline");
+
