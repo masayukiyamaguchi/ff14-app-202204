@@ -760,4 +760,14 @@ class IndexController extends Controller
 
         return $search_data;
     }
+
+
+    public function Ajax_access_skilldata_only(Request $request)
+    {
+
+        // ジョブのデータを抽出
+        $search_data = Buffsimulator_skilldata::get();
+
+        return $search_data;
+    }
 }

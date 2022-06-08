@@ -338,6 +338,12 @@
                                 <option value="Dragonsongs_Reprise">絶竜詩戦争</option>
                                 <option value="test">テスト</option>
                             </select>
+
+                            <div class="cbox_recasttime_div">
+                                <input type="checkbox" id="cbox_recasttime" name="cbox_recasttime">
+                                <div>リキャストタイム表示</div>
+                            </div>
+
                         </div>
 
                         {{-- スキルリスト待機 --}}
@@ -387,7 +393,7 @@
                             <div class="time_line_timekeyper">
                                 <table class="time_line_timekeyper_table">
 
-                                    @for ($i = 0; $i < 10; $i++)
+                                    @for ($i = 0; $i < 200; $i++)
                                         <tr class="tr{{ $i }}">
                                             @for ($j = 1; $j < 11; $j++)
                                                 <td class="tr{{ $i }}td{{ $j }}"></td>
