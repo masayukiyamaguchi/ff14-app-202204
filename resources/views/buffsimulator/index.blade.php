@@ -323,9 +323,6 @@
 
 
 
-
-
-
                     <div class="contents2 contents_display_none">
                     </div>
 

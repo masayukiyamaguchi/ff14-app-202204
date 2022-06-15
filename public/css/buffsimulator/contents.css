@@ -375,7 +375,8 @@
 
     /* 軽減タイムライン */
     .time_line_timekeyper_table img {
-        width: 23px;
+        /* width: 23px; */
+        width: 20px;
         padding: 0px;
         margin-right: 1px;
         z-index: 5;
@@ -397,7 +398,7 @@
         display: inline-flex;
         vertical-align: middle;
         position: relative;
-        opacity: 0.0;
+        opacity: 1.0;
     }
 
     .tline_skill_icon_bg {

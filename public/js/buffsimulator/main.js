@@ -1157,7 +1157,7 @@ $(function () {
         $("[class^=tline_skl_list]").css("display", "none");
 
         // リスト表示
-        $(".tline_skl_list" + job_num).css("left", off.left);
+        $(".tline_skl_list" + job_num).css("left", off.left + 200);//ここ調整
         $(".tline_skl_list" + job_num).css("top", off.top - scroll_top + 33);
         $(".tline_skl_list" + job_num).css("display", "block");
 
@@ -1227,6 +1227,10 @@ $(function () {
                 // リキャストタイムから残り時間を算出
                 var cool_down_time = select_skill["recast_time"] - elapsed_time;
 
+                if (cool_down_time > select_skill["recast_time"]) {
+                    cool_down_time = select_skill["recast_time"] + elapsed_time;
+                }
+
                 $(this).children("img").css("opacity", "0.5");
                 $(this).css("pointer-events", "none");
                 $(this).find(".recast_time_text").css("display", "block");
@@ -1294,11 +1298,99 @@ $(function () {
 
         if (active_tline_trtd_exist_bool > -1) {
             // 存在する
+
+            // アクティブのtrtdの位置を抽出
+            var next_select_tr = Number(active_tline_trtd.slice(2, active_tline_trtd.indexOf("td")));
+            var next_select_td = Number(active_tline_trtd.slice(active_tline_trtd.indexOf("td") + 2));
+
+            var for_bool = 1;
+            var for_bool2 = 1;
+            next_select_tr++;//調整
+
+
+            //自分が何番目のスキル要素か取得
+            var icon_num_array = [];
+            $("." + active_tline_trtd).find(".tline_skill_icon_div").each(function () {
+                icon_num_array.push($(this).attr("icon_num"));
+            });
+
+            var active_div_icon_num = icon_num_array.indexOf(job_name + skill_num) + 1;
+            var count_skill_num = active_div_icon_num + $("." + active_tline_trtd).find(".tline_skill_icon_inv").length
+
+
+            // アイコンを消す
             $("." + active_tline_trtd).children().eq(active_tline_trtd_exist_bool).remove();
+
+            // 効果時間のinvdivを消す
+            for (i = 0; for_bool; i++) {
+                var next_trtd = "tr" + next_select_tr + "td" + next_select_td;
+
+                for_bool = $("." + next_trtd).find(".tline_skill_icon_inv").eq(count_skill_num - 1).remove().length;
+                next_select_tr++;
+
+                // 空き部分を埋めたinvdivを消す
+                if (!for_bool) {
+                    var prev_select_tr = next_select_tr - 1;
+
+
+                    // 後ろからinvdivを確認
+                    for (i = 0; for_bool2; i++) {
+                        prev_select_tr--;
+                        var prev_trtd = "tr" + prev_select_tr + "td" + next_select_td;
+
+                        // 自分より後ろに効果時間があればその場所で終わり(消すかどうかのチェック)
+                        for (i = active_div_icon_num; i < $("." + prev_trtd).children("div").length; i++) {
+                            if ($("." + prev_trtd).children(".tline_skill_icon_inv").eq(i - 1).attr("class") == "tline_skill_icon_inv") {
+                                for_bool2 = false;
+                                break;
+                            };
+                        }
+
+                        if (for_bool2) {
+                            for_bool2 = $("." + prev_trtd).children('[inv_id=' + job_name + skill_num + ']').remove().length;
+                        }
+
+                    }
+
+                }
+
+            }
+
+            var for_bool3 = true;
+            // 残りinvを特殊invへ変換
+            for (i = 0; for_bool3; i++) {
+
+                // 特殊invにidを変換
+                $("." + prev_trtd).children('[inv_id=' + job_name + skill_num + ']').attr("inv_id", "invisible").length;
+
+                // 逆順に確認
+                $($("." + prev_trtd).children("[class^='tline_skill_icon_']").get().reverse()).each(function () {
+                    if ($(this).attr("inv_id") == "invisible") {
+                        $(this).remove();
+                    } else {
+                        return false;
+                    }
+
+                });
+
+                if (prev_trtd == active_tline_trtd) {
+                    for_bool3 = false;
+                }
+
+                prev_select_tr--;
+                prev_trtd = "tr" + prev_select_tr + "td" + next_select_td;
+
+            }
+
+            // リキャスト時間のinvdivを消す
+            $(".time_line_timekeyper_table").find("[recast_active_tl=" + active_tline_trtd + "]" + "[recast_job_num=" + job_name + skill_num + "]").remove();
+
+
+
 
         } else {
             //存在しない
-            $("." + active_tline_trtd).append($("<div class='tline_skill_icon_div'><img src=" + image_url + "></div>"));
+            $("." + active_tline_trtd).append($("<div class='tline_skill_icon_div' icon_num='" + job_name + skill_num + "'><img src=" + image_url + "></div>"));
             $("." + active_tline_trtd).children(".tline_skill_icon_div").last().append($('<div class="tline_skill_icon_bg ' + job_name + skill_num + '"></div>'));
             $("." + active_tline_trtd).children(".tline_skill_icon_div").last().append($('<div class="tline_skill_icon_bg_recast recast_' + job_name + skill_num + '"></div>'));
 
@@ -1340,20 +1432,65 @@ $(function () {
 
             var tr_length = $(".time_line_timekeyper_table").find("tr").length - 1;
 
+            var bool_prev_skill = false;
+
+
+            // 効果時間div挿入
             use_time_next_tr++;
             for (i = 0; use_time_next - use_time_num < skill_efect_time; use_time_next_tr++) {
-
-                //自分が何番目のスキル要素か取得
-                var count_skill_num = $("." + active_tline_trtd).children("div").length;
 
                 // 透明スキルを挿入
                 //単純に挿入
                 inv_skill_tr = use_time_next_tr - 1;
 
-                var count_inv_skill_num = $(".tr" + inv_skill_tr + "td" + inv_skill_td).children("div").length;
 
-                for (i = count_inv_skill_num; i < count_skill_num; i++) {
-                    $(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv'><img src=/images/buffsimulator/skillicon/skilliconnull.png></div>"));
+                //透明スキルがいくつ入っているか
+                var count_inv_skill_num = $(".tr" + inv_skill_tr + "td" + inv_skill_td).find("[class^='tline_skill_icon_']").length;
+
+                //自分が何番目のスキル要素か取得
+                var count_skill_num = $("." + active_tline_trtd).find(".tline_skill_icon_div").length + $("." + active_tline_trtd).find(".tline_skill_icon_inv").length;
+
+
+                // スキル挿入よりも前にスキルがある場合の処理
+                if (count_skill_num <= count_inv_skill_num) {
+                    $(".tr" + inv_skill_tr + "td" + inv_skill_td).children("[class^='tline_skill_icon_']").eq(count_skill_num - 1).before("<div class='tline_skill_icon_inv' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/" + job_name + skill_num + ".png></div>");
+                    bool_prev_skill = true;
+
+                    var loop_bool = true;
+
+                    // 使用時間より左側にすでにinvがある場合自分に染める（ただしコピー品のみ）
+                    for (i = count_skill_num - 2; i >= 0; i--) {
+
+                        var temp_trtd_eqi = $(".tr" + inv_skill_tr + "td" + inv_skill_td).children("[class^='tline_skill_icon_']").eq(i);
+
+                        if (temp_trtd_eqi.attr("class") == "tline_skill_icon_inv" && temp_trtd_eqi.attr("prepend_id") == "copy") {
+                            temp_trtd_eqi.attr("inv_id", job_name + skill_num);
+                            temp_trtd_eqi.children("img").attr("src", "/images/buffsimulator/skillicon/" + job_name + skill_num + ".png");
+
+                        } else {
+
+                            loop_bool = false;
+                        }
+
+                    }
+
+
+                } else {
+
+                    for (i = count_inv_skill_num; i < count_skill_num; i++) {
+
+                        if (i < count_skill_num - 1) {
+                            //$(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/skilliconnull.png></div>"));
+                            $(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv' prepend_id='copy' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/" + job_name + skill_num + ".png></div>"));
+                            // デバッグ用
+
+                        } else {
+                            //$(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/skilliconnull.png></div>"));
+                            $(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/" + job_name + skill_num + ".png></div>"));
+                            // デバッグ用
+                        }
+
+                    }
                 }
 
 
@@ -1361,15 +1498,42 @@ $(function () {
                 use_time_next = Number($("." + use_time_next_trtd).text()); //スキル開始地点の時間
 
                 // 最後の行でやめる
-                if (use_time_next == tr_length) {
+                if (use_time_next == 0) {
                     break;
                 }
 
             }
 
+
+            // invを調整、すでにあるスキルの前に入れる場合(効果時間後の空きに前の分のinvを挿入)
+            if (bool_prev_skill) {
+
+                //自分が何番目のスキル要素か取得
+                var count_skill_num = $("." + active_tline_trtd).find(".tline_skill_icon_div").length + $("." + active_tline_trtd).find(".tline_skill_icon_inv").length;
+
+                var next_trtd = "tr" + (inv_skill_tr + 1) + "td" + inv_skill_td;
+                var next_trtd_first = $("." + next_trtd).children("[class^='tline_skill_icon_']").eq(count_skill_num - 1);
+                var loop_bool = true;
+
+
+                for (i = 2; loop_bool; i++) {
+                    if (next_trtd_first.attr("class") == "tline_skill_icon_inv") {
+                        next_trtd_first.before(next_trtd_first.prop("outerHTML"));
+                        $("." + next_trtd).children("[class^='tline_skill_icon_']").eq(count_skill_num - 1).attr("prepend_id", "copy");
+                    } else {
+
+                        loop_bool = false;
+                    }
+
+                    next_trtd = "tr" + (inv_skill_tr + i) + "td" + inv_skill_td;
+                    next_trtd_first = $("." + next_trtd).children("[class^='tline_skill_icon_']").eq(0);
+
+                }
+            }
+
+
             var minus = $("." + use_time_next_trtd).offset().top - $("." + active_tline_trtd).offset().top;
             $("." + active_tline_trtd).find("." + job_name + skill_num).css("height", minus + "px");
-
 
 
             // リキャスト時間を測定
@@ -1378,28 +1542,61 @@ $(function () {
             var use_time_next_tr = use_time_next_tr_temp;
             use_time_next_tr += 1;
 
+            var use_time_prev_tr = use_time_next_tr_temp;
+            use_time_prev_tr -= 1;
+
             var use_time_next_trtd = "tr" + use_time_next_tr + "td1";
+            var use_time_prev_trtd = "tr" + use_time_prev_tr + "td1";
             var use_time_next = Number($("." + use_time_next_trtd).text()); //スキル開始地点の時間
+            var use_time_prev = Number($("." + use_time_prev_trtd).text()); //スキル開始地点の時間
 
             use_time_next_tr++;
-            for (i = 0; use_time_next - use_time_num < skill_recast; use_time_next_tr++) {
+            use_time_prev_tr--;
 
+
+            // リキャストdiv挿入
+            for (i = 1; use_time_next - use_time_num < skill_recast; use_time_next_tr++) {
 
                 // 透明スキルを挿入
                 //単純に挿入
                 inv_skill_tr = use_time_next_tr - 1;
-                $(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='recast_time' recast_id='" + use_time_num + "' name='" + image_url + "'><img src=/images/buffsimulator/skillicon/skilliconnull.png></div>"));
 
+                $(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='recast_time' recast_id=" + use_time_num + " name=" + image_url + " recast_active_tl =" + active_tline_trtd + " recast_job_num =" + job_name + skill_num + "><img src=/images/buffsimulator/skillicon/skilliconnull.png></div>"));
+                //$(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='recast_time' recast_id='" + active_tline_trtd + "' name='" + job_name + skill_num + "'><img src=/images/buffsimulator/" + job_name + skill_num + ".png></div>"));
+                //デバッグ用
 
                 use_time_next_trtd = "tr" + use_time_next_tr + "td1";
                 use_time_next = Number($("." + use_time_next_trtd).text()); //スキル開始地点の時間
 
                 // 最後の行でやめる
-                if (use_time_next == tr_length) {
+                if (use_time_next == 0) {
                     break;
                 }
 
             }
+
+            // リキャストdiv挿入（逆）
+            for (i = 1; use_time_num - use_time_prev < skill_recast; use_time_prev_tr--) {
+
+                // 透明スキルを挿入
+                //単純に挿入
+                inv_skill_tr = use_time_prev_tr + 1;
+
+                $(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='recast_time' recast_id=" + use_time_num + " name=" + image_url + " recast_active_tl =" + active_tline_trtd + " recast_job_num =" + job_name + skill_num + "><img src=/images/buffsimulator/skillicon/skilliconnull.png></div>"));
+                //$(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='recast_time' recast_id='" + active_tline_trtd + "' name='" + job_name + skill_num + "'><img src=/images/buffsimulator/" + job_name + skill_num + ".png></div>"));
+                //デバッグ用
+
+                use_time_prev_trtd = "tr" + use_time_prev_tr + "td1";
+                use_time_prev = Number($("." + use_time_prev_trtd).text()); //スキル開始地点の時間
+
+                // 最後の行でやめる
+                if (use_time_prev == 0) {
+                    break;
+                }
+
+            }
+
+
 
             var minus_recast = $("." + use_time_next_trtd).offset().top - $("." + active_tline_trtd).offset().top;
             $("." + active_tline_trtd).find(".recast_" + job_name + skill_num).css("height", minus_recast - minus + "px");
