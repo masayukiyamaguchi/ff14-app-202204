@@ -327,19 +327,61 @@
                     </div>
 
                     <div class="contents3 contents_display_none">準備中1</div>
+
                     <div class="contents4 contents_display_none">
 
-                        <div class="timeline_select_contents4">
-                            <div>コンテンツ選択：</div>
-                            <select name="timeline_select_contents4" id="timeline_select_contents4">
-                                <option value="Dragonsongs_Reprise">絶竜詩戦争</option>
-                                <option value="test">テスト</option>
-                            </select>
+                        <div class="trtd_hp_cal_message">
+                            <div>--「残HP予測」計算中--</div>
+                        </div>
 
-                            <div class="cbox_recasttime_div">
-                                <input type="checkbox" id="cbox_recasttime" name="cbox_recasttime">
-                                <div>リキャストタイム表示</div>
+                        <div class="time_line_contents_option_div">
+                            <div class="time_line_contents_option_div_first">
+                                <div class="timeline_select_contents4">
+                                    <div>コンテンツ選択：</div>
+                                    <select name="timeline_select_contents4" id="timeline_select_contents4">
+                                        <option value="Dragonsongs_Reprise">絶竜詩戦争</option>
+                                        <option value="test">テスト</option>
+                                    </select>
+                                </div>
+
+                                <div class="timeline_select_phase_div_contents4">
+                                    <div>フェーズ選択：</div>
+                                    <div class="timeline_select_phase_contents4">
+                                        <select name="Dragonsongs_Reprise" select_id="Dragonsongs_Reprise">
+                                            <option value="kyoukou1">教皇庁</option>
+                                            <option value="toldan1">トールダン</option>
+                                            <option value="neaz">ニーズヘッグ</option>
+                                            <option value="jagan">邪眼</option>
+                                            <option value="kyoukouif">教皇庁if</option>
+                                            <option value="giten">偽典</option>
+                                            <option value="niten">二天竜</option>
+                                            <option value="toldan2">Pトールダン</option>
+                                        </select>
+                                        <select name="test" select_id="test">
+                                            <option value="test">テスト</option>
+                                            <option value="test">テスト</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
+
+                            <div class="time_line_contents_option_div_second">
+                                <div class="cbox_recasttime_div">
+                                    <input type="checkbox" id="cbox_recasttime" name="cbox_recasttime">
+                                    <div>リキャストタイム表示</div>
+                                </div>
+                                <div class="cbox_remain_hp_div">
+                                    <input type="checkbox" id="cbox_remain_hp" name="cbox_remain_hp"
+                                        checked="checked">
+                                    <div>残HP表示</div>
+                                </div>
+                            </div>
+
+                            {{-- <div class="time_line_contents_option_div_third">
+                                <div>
+                                    <button class="contents4_remain_ph">残HP計算</button>
+                                </div>
+                            </div> --}}
 
                         </div>
 
@@ -382,6 +424,8 @@
                                     <button class="use_tline_done_button{{ $i }}">決定</button>
                                 </div>
 
+                                <div class="contents4_remain_ph"></div>
+
                             </div>
                         @endfor
 
@@ -392,7 +436,7 @@
 
                                     @for ($i = 0; $i < 200; $i++)
                                         <tr class="tr{{ $i }}">
-                                            @for ($j = 1; $j < 11; $j++)
+                                            @for ($j = 1; $j < 18; $j++)
                                                 <td class="tr{{ $i }}td{{ $j }}"></td>
                                             @endfor
                                         </tr>
@@ -403,9 +447,81 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
 
+                    {{-- 残HP --}}
+                    <div div class="trtd_hp">
+                        <div div class="trtd_hp_div">
 
+                            <div class="trtd_hp_cal_button">
+                                <button>計算</button>
+                            </div>
 
+                            <div class="trtd_hp_icon_div">
+                                <div class="trtd_hp_div_up">
+                                    <div class="tank_hp">
+                                        <div class="ptmem_hp_1">
+                                            <img src="/images/buffsimulator/skillicon/darkknight_jobicon.png">
+                                            <div class="ptmem_hpnum">
+                                            </div>
+                                        </div>
+                                        <div class="ptmem_hp_2">
+                                            <img src="/images/buffsimulator/skillicon/darkknight_jobicon.png">
+                                            <div class="ptmem_hpnum">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="healer_hp">
+                                        <div class="ptmem_hp_3">
+                                            <img src="/images/buffsimulator/skillicon/darkknight_jobicon.png">
+                                            <div class="ptmem_hpnum">
+                                            </div>
+                                        </div>
+                                        <div class="ptmem_hp_4">
+                                            <img src="/images/buffsimulator/skillicon/darkknight_jobicon.png">
+                                            <div class="ptmem_hpnum">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="trtd_hp_div_down">
+                                    <div class="melee_hp">
+                                        <div class="ptmem_hp_5">
+                                            <img src="/images/buffsimulator/skillicon/darkknight_jobicon.png">
+                                            <div class="ptmem_hpnum">
+                                            </div>
+                                        </div>
+                                        <div class="ptmem_hp_6">
+                                            <img src="/images/buffsimulator/skillicon/darkknight_jobicon.png">
+                                            <div class="ptmem_hpnum">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="range_hp">
+                                        <div class="ptmem_hp_7">
+                                            <img src="/images/buffsimulator/skillicon/darkknight_jobicon.png">
+                                            <div class="ptmem_hpnum">
+                                            </div>
+                                        </div>
+                                        <div class="ptmem_hp_8">
+                                            <img src="/images/buffsimulator/skillicon/darkknight_jobicon.png">
+                                            <div class="ptmem_hpnum">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {{-- 対象選択 --}}
+                    <div class="timeline_skill_targetselect_div">
+                        <div class="timeline_skill_targetselect_one">
+                            <select class="timeline_skill_targetselect" name="timeline_skill_targetselect">
+
+                            </select>
+                        </div>
                     </div>
 
 
@@ -423,7 +539,7 @@
                         <div class="timeline_select_phase_div">
                             <div>フェーズ選択：</div>
                             <div class="timeline_select_phase">
-                                <select name="Dragonsongs_Reprise" id="Dragonsongs_Reprise">
+                                <select name="Dragonsongs_Reprise" select_id="Dragonsongs_Reprise">
                                     <option value="kyoukou1">教皇庁</option>
                                     <option value="toldan1">トールダン</option>
                                     <option value="neaz">ニーズヘッグ</option>
@@ -433,7 +549,7 @@
                                     <option value="niten">二天竜</option>
                                     <option value="toldan2">Pトールダン</option>
                                 </select>
-                                <select name="test" id="test">
+                                <select name="test" select_id="test">
                                     <option value="test">テスト</option>
                                     <option value="test">テスト</option>
                                 </select>
@@ -450,10 +566,9 @@
 
 
 
-
-
-
                     </div>
+
+
 
                 </div>
 

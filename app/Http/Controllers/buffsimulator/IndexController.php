@@ -38,6 +38,9 @@ class IndexController extends Controller
     }
 
 
+
+
+
     public function Ajax_access_skilldata(Request $request)
     {
 
@@ -102,6 +105,8 @@ class IndexController extends Controller
             $loop++;
         }
 
+
+
         // データベース調整
         // 整理されたサブターゲットをtarget_oneに設置
         foreach ($select_skill_data_alljob as $data) {
@@ -109,6 +114,8 @@ class IndexController extends Controller
             $skill_no = $data["skill_no"];
 
             if ($data["target"] == "pt_target") {
+                $data["target_one"] = $select_skill_subs[$job_e][$skill_no];
+            } else if ($job_e == "dancer" && $skill_no == "2") {
                 $data["target_one"] = $select_skill_subs[$job_e][$skill_no];
             }
         }
