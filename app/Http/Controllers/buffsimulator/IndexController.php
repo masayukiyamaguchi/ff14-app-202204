@@ -756,6 +756,7 @@ class IndexController extends Controller
         return $array_temp;
     }
 
+    // タイムラインを取得
     public function Ajax_access_timeline(Request $request)
     {
         // リクエストからデータを取得
@@ -766,6 +767,90 @@ class IndexController extends Controller
         $search_data = Buffsimulator_timeline::where("contents", $phase_name)->get();
 
         return $search_data;
+    }
+
+    // バリアを取得+ついでに全スキルのジョブごとの数も返してもらう
+    public function Ajax_access_barrier(Request $request)
+    {
+        // データベースにアクセス
+        $barrier_data = Buffsimulator_skilldata::where("type", "pt_barrier")
+            ->orWhere("type", "self_barrier")
+            ->orWhere("type", "target_barrier")
+            ->get();
+
+
+        //ついでに全スキルのジョブごとの数も返してもらう
+        $all_skill_data = Buffsimulator_skilldata::get();
+
+        $array_job_skill_num = ["paladin" => 0];
+
+
+        foreach ($all_skill_data as $data) {
+
+            switch ($data["job_e"]) {
+                case "paladin":
+                    $array_job_skill_num["paladin"] = $data["skill_no"];
+                    break;
+                case "warrior":
+                    $array_job_skill_num["warrior"] = $data["skill_no"];
+                    break;
+                case "darkknight":
+                    $array_job_skill_num["darkknight"] = $data["skill_no"];
+                    break;
+                case "gunbreaker":
+                    $array_job_skill_num["gunbreaker"] = $data["skill_no"];
+                    break;
+                case "monk":
+                    $array_job_skill_num["monk"] = $data["skill_no"];
+                    break;
+                case "dragoon":
+                    $array_job_skill_num["dragoon"] = $data["skill_no"];
+                    break;
+                case "ninja":
+                    $array_job_skill_num["ninja"] = $data["skill_no"];
+                    break;
+                case "samurai":
+                    $array_job_skill_num["samurai"] = $data["skill_no"];
+                    break;
+                case "reaper":
+                    $array_job_skill_num["reaper"] = $data["skill_no"];
+                    break;
+                case "bard":
+                    $array_job_skill_num["bard"] = $data["skill_no"];
+                    break;
+                case "machinist":
+                    $array_job_skill_num["machinist"] = $data["skill_no"];
+                    break;
+                case "dancer":
+                    $array_job_skill_num["dancer"] = $data["skill_no"];
+                    break;
+                case "blackmage":
+                    $array_job_skill_num["blackmage"] = $data["skill_no"];
+                    break;
+                case "summoner":
+                    $array_job_skill_num["summoner"] = $data["skill_no"];
+                    break;
+                case "redmage":
+                    $array_job_skill_num["redmage"] = $data["skill_no"];
+                    break;
+                case "whitemage":
+                    $array_job_skill_num["whitemage"] = $data["skill_no"];
+                    break;
+                case "scholar":
+                    $array_job_skill_num["scholar"] = $data["skill_no"];
+                    break;
+                case "astrologian":
+                    $array_job_skill_num["astrologian"] = $data["skill_no"];
+                    break;
+                case "sage":
+                    $array_job_skill_num["sage"] = $data["skill_no"];
+                    break;
+            }
+        }
+
+
+        $array_temp = [$barrier_data, $all_skill_data, $array_job_skill_num];
+        return $array_temp;
     }
 
 
