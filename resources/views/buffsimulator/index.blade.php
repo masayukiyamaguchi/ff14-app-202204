@@ -54,6 +54,16 @@
                             <div class="left_menu5" tags="contents5">元ダメージリスト</div>
                         </div>
 
+
+                        @if ($save_id === 'none')
+                            <div class="save_id"></div>
+                        @else
+                            <div class="save_id_div">
+                                <div class="save_id_h">【セーブID】</div>
+                                <div class="save_id">{{ $save_id }}</div>
+                            </div>
+                        @endif
+
                     </div>
 
 
@@ -343,11 +353,13 @@
 
                         <div class="contents4 contents_display_none">
 
+                            <div class="skl_icon_sub">
+                                <img src="\" alt="">
+                            </div>
+
                             <div class="trtd_hp_cal_message">
                                 <div>--「残HP予測」計算中--</div>
                             </div>
-
-
 
                             <div class="time_line_contents_option_div">
                                 <div class="time_line_contents_option_div_first">
@@ -396,8 +408,17 @@
                                     <div class="button_all_remain_hp_calc_div">
                                         <button class="button_all_remain_hp_calc_button">全ての残HPを計算</button>
                                     </div>
-                                    <div class="cbox_remain_hp_div">
+                                    <div class="button_data_save_div">
+                                        <button class="button_data_save_div_button">現在の状態を保存する</button>
+                                    </div>
+                                </div>
 
+                                <div class="time_line_contents_option_div_forth">
+                                    <div class="button_data_load_div">
+                                        <button class="button_data_load_button">保存した内容を反映</button>
+                                    </div>
+                                    <div class="button_data_load_div">
+                                        <button class="button_data_load_button">保存した内容を反映</button>
                                     </div>
                                 </div>
 
@@ -624,9 +645,6 @@
 
                                 </table>
                             </div>
-
-
-
 
                         </div>
 

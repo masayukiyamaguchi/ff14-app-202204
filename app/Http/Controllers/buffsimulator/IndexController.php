@@ -8,6 +8,8 @@ use App\Models\buffsimulator\Buffsimulator_jobdata;
 use App\Models\buffsimulator\Buffsimulator_skilldata;
 use App\Models\buffsimulator\Buffsimulator_statusdata;
 use App\Models\buffsimulator\Buffsimulator_timeline;
+use App\Models\buffsimulator\Buffsimulator_savedata;
+use Illuminate\Support\Facades\Storage;
 use LengthException;
 
 class IndexController extends Controller
@@ -16,13 +18,28 @@ class IndexController extends Controller
     public function Index()
     {
 
+        $save_id = "none";
+
         $array_joblist = [
             "paladin", "warrior", "darkknight", "gunbreaker", "monk", "dragoon", "ninja", "samurai", "reaper", "bard", "machinist", "dancer", "blackmage", "summoner", "redmage", "bluemage", "whitemage", "scholar", "astrologian", "sage"
         ];
 
 
-        return view("buffsimulator.index", compact("array_joblist"));
+        return view("buffsimulator.index", compact("array_joblist", 'save_id'));
     }
+
+
+    //top_save
+    public function index_saved($save_id)
+    {
+        $array_joblist = [
+            "paladin", "warrior", "darkknight", "gunbreaker", "monk", "dragoon", "ninja", "samurai", "reaper", "bard", "machinist", "dancer", "blackmage", "summoner", "redmage", "bluemage", "whitemage", "scholar", "astrologian", "sage"
+        ];
+
+        return view("buffsimulator.index", compact("array_joblist", 'save_id'));
+    }
+
+
 
 
     public function Ajax_access(Request $request)
@@ -43,7 +60,6 @@ class IndexController extends Controller
 
     public function Ajax_access_skilldata(Request $request)
     {
-
         // リクエストからデータを取得
         $datas = $request->all();
         $select_skill_data_alljob = [];
@@ -52,7 +68,6 @@ class IndexController extends Controller
         if (!array_key_exists("all_done_skill_list", $datas)) {
             $datas["all_done_skill_list"] = [];
         }
-
 
         // サブ項目の配列を整理用
         $select_skill_sub = [];
@@ -86,6 +101,7 @@ class IndexController extends Controller
             $select_skill_subs = array_merge($select_skill_subs, $temp);
             $count++;
         }
+
 
         // 選択されたスキルだけデータベースから情報を選別して抽出
         foreach ($datas["all_done_skill_list"] as $data) {
@@ -861,5 +877,100 @@ class IndexController extends Controller
         $search_data = Buffsimulator_skilldata::get();
 
         return $search_data;
+    }
+
+    // データの保存
+    public function Ajax_save_data(Request $request)
+    {
+
+        // リクエストからデータを取得
+        $data = $request->all();
+
+        $timeline_data = $data["timeline_data"];
+        $job_name_list = $data["job_name_list"];
+
+        $all_job_status = array();
+        for ($i = 1; $i < 9; $i++) {
+            $all_job_status += array($job_name_list[$i - 1] => $data["all_job_status" . $i]);
+        }
+
+        $roop_bool = true;
+
+        for ($i = 0; $roop_bool; $i++) {
+            $str3 = uniqid();
+            //$str3 = "test";
+
+            // データベースにデータを保存
+            $search_data = Buffsimulator_savedata::where("save_url", $str3)->first();
+
+            if ($search_data) {
+                //データある場合
+                $str3 = uniqid();
+            } else {
+                //データない場合
+                $roop_bool = false;
+            }
+        }
+
+        $datas = new Buffsimulator_savedata();
+
+
+        // データ保存、配列はjsonにして保存
+        $datas->save_url = $str3;
+        $datas->pt_job = json_encode($job_name_list);
+        $datas->pt_status = json_encode($all_job_status);
+
+        $datas->save();
+
+        // ストレージにurlデータを保存
+        //Storage::put('public/buffsimulator/' . $str3 . '.html', $data);
+        Storage::put('public/buffsimulator/' . $str3 . '.html', $timeline_data);
+
+
+        $retrun_data = array();
+        array_push($retrun_data, $str3);
+        return $retrun_data;
+    }
+
+
+    // セーブデータのロード
+    public function Ajax_load_savedata(Request $request)
+    {
+
+        // リクエストからデータを取得
+        $data = $request->all();
+        $save_url = $data["save_url"];
+
+        $load_data =  Buffsimulator_savedata::where("save_url", $save_url)->first();
+
+        $pt_job = json_decode($load_data["pt_job"]);
+        $pt_status = json_decode($load_data["pt_status"]);
+
+        // リターンデータを作る
+        $retrun_data = array();
+        array_push($retrun_data, $pt_job);
+        array_push($retrun_data, $pt_status);
+        array_push($retrun_data, $save_url);
+
+        return $retrun_data;
+    }
+
+
+
+    // タイムラインデータのロード
+    public function Ajax_load_timelinedata(Request $request)
+    {
+
+        // リクエストからデータを取得
+        $data = $request->all();
+
+        $save_url = $data["save_url"];
+
+        $load_data =  Storage::get('public/buffsimulator/' . $save_url . '.html');
+        $retrun_data = array();
+
+        array_push($retrun_data, $load_data);
+
+        return $retrun_data;
     }
 }

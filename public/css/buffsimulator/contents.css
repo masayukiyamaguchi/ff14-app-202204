@@ -1,781 +1,823 @@
-@media screen and (min-width: 767px) {
-    /*ウィンドウ幅が767px以上の場合に適用*/
+/* @media screen and (min-width: 767px) { */
+/*ウィンドウ幅が767px以上の場合に適用*/
 
 
-    .mainContents_container {}
+.mainContents_container {}
 
-    /*レフトコンテンツ*/
-    .mainContents_container_left {
-        width: 10%;
-    }
-
-    .left_menu {
-        text-align: center;
-        color: white;
-        margin-top: 20px;
-    }
-
-    .left_menu div {
-        padding-top: 4px;
-        padding-bottom: 4px;
-    }
-
-    .left_menu_active {
-        background-color: rgb(87, 87, 87);
-        color: rgb(255, 255, 255);
-    }
+/*レフトコンテンツ*/
+.mainContents_container_left {
+    width: 10%;
+}
 
-    .left_menu div:hover {
-        transition: 0.3s;
-        background-color: rgb(87, 87, 87);
-        color: rgb(255, 255, 255);
-        cursor: pointer
-    }
+.left_menu {
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+}
 
+.left_menu div {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
 
+.left_menu_active {
+    background-color: rgb(87, 87, 87);
+    color: rgb(255, 255, 255);
+}
 
+.left_menu div:hover {
+    transition: 0.3s;
+    background-color: rgb(87, 87, 87);
+    color: rgb(255, 255, 255);
+    cursor: pointer
+}
 
 
-    /*中央コンテンツ*/
 
-    input {
-        text-align: center;
-    }
+.save_id_div {
+    padding-top: 30px;
+}
 
-    .mainContents_container_center {
-        width: 90%;
-        background-color: rgb(87, 87, 87);
-    }
+.save_id_h {
+    text-align: center;
+    color: white;
+}
 
-    /* テキストカーソルの非表示 */
-    body {
-        caret-color: transparent;
-    }
+.save_id {
+    text-align: center;
+    color: white;
+    font-size: 10px;
+}
 
-    input {
-        caret-color: #000000;
-    }
 
 
+/*中央コンテンツ*/
 
+input {
+    text-align: center;
+}
 
+.mainContents_container_center {
+    width: 90%;
+    background-color: rgb(87, 87, 87);
+}
 
+/* テキストカーソルの非表示 */
+body {
+    caret-color: transparent;
+}
 
-    .contents_display_none {
-        display: none;
-    }
+input {
+    caret-color: #000000;
+}
 
-    .contents_display_block {
-        display: block;
-    }
 
-    .contents_visibility_hidden {
-        visibility: hidden;
-    }
+.contents0_container1,
+.contents0_container2 {
+    background-color: #4156BC;
+    border: 2px solid #0020c2;
+}
 
-    .contents_visibility_visible {
-        visibility: visible;
-    }
 
+.contents0_container3,
+.contents0_container4,
+.contents0_container5,
+.contents0_container6 {
+    background-color: #713234;
+    border: 2px solid #6f0004;
+}
 
+.contents0_container7,
+.contents0_container8 {
+    background-color: #487A39;
+    border: 2px solid #1c7700;
+}
 
-    .contents0_div {
-        display: -webkit-flex;
-        display: flex;
-        text-align: center;
-        color: white;
-    }
 
-    .contents0_div>div {
-        padding: 10px;
-    }
 
-    .member_heder {
-        color: red;
-    }
+.contents_display_none {
+    display: none;
+}
 
-    .member_job {
-        margin-top: 10px;
-    }
+.contents_display_block {
+    display: block;
+}
 
-    .member_hp {
-        margin-top: 20px;
-    }
+.contents_visibility_hidden {
+    visibility: hidden;
+}
 
-    .member_ten {
-        margin-top: 20px;
-    }
+.contents_visibility_visible {
+    visibility: visible;
+}
 
-    button[class^="member_button"] {
-        margin-top: 20px;
-    }
 
 
+.contents0_div {
+    display: -webkit-flex;
+    display: flex;
+    text-align: center;
+    color: white;
+}
 
+.contents0_div>div {
+    padding: 10px;
+}
 
-    .contents1 {}
+.member_heder {
+    color: rgb(255, 255, 255);
+}
+
+.member_job {
+    margin-top: 10px;
+}
+
+.member_hp {
+    margin-top: 20px;
+}
+
+.member_ten {
+    margin-top: 20px;
+}
 
-    .contents1_div {
-        display: -webkit-flex;
-        display: flex;
-        text-align: center;
-        color: white;
-    }
+button[class^="member_button"] {
+    margin-top: 20px;
+}
 
-    .contents1_div>div {
-        padding: 10px;
-    }
 
-    .member_Rhp {
-        margin-top: 20px;
-    }
 
-    .member_skl {}
 
-    .use_skl {
-        display: -webkit-flex;
-        display: flex;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-align-items: center;
-        align-items: center;
-        margin-top: 20px;
+.contents1 {}
+
+.contents1_div {
+    display: -webkit-flex;
+    display: flex;
+    text-align: center;
+    color: white;
+}
+
+.contents1_div>div {
+    padding: 10px;
+}
+
+.member_Rhp {
+    margin-top: 20px;
+}
+
+.member_skl {}
+
+.use_skl {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-top: 20px;
 
-    }
+}
+
+button[class^="use_skl_button"] {
+    height: 20px;
+}
 
-    button[class^="use_skl_button"] {
-        height: 20px;
-    }
+div[class^="use_skl_list"] {
+    position: fixed;
+    top: 240px;
+    z-index: 10;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(42, 42, 42);
+    height: 150px;
+    width: 150px;
 
-    div[class^="use_skl_list"] {
-        position: fixed;
-        top: 240px;
-        z-index: 10;
-        padding-left: 10px;
-        padding-right: 10px;
-        background-color: rgb(42, 42, 42);
-        height: 150px;
-        width: 150px;
+}
 
-    }
+div[class^="use_skl_list"]>div {
+    display: flex;
+}
 
-    div[class^="use_skl_list"]>div {
-        display: flex;
-    }
+div[class^="use_skl_list"]>div:first-child {
+    padding-top: 10px;
+}
 
-    div[class^="use_skl_list"]>div:first-child {
-        padding-top: 10px;
-    }
+.use_skl_click {
+    width: 26px !important;
+    height: 26px !important;
+    opacity: 1.0 !important;
+    border: 2px solid #ff0000 !important;
+}
 
-    .use_skl_click {
-        width: 26px !important;
-        height: 26px !important;
-        opacity: 1.0 !important;
-        border: 2px solid #ff0000 !important;
-    }
+div[class^="use_skl_list"] img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    opacity: 0.5;
+}
 
-    div[class^="use_skl_list"] img {
-        width: 30px;
-        height: 30px;
-        margin-right: 5px;
-        opacity: 0.5;
-    }
 
+.skill_icon img:hover {
+    width: 26px;
+    height: 26px;
+    opacity: 1.0;
+    border: 2px solid #ff0000;
+}
 
-    .skill_icon img:hover {
-        width: 26px;
-        height: 26px;
-        opacity: 1.0;
-        border: 2px solid #ff0000;
-    }
+.skl_icon_sub {
+    visibility: hidden;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 12;
+}
 
-    .skl_icon_sub {
-        visibility: hidden;
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        z-index: 12;
-    }
+.skl_icon_sub img {
+    width: 400px;
+}
 
-    .skl_icon_sub img {
-        width: 400px;
-    }
 
 
+div[class^="use_skl_bg"] {
+    display: none;
+}
 
-    div[class^="use_skl_bg"] {
-        display: none;
-    }
+.use_skl_done_button {
+    position: absolute;
+    height: 20px;
+    width: 40px;
+    font-size: 3px;
+    right: 65px;
+    bottom: 8px;
+}
 
-    .use_skl_done_button {
-        position: absolute;
-        height: 20px;
-        width: 40px;
-        font-size: 3px;
-        right: 65px;
-        bottom: 8px;
-    }
+.skill_list_div {
+    padding-top: 10px;
+    text-align: left;
+    height: 570px;
+}
 
-    .skill_list_div {
-        padding-top: 10px;
-        text-align: left;
-        height: 570px;
-    }
+.skill_list_div>div {
+    display: none;
+}
 
-    .skill_list_div>div {
-        display: none;
-    }
+.skill_list_target {
+    padding-left: 5px;
+    font-size: 12px;
+    display: none;
+}
 
-    .skill_list_target {
-        padding-left: 5px;
-        font-size: 12px;
-        display: none;
-    }
+.skill_list_ {
+    display: none;
+}
 
-    .skill_list_ {
-        display: none;
-    }
 
 
+.skill_list_one_select {
+    width: 70px;
+    font-size: 12px;
+}
 
-    .skill_list_one_select {
-        width: 70px;
-        font-size: 12px;
-    }
 
+.skill_list_one {
+    display: flex;
+}
 
-    .skill_list_one {
-        display: flex;
-    }
+.input_info {
+    padding-top: 20px;
+    padding-left: 20px;
+}
 
-    .input_info {
-        padding-top: 20px;
-        padding-left: 20px;
-    }
 
 
 
+.damage_target {
+    display: flex;
+}
 
-    .damage_target {
-        display: flex;
-    }
+.damage_att {
+    display: flex;
+}
 
-    .damage_att {
-        display: flex;
-    }
+.result_text {
+    display: flex;
+}
 
-    .result_text {
-        display: flex;
-    }
 
+.result_sim_div {
+    display: flex;
+}
 
-    .result_sim_div {
-        display: flex;
-    }
+.result_sim_div_text {
+    margin-right: 10px;
+}
 
-    .result_sim_div_text {
-        margin-right: 10px;
-    }
+.damage_att_sim {
+    display: flex;
+}
 
-    .damage_att_sim {
-        display: flex;
-    }
 
+#damage_log_list_text_id {
+    margin-top: -110px;
+    display: none;
+}
 
-    #damage_log_list_text_id {
-        margin-top: -110px;
-        display: none;
-    }
 
 
+/* 軽減タイムライン */
+.contents4 {
+    padding-left: 10px;
+    padding-top: 10px;
+    color: white;
+    width: 2500px;
+}
 
-    /* 軽減タイムライン */
-    .contents4 {
-        padding-left: 10px;
-        padding-top: 10px;
-        color: white;
-        width: 2500px;
-    }
+.timeline_select_contents4 {
+    display: flex;
+}
 
-    .timeline_select_contents4 {
-        display: flex;
-    }
+.time_line_contents_option_div {
+    display: flex;
+}
 
-    .time_line_contents_option_div {
-        display: flex;
-    }
+.timeline_select_phase_div_contents4 {
+    display: flex;
+    padding-bottom: 10px;
+}
 
-    .timeline_select_phase_div_contents4 {
-        display: flex;
-        padding-bottom: 10px;
-    }
+.timeline_select_phase_contents4 select:not(:first-child) {
+    display: none;
+}
 
-    .timeline_select_phase_contents4 select:not(:first-child) {
-        display: none;
-    }
+.time_line_contents_option_div_third {
+    padding-left: 15px;
+}
 
-    .time_line_contents_option_div_third {
-        padding-left: 15px;
-    }
+.time_line_contents_option_div_third button {
+    font-size: 11px;
+}
 
-    .button_all_remain_hp_calc_div {
-        font-size: 12px;
-    }
+.time_line_contents_option_div_forth {
+    padding-left: 15px;
+}
 
-    /* オプション項目 */
-    .cbox_recasttime_div,
-    .cbox_remain_hp_div {
-        padding-left: 10px;
-        display: flex;
-    }
+.button_all_remain_hp_calc_div {
+    font-size: 12px;
+}
 
-    /* 残HP表示 */
-    .time_line_timekeyper_table td:nth-child(12) {
-        display: block;
-    }
+/* オプション項目 */
+.cbox_recasttime_div,
+.cbox_remain_hp_div {
+    padding-left: 10px;
+    display: flex;
+}
 
+/* 残HP表示 */
+.time_line_timekeyper_table td:nth-child(12) {
+    display: block;
+}
 
 
 
 
-    .time_line_timekeyper tr:nth-child(odd) {
-        background-color: rgb(108, 108, 108)
-    }
 
-    .time_line_timekeyper td {
-        position: relative;
-    }
+.time_line_timekeyper tr:nth-child(odd) {
+    background-color: rgb(108, 108, 108)
+}
 
+.time_line_timekeyper td {
+    position: relative;
+}
 
 
-    /* スキルアイコンリスト */
-    div[class^="tline_skl_list"] {
-        position: fixed;
-        z-index: 10;
-        padding-left: 10px;
-        padding-right: 10px;
-        background-color: rgb(42, 42, 42);
-        height: 150px;
-        width: 150px;
-        display: none;
 
-    }
+/* スキルアイコンリスト */
+div[class^="tline_skl_list"] {
+    position: fixed;
+    z-index: 10;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(42, 42, 42);
+    height: 150px;
+    width: 150px;
+    display: none;
 
-    div[class^="tline_skl_list"]>div {
-        display: flex;
-    }
+}
 
-    div[class^="tline_skl_list"]>div:first-child {
-        padding-top: 10px;
-    }
+div[class^="tline_skl_list"]>div {
+    display: flex;
+}
 
-    div[class^="tline_skl_list"] img {
-        width: 30px;
-        height: 30px;
-        margin-right: 5px;
-        opacity: 0.5;
-    }
+div[class^="tline_skl_list"]>div:first-child {
+    padding-top: 10px;
+}
 
+div[class^="tline_skl_list"] img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    opacity: 0.5;
+}
 
-    /* ジョブアイコンリスト */
-    div[class^="tline_job_list"] {
-        position: fixed;
-        z-index: 10;
-        padding-left: 10px;
-        padding-right: 10px;
-        background-color: rgb(42, 42, 42);
-        height: 150px;
-        width: 150px;
-        display: none;
 
-    }
+/* ジョブアイコンリスト */
+div[class^="tline_job_list"] {
+    position: fixed;
+    z-index: 10;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(42, 42, 42);
+    height: 150px;
+    width: 150px;
+    display: none;
 
-    div[class^="tline_job_list"]>div {
-        display: flex;
-    }
+}
 
-    div[class^="tline_job_list"]>div:first-child {
-        padding-top: 10px;
-    }
+div[class^="tline_job_list"]>div {
+    display: flex;
+}
 
-    div[class^="tline_job_list"] img {
-        width: 30px;
-        height: 30px;
-        margin-right: 5px;
-        opacity: 0.2;
-    }
+div[class^="tline_job_list"]>div:first-child {
+    padding-top: 10px;
+}
 
+div[class^="tline_job_list"] img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    opacity: 0.2;
+}
 
 
 
 
-    /* 元ダメージリスト */
-    .contents5 {
-        padding-left: 10px;
-        padding-top: 10px;
 
-    }
+/* 元ダメージリスト */
+.contents5 {
+    padding-left: 10px;
+    padding-top: 10px;
 
-    .timeline_table {
-        text-align: center;
-        color: white;
-    }
+}
 
+.timeline_table {
+    text-align: center;
+    color: white;
+}
 
 
-    .timeline_table_table {
-        border-collapse: collapse;
-        border-spacing: 0;
 
-    }
+.timeline_table_table {
+    border-collapse: collapse;
+    border-spacing: 0;
 
-    .timeline_table_table td {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
+}
 
+.timeline_table_table td {
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
-    .timeline_select_contents {
-        display: flex;
-    }
 
-    .timeline_select_phase_div {
-        display: flex;
-    }
+.timeline_select_contents {
+    display: flex;
+}
 
-    .timeline_table_table tr:nth-child(odd) {
-        background-color: rgb(108, 108, 108)
-    }
+.timeline_select_phase_div {
+    display: flex;
+}
 
-    .timeline_select_phase select:not(:first-child) {
-        display: none;
-    }
+.timeline_table_table tr:nth-child(odd) {
+    background-color: rgb(108, 108, 108)
+}
 
+.timeline_select_phase select:not(:first-child) {
+    display: none;
+}
 
 
-    /* 軽減タイムライン */
-    .time_line_timekeyper_table {
-        font-size: 15px;
-    }
 
-    .time_line_timekeyper_table img {
-        width: 23px;
-        /* width: 20px; */
-        padding: 0px;
-        margin-right: 1px;
-        z-index: 5;
-    }
+/* 軽減タイムライン */
+.time_line_timekeyper_table {
+    font-size: 15px;
+}
 
-    .time_line_timekeyper_table tr {
-        height: 20px;
-    }
+.time_line_timekeyper_table img {
+    width: 23px;
+    /* width: 20px; */
+    padding: 0px;
+    margin-right: 1px;
+    z-index: 5;
+}
 
+.time_line_timekeyper_table tr {
+    height: 20px;
+}
 
-    .tline_skill_icon_div {
-        display: inline-flex;
-        vertical-align: middle;
-        position: relative;
-    }
 
+.tline_skill_icon_div {
+    display: inline-flex;
+    vertical-align: middle;
+    position: relative;
+}
 
-    .tline_skill_icon_inv {
-        display: inline-flex;
-        vertical-align: middle;
-        position: relative;
-        opacity: 0.0;
-    }
 
-    .tline_skill_icon_bg {
-        position: absolute;
-        background-color: #0059ff;
-        opacity: 0.5;
-        top: 0px;
-        left: 0px;
-        /* ベースが24、30-1 */
-        width: 23px;
-        height: 256px;
-        z-index: 3;
-        pointer-events: none
-    }
+.tline_skill_icon_inv {
+    display: inline-flex;
+    vertical-align: middle;
+    position: relative;
+    opacity: 0.0;
+}
 
-    .tline_skill_icon_bg_recast {
-        position: absolute;
-        background-color: #ff0000;
-        opacity: 0.0;
-        top: 0px;
-        left: 0px;
-        /* ベースが24、30-1 */
-        width: 11px;
-        height: 256px;
-        pointer-events: none
-    }
+.tline_skill_icon_bg {
+    position: absolute;
+    background-color: #0059ff;
+    opacity: 0.5;
+    top: 0px;
+    left: 0px;
+    /* ベースが24、30-1 */
+    width: 23px;
+    height: 256px;
+    z-index: 3;
+    pointer-events: none
+}
 
-    .skill_icon {
-        position: relative;
-        text-align: center;
-    }
+.tline_skill_icon_bg_recast {
+    position: absolute;
+    background-color: #ff0000;
+    opacity: 0.0;
+    top: 0px;
+    left: 0px;
+    /* ベースが24、30-1 */
+    width: 11px;
+    height: 256px;
+    pointer-events: none
+}
+
+.skill_icon {
+    position: relative;
+    text-align: center;
+}
 
-    .recast_time_text {
-        text-align: center;
-        position: absolute;
-        top: 0px;
-        font-size: 3px;
-        pointer-events: none;
-        display: none;
-    }
+.recast_time_text {
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    font-size: 3px;
+    pointer-events: none;
+    display: none;
+}
 
-    .recast_time_num {
-        text-align: center;
-        position: absolute;
-        top: 9px;
-        font-size: 15px;
-        pointer-events: none;
-        display: none;
-    }
+.recast_time_num {
+    text-align: center;
+    position: absolute;
+    top: 9px;
+    font-size: 15px;
+    pointer-events: none;
+    display: none;
+}
 
-    .recast_time {
-        position: absolute;
-        opacity: 0.0;
-    }
+.recast_time {
+    position: absolute;
+    opacity: 0.0;
+}
+
 
+/* 残HP */
+.trtd_hp {
+    visibility: hidden;
+}
 
-    /* 残HP */
-    .trtd_hp {
-        visibility: hidden;
-    }
+.trtd_hp_div {
+    display: flex;
+    padding-top: 2px;
+}
 
-    .trtd_hp_div {
-        display: flex;
-        padding-top: 2px;
-    }
 
+.tank_hp,
+.healer_hp,
+.melee_hp,
+.range_hp,
+.trtd_hp_div_up,
+.trtd_hp_div_down,
+.trtd_hp_icon_div {
+    display: flex;
+    font-size: 5px;
+}
 
-    .tank_hp,
-    .healer_hp,
-    .melee_hp,
-    .range_hp,
-    .trtd_hp_div_up,
-    .trtd_hp_div_down,
-    .trtd_hp_icon_div {
-        display: flex;
-        font-size: 5px;
-    }
+.target_icon {
+    display: inline-flex;
+}
 
-    .target_icon {
-        display: inline-flex;
-    }
+.target_icon img {
+    width: 19px;
+    position: relative;
+    top: 3px;
+}
 
-    .target_icon img {
-        width: 19px;
-        position: relative;
-        top: 3px;
-    }
+.trtd_hp_div_up * img,
+.trtd_hp_div_down * img {
+    width: 20px;
+}
 
-    .trtd_hp_div_up * img,
-    .trtd_hp_div_down * img {
-        width: 20px;
-    }
 
+[class^="ptmem_hp_"] {
+    display: flex;
+    vertical-align: middle;
+    text-align: center;
+    display: none;
+    margin-left: 3px;
+}
 
-    [class^="ptmem_hp_"] {
-        display: flex;
-        vertical-align: middle;
-        text-align: center;
-        display: none;
-        margin-left: 3px;
-    }
+[class^="ptmem_hp_"] img {
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 2px;
+}
 
-    [class^="ptmem_hp_"] img {
-        text-align: center;
-        vertical-align: middle;
-        margin-left: 2px;
-    }
+.ptmem_hpnum {
+    margin-top: 2px;
+}
 
-    .ptmem_hpnum {
-        margin-top: 2px;
-    }
+/* 文字を点滅 */
+.trtd_hp_cal_message {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 800px;
+    z-index: 50;
+    font-size: 50px;
+    animation: blinking 1s ease-in-out infinite alternate;
+}
 
-    /* 文字を点滅 */
-    .trtd_hp_cal_message {
-        display: none;
-        position: fixed;
-        top: 20px;
-        left: 800px;
-        z-index: 50;
-        font-size: 50px;
-        animation: blinking 1s ease-in-out infinite alternate;
+@keyframes blinking {
+    0% {
+        opacity: 0;
     }
 
-    @keyframes blinking {
-        0% {
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 1;
-        }
+    100% {
+        opacity: 1;
     }
+}
 
 
-    .trtd_hp_cal_button button {
-        display: none;
-        font-size: 5px;
-        width: 10px;
-        height: 30px;
-        margin-top: 5px;
-        margin-left: 5px;
-        margin-right: 5px;
+.trtd_hp_cal_button button {
+    display: none;
+    font-size: 5px;
+    width: 10px;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
 
-    }
+}
 
-    /* 対象選択 */
-    .timeline_skill_targetselect_div {
-        visibility: hidden;
-    }
+/* 対象選択 */
+.timeline_skill_targetselect_div {
+    visibility: hidden;
+}
 
-    .timeline_skill_targetselect {
-        width: 70px;
-        font-size: 12px;
-    }
+.timeline_skill_targetselect {
+    width: 70px;
+    font-size: 12px;
+}
 
-    .timeline_skill_targetselect {
-        border: 2px solid #ff0000;
+.timeline_skill_targetselect {
+    border: 2px solid #ff0000;
 
-    }
+}
 
 
 
 
 
 
-    .select_target_job_icon {
-        display: none;
-    }
+.select_target_job_icon {
+    display: none;
+}
 
-    .select_target_job_icon img {
-        width: 17px;
-        position: absolute;
-        top: 12px;
-        left: 12px;
-    }
+.select_target_job_icon img {
+    width: 17px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
 
 
 
 
-    /*ライトコンテンツ*/
-    .mainContents_container_right {
-        width: 0%;
-    }
+/*ライトコンテンツ*/
+.mainContents_container_right {
+    width: 0%;
+}
 
 
 
-    /* ロード画面 */
-    #loading {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        z-index: 99999;
-        width: 100%;
-        height: 100%;
-        background: #999;
-    }
+/* ロード画面 */
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    background: #999;
+}
 
-    #loading_box {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        text-align: center;
-    }
+#loading_box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+}
 
-    .loading-one {
-        display: inline-block;
-        border-top: 1px solid #ffffff;
-        border-bottom: 1px solid #ffffff;
-    }
+.loading-one {
+    display: inline-block;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+}
 
-    .loading-one p.loading-txt {
-        color: #fff;
-        font-size: 20px;
-        letter-spacing: 0.25em;
-        line-height: 2.0;
-        padding: 2em 0;
-    }
+.loading-one p.loading-txt {
+    color: #fff;
+    font-size: 20px;
+    letter-spacing: 0.25em;
+    line-height: 2.0;
+    padding: 2em 0;
+}
 
-    /*==================
+/*==================
       .animation_loading
       ==================*/
 
-    .animation_loading {
-        animation: equalizer_loading 7000ms infinite;
-        animation-iteration-count: 10;
-    }
-
-    @keyframes equalizer_loading {
-        0% {
-            width: 70%;
-        }
-
-        10% {
-            width: 50%;
-        }
-
-        20% {
-            width: 100%;
-        }
-
-        30% {
-            width: 10%;
-        }
-
-        40% {
-            width: 50%;
-        }
-
-        50% {
-            width: 70%;
-        }
-
-        60% {
-            width: 50%;
-        }
-
-        70% {
-            width: 10%;
-        }
-
-        80% {
-            width: 100%;
-        }
-
-        90% {
-            width: 10%;
-        }
-
-        100% {
-            width: 70%;
-        }
-    }
-
-
-
-
-
-
+.animation_loading {
+    animation: equalizer_loading 7000ms infinite;
+    animation-iteration-count: 10;
 }
+
+@keyframes equalizer_loading {
+    0% {
+        width: 70%;
+    }
+
+    10% {
+        width: 50%;
+    }
+
+    20% {
+        width: 100%;
+    }
+
+    30% {
+        width: 10%;
+    }
+
+    40% {
+        width: 50%;
+    }
+
+    50% {
+        width: 70%;
+    }
+
+    60% {
+        width: 50%;
+    }
+
+    70% {
+        width: 10%;
+    }
+
+    80% {
+        width: 100%;
+    }
+
+    90% {
+        width: 10%;
+    }
+
+    100% {
+        width: 70%;
+    }
+}
+
+
+
+
+
+
+/* } */
 
 /*ウィンドウ幅が767px以上の場合に適用*/
 
 
-
+/*ウィンドウ幅が最大479pxまでの場合に適用
 @media screen and (max-width: 479px) {
-    /*ウィンドウ幅が最大479pxまでの場合に適用*/
+
 
 
 
 
 }
-
+*/
 /*ウィンドウ幅が最大479pxまでの場合に適用*/

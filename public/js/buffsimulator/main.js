@@ -48,29 +48,29 @@ $(function () {
     var total_buff_no;
 
 
+    // セーブIDありなしでの動作
+    if ($(".save_id").text() === "") {
+        //ロード時の処理
+        for (i = 1; i < 9; i++) {
+            $("[name=pt_member" + i + "_job]").val(localStorage.getItem("bs_pt_member" + i + "_job"));
+            $("[name=pt_member" + i + "_hit_point]").val(localStorage.getItem("bs_pt_member" + i + "_hit_point"));
+            $("[name=pt_member" + i + "_physical_defenses]").val(localStorage.getItem("bs_pt_member" + i + "_physical_defenses"));
+            $("[name=pt_member" + i + "_magical_defenses]").val(localStorage.getItem("bs_pt_member" + i + "_magical_defenses"));
+            $("[name=pt_member" + i + "_tenacity]").val(localStorage.getItem("bs_pt_member" + i + "_tenacity"));
+            $("[name=pt_member" + i + "_determination]").val(localStorage.getItem("bs_pt_member" + i + "_determination"));
+            $("[name=pt_member" + i + "_mind]").val(localStorage.getItem("bs_pt_member" + i + "_mind"));
+            $("[name=pt_member" + i + "_weapon_damage]").val(localStorage.getItem("bs_pt_member" + i + "_weapon_damage"));
+            $("[name=pt_member" + i + "_Remain_hit_point]").val(localStorage.getItem("bs_pt_member" + i + "_Remain_hit_point"));
+        }
+    } else {
+        var save_url = $(".save_id").text();
+        ptMemberSaveDataLoad(save_url);
 
-    // contents4残HP全体表示するかどうかのフラグ
-    var remain_hp_only_minus_bool = false
-
-
-    //ロード時の処理
-    for (i = 1; i < 9; i++) {
-        $("[name=pt_member" + i + "_job]").val(localStorage.getItem("bs_pt_member" + i + "_job"));
-        $("[name=pt_member" + i + "_hit_point]").val(localStorage.getItem("bs_pt_member" + i + "_hit_point"));
-        $("[name=pt_member" + i + "_physical_defenses]").val(localStorage.getItem("bs_pt_member" + i + "_physical_defenses"));
-        $("[name=pt_member" + i + "_magical_defenses]").val(localStorage.getItem("bs_pt_member" + i + "_magical_defenses"));
-        $("[name=pt_member" + i + "_tenacity]").val(localStorage.getItem("bs_pt_member" + i + "_tenacity"));
-        $("[name=pt_member" + i + "_determination]").val(localStorage.getItem("bs_pt_member" + i + "_determination"));
-        $("[name=pt_member" + i + "_mind]").val(localStorage.getItem("bs_pt_member" + i + "_mind"));
-        $("[name=pt_member" + i + "_weapon_damage]").val(localStorage.getItem("bs_pt_member" + i + "_weapon_damage"));
-        $("[name=pt_member" + i + "_Remain_hit_point]").val(localStorage.getItem("bs_pt_member" + i + "_Remain_hit_point"));
-
-
-        //var job_name = $(".pt_membere_select option:selected").eq(i - 1).text();
-        var job_name_eng_temp = $(".pt_membere_select").eq(i - 1).val();
-        all_job_list_parents.push(job_name_eng_temp);
 
     }
+
+
+
 
     // ジョブをリスト化
     var tank_list = [];
@@ -80,46 +80,65 @@ $(function () {
     var dps_list = [];
     var healer_list = [];
 
-    $.each(all_job_list_parents, function (index, element) {
-        switch (element) {
-            case "paladin":
-            case "warrior":
-            case "darkknight":
-            case "gunbreaker":
-                tank_list.push(element);
-                break;
-            case "monk":
-            case "dragoon":
-            case "ninja":
-            case "samurai":
-            case "reaper":
-                melee_list.push(element);
-                dps_list.push(element);
-                break;
-            case "bard":
-            case "machinist":
-            case "dancer":
-                range_list.push(element);
-                dps_list.push(element);
-                break;
-            case "blackmage":
-            case "summoner":
-            case "redmage":
-                caster_list.push(element);
-                dps_list.push(element);
-                break;
-            case "whitemage":
-            case "scholar":
-            case "astrologian":
-            case "sage":
-                healer_list.push(element);
-                break;
+    // パーティメンバーをリスト化（初期動作）
+    ptMemberListRefresh();
+
+    function ptMemberListRefresh() {
+
+        // リスト初期化
+        all_job_list_parents = [];
+        tank_list = [];
+        melee_list = [];
+        range_list = [];
+        caster_list = [];
+        dps_list = [];
+        healer_list = [];
+
+        for (i = 1; i < 9; i++) {
+            var job_name_eng_temp = $(".pt_membere_select").eq(i - 1).val();
+            all_job_list_parents.push(job_name_eng_temp);
         }
 
-    });
+        $.each(all_job_list_parents, function (index, element) {
+            switch (element) {
+                case "paladin":
+                case "warrior":
+                case "darkknight":
+                case "gunbreaker":
+                    tank_list.push(element);
+                    break;
+                case "monk":
+                case "dragoon":
+                case "ninja":
+                case "samurai":
+                case "reaper":
+                    melee_list.push(element);
+                    dps_list.push(element);
+                    break;
+                case "bard":
+                case "machinist":
+                case "dancer":
+                    range_list.push(element);
+                    dps_list.push(element);
+                    break;
+                case "blackmage":
+                case "summoner":
+                case "redmage":
+                    caster_list.push(element);
+                    dps_list.push(element);
+                    break;
+                case "whitemage":
+                case "scholar":
+                case "astrologian":
+                case "sage":
+                    healer_list.push(element);
+                    break;
+            }
+
+        });
+    }
 
     //タイムライン初期設置
-    timeLineDisplay($(".timeline_select_phase").children("select").val());
     timeLineDisplay5($(".timeline_select_phase").children("select").val());
 
     // バリアスキル一覧を取得+ついでに全スキルのジョブごとの数も返してもらう
@@ -218,11 +237,14 @@ $(function () {
             }
         }
 
-
         if (existsSameValue(array_select_job)) {
             alert("ジョブの重複は対応していません");
             $(this).val('');
         }
+
+        // メンバーリスト更新
+        ptMemberListRefresh();
+
     });
 
 
@@ -379,6 +401,7 @@ $(function () {
     });
 
 
+
     // スキルアイコンのクリック
     $(".skill_icon").click(function () {
 
@@ -438,6 +461,9 @@ $(function () {
 
 
     // マウスの位置を監視
+    $(window).scroll(function () {
+        scroll_top = $(this).scrollTop();
+    });
     document.body.addEventListener("mousemove", function (e) {
 
         //座標を取得する
@@ -447,21 +473,20 @@ $(function () {
 
         //画面半分以上来たら表示の方向を変える
         if (mX > 960) {
-            var X_ad = 410;
+            var X_ad = 420;
         }
 
-        $(".skl_icon_sub").css("top", mY - 35);
-        $(".skl_icon_sub").css("left", mX + 5 - X_ad);
+        $(".skl_icon_sub").css("top", mY - 35 - scroll_top);
+        $(".skl_icon_sub").css("left", mX + 15 - X_ad);
 
     });
 
-    $(window).scroll(function () {
-        scroll_top = $(this).scrollTop();
-    });
+
 
 
     // スキルアイコンのホバー
     $(".skill_icon").hover(function () {
+
         var icon_url = $(this).children("img").attr("src");
 
         icon_url = icon_url.slice(0, -4);
@@ -478,6 +503,7 @@ $(function () {
 
     // スキルアイコンリストのホバー
     $(".skill_icon_l").hover(function () {
+
         var icon_url = $(this).attr("src");
 
         icon_url = icon_url.slice(0, -4);
@@ -491,6 +517,28 @@ $(function () {
         $(".skl_icon_sub").css("visibility", "hidden");
 
     });
+
+    // あとから追加されたタイムラインのアイコンのホバー
+    $(document).on({
+        "mouseenter": function () {
+
+            $(".skl_icon_sub").css("top", scroll_top);
+
+            var icon_url = $(this).children("img").attr("src");
+
+            icon_url = icon_url.slice(0, -4);
+            iconsub_url = icon_url + "sub.png";
+
+            $(".skl_icon_sub").children("img").attr("src", iconsub_url);
+            $(".skl_icon_sub").css("visibility", "visible");
+        },
+        "mouseleave": function () {
+            $(".skl_icon_sub").css("visibility", "hidden");
+        }
+    }, ".tline_skill_icon_div");
+
+
+
 
     // 元ダメージ計算
     $(".result_button_done").click(function () {
@@ -1217,7 +1265,7 @@ $(function () {
                 // 初期化
                 $(".time_line_timekeyper_table").find("tr").css("visibility", "visible");
                 for (i = 1; i < table_length + 1; i++) {
-                    for (j = 1; j < 18; j++) {
+                    for (j = 1; j < 20; j++) {
                         // 列が増えたらここを編集
                         if (j != 12) {
                             $(".tr" + i + "td" + j).empty();
@@ -1397,7 +1445,9 @@ $(function () {
 
 
     // メニューを開いた動作
-    $(".left_menu4").one("click", function () {
+    $(".left_menu4").click(function () {
+
+        timeLineDisplay($(".timeline_select_phase").children("select").val());
 
         var job_name_list = [];
         var job_name_list_eng = [];
@@ -1411,8 +1461,6 @@ $(function () {
 
             var job_name = $(".pt_membere_select option:selected").eq(i - 1).text();
             var job_name_eng = $(".pt_membere_select").eq(i - 1).val();
-            var skill_no_list = [];
-            var skill_no_list_sub = [];
 
             //ジョブ名だけリスト化し渡す。
             job_name_list.push(job_name);
@@ -1428,6 +1476,7 @@ $(function () {
 
         //スキルアイコン読み込み
         for (i = 1; i < 9; i++) {
+            $(".tline_skill_icon" + i).children().remove();// 初期化
             var dase_ual = "/images/buffsimulator/skillicon/";
             var job_eng = $("[name=pt_member" + i + "_job]").val();
 
@@ -1460,6 +1509,7 @@ $(function () {
         var tr_length = $(".time_line_timekeyper_table").find("tr").length;
 
         for (i = 1; i < tr_length; i++) {
+            $(".tr" + i + "td12").children().remove();
             $(".tr" + i + "td12").append(trtd_hp_div);
         }
 
@@ -1482,46 +1532,28 @@ $(function () {
             $("[name=timeline_skill_targetselect]").append($('<option>').html(job_name_list[i + 3]).val(job_name_list_eng[i]));
         }
 
-
-        // // スキルデータを取得
-        // //ajaxでデータを受け渡し
-        // $.ajaxSetup({
-        //     headers: {
-        //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        //     },
-        // });
-        // $.ajax({
-        //     //POST通信
-        //     type: "post",
-        //     //ここでデータの送信先URLを指定します。
-        //     url: "/buffsimulator/ajax_access_skilldata_only",
-        //     dataType: "json",
-        //     data: {
-        //         dase_ual,
-        //     },
-        // })
-        //     // Ajaxリクエスト成功時の処理
-        //     .done(function (data) {
-        //         console.log("done");
-        //         all_skill_data = data;
-        //     })
-        //     // Ajaxリクエスト失敗時の処理
-        //     .fail(function (data) {
-        //         console.log("fall");
-        //     });
-
-
         // ヘッダー情報を格納
         for (i = 0; i < $(".time_line_timekeyper_table")[0].rows[0].cells.length; i++) {
             header_text_list.push($(".tr0td" + (i + 1)).text());
         }
+
+        // ジョブの設定
+        job_key_no = 4;//列が増えたらここを編集
+        damage_type = header_text_list.indexOf("type") + 1;
+        damage_resits = header_text_list.indexOf("resist") + 1;
+        damage_key_no = header_text_list.indexOf("damage") + 1;
+        remainhp_key_no = header_text_list.indexOf("残HP予測") + 1;
+        targettype_no = header_text_list.indexOf("targettype") + 1;
+        targetjob_no = header_text_list.indexOf("targetjob") + 1;
+        total_barrier_no = header_text_list.indexOf("総バリア量") + 1;
+        total_buff_no = header_text_list.indexOf("総軽減率") + 1;
 
 
     })
 
 
     //選択のテーブルをクリック
-    $(".time_line_timekeyper_table").find("td").click(function () {
+    $(document).on("click", ".time_line_timekeyper_table td", function () {
 
         // スキルの設定
         // 同じ場所をクリックしても初期化しない
@@ -1652,17 +1684,6 @@ $(function () {
 
         });
 
-
-        // ジョブの設定
-        job_key_no = 4;//列が増えたらここを編集
-        damage_type = header_text_list.indexOf("type") + 1;
-        damage_resits = header_text_list.indexOf("resist") + 1;
-        damage_key_no = header_text_list.indexOf("damage") + 1;
-        remainhp_key_no = header_text_list.indexOf("残HP予測") + 1;
-        targettype_no = header_text_list.indexOf("targettype") + 1;
-        targetjob_no = header_text_list.indexOf("targetjob") + 1;
-        total_barrier_no = header_text_list.indexOf("総バリア量") + 1;
-        total_buff_no = header_text_list.indexOf("総軽減率") + 1;
 
 
         if (h_pt_num == "対象") {
@@ -2466,8 +2487,6 @@ $(function () {
                     var skill_id = $(this).attr("inv_id");
                     var skill_no = skillNumberSearchId(skill_id);
 
-                    console.log(skill_no);
-
                     if ($.inArray(skill_no, skill_no_list) > -1) {
                     } else {
                         skill_no_list.push(skill_no);
@@ -2476,7 +2495,10 @@ $(function () {
                     //補助項目の有無
                     var job_src = $(this).children(".select_target_job_icon").children("img").attr("src");
 
+
                     if (job_src === undefined) {
+                    } else if (job_src.slice(job_src.lastIndexOf("/") + 1, -5) == "impro") {
+                        var sub_target_job = job_src.slice(job_src.lastIndexOf("impro") + 5, -4);
                     } else {
                         var sub_target_job = job_src.slice(job_src.lastIndexOf("/") + 1, -12);
                     }
@@ -2519,11 +2541,10 @@ $(function () {
 
             }
 
-
             if ($(".tr" + target_tr + "td" + damage_type).text() == "hit") {
+
                 // 対象だけ表示する用のリスト
                 var target_job_list = targetCharHpDisplay(target_tr);
-
                 await timeLineDataAjax(all_done_skill_list, all_done_skill_list_sub, job_name_list, damage_element, all_job_status, target_tr, damage_key_no, remainhp_key_no, target_job_list);
 
             } else {
@@ -2534,20 +2555,11 @@ $(function () {
 
         });
 
-        // 計算中表示
-        $(".trtd_hp_cal_message").css("display", "none");
-
-
     }
 
 
 
     async function timeLineDataAjax(all_done_skill_list, all_done_skill_list_sub, job_name_list, damage_element, all_job_status, target_tr, damage_key_no, remainhp_key_no, target_job_list) {
-
-        //console.log(all_done_skill_list);
-
-        // 計算中表示
-        $(".trtd_hp_cal_message").css("display", "block");
 
         //ajaxでデータを受け渡し
         $.ajaxSetup({
@@ -2714,7 +2726,7 @@ $(function () {
             // Ajaxリクエスト失敗時の処理
             .fail(function (data) {
                 console.log("fallout");
-                alert("先にターゲットを選択してください");
+                alert("エラーが発生しています。\n「OK」を押してしばらく待ってから再度お試しください（5分くらい）\nこのメッセージは何度か表示されることがあります。")
                 return false;
             });
 
@@ -2780,6 +2792,212 @@ $(function () {
             allRemainHpCalc();
         }
     })
+
+
+    // 現在の状態の保存する
+    $(".button_data_save_div_button").click(function () {
+
+        // タイムラインのhtmlを取得
+        var timeline_data = $(".timeline_div").html();
+
+        var pt_data = dataSearchFunc();
+
+        // 多次元連想配列がajaxできないので仕方なく分解する
+        var job_status0 = pt_data[0][pt_data[1][0]];
+        var job_status1 = pt_data[0][pt_data[1][1]];
+        var job_status2 = pt_data[0][pt_data[1][2]];
+        var job_status3 = pt_data[0][pt_data[1][3]];
+        var job_status4 = pt_data[0][pt_data[1][4]];
+        var job_status5 = pt_data[0][pt_data[1][5]];
+        var job_status6 = pt_data[0][pt_data[1][6]];
+        var job_status7 = pt_data[0][pt_data[1][7]];
+
+        //ajaxでデータを受け渡し
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+        $.ajax({
+            //POST通信
+            type: "post",
+            //ここでデータの送信先URLを指定します。
+            url: "/buffsimulator/ajax_save_data",
+            dataType: "json",
+            data: {
+                timeline_data: timeline_data,
+                job_name_list: pt_data[1],
+                all_job_status1: job_status0,
+                all_job_status2: job_status1,
+                all_job_status3: job_status2,
+                all_job_status4: job_status3,
+                all_job_status5: job_status4,
+                all_job_status6: job_status5,
+                all_job_status7: job_status6,
+                all_job_status8: job_status7,
+            },
+        })
+            // Ajaxリクエスト成功時の処理
+            .done(function (data) {
+                console.log("done");
+                alert("http://localhost:8000/buffsimulator/" + data[0]);
+
+
+            })
+            // Ajaxリクエスト失敗時の処理
+            .fail(function (data) {
+                console.log("fall");
+            });
+    })
+
+
+    // 状態保存で必要な情報を集める
+    function dataSearchFunc() {
+
+        // 初期化
+        var job_name_list = [];
+        var all_job_status = [];
+
+        for (i = 1; i < 9; i++) {
+
+            var job_name = $(".pt_membere_select").eq(i - 1).val();
+
+            //ジョブ名だけリスト化し渡す。
+            job_name_list.push(job_name);
+
+            // PTジョブ設定の値を配列化
+            var hit_point = $("[name='pt_member" + i + "_hit_point']").val();
+            var physical_defenses = $("[name='pt_member" + i + "_physical_defenses']").val();
+            var magical_defenses = $("[name='pt_member" + i + "_magical_defenses']").val();
+            var tenacity = $("[name='pt_member" + i + "_tenacity']").val();
+            var determination = $("[name='pt_member" + i + "_determination']").val();
+            var mind = $("[name='pt_member" + i + "_mind']").val();
+            var weapon_damage = $("[name='pt_member" + i + "_weapon_damage']").val();
+
+            all_job_status[job_name] = {};
+            all_job_status[job_name]["hit_point"] = hit_point;
+            all_job_status[job_name]["physical_defenses"] = physical_defenses;
+            all_job_status[job_name]["magical_defenses"] = magical_defenses;
+            all_job_status[job_name]["tenacity"] = tenacity;
+            all_job_status[job_name]["determination"] = determination;
+            all_job_status[job_name]["mind"] = mind;
+            all_job_status[job_name]["weapon_damage"] = weapon_damage;
+
+        }
+
+        var return_data = [];
+        return_data.push(all_job_status);
+        return_data.push(job_name_list);
+
+        return return_data;
+
+
+
+    }
+
+
+    //PTメンバー情報を反映
+    async function ptMemberSaveDataLoad(save_url) {
+
+        //ajaxでデータを受け渡し
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+
+        $.ajax({
+            //POST通信
+            type: "post",
+            //ここでデータの送信先URLを指定します。
+            url: "/buffsimulator/ajax_load_savedata",
+            dataType: "json",
+            data: {
+                save_url: save_url,
+            },
+        })
+            // Ajaxリクエスト成功時の処理
+            .done(function (data) {
+                console.log("done");
+
+                var pt_job = data[0];
+                var pt_status = data[1];
+
+                pt_job.forEach(function (job_name, index) {
+                    $("[name=pt_member" + (index + 1) + "_job]").val(job_name);
+                    $("[name=pt_member" + (index + 1) + "_hit_point]").val(pt_status[job_name]["hit_point"]);
+                    $("[name=pt_member" + (index + 1) + "_physical_defenses]").val(pt_status[job_name]["physical_defenses"]);
+                    $("[name=pt_member" + (index + 1) + "_magical_defenses]").val(pt_status[job_name]["magical_defenses"]);
+                    $("[name=pt_member" + (index + 1) + "_tenacity]").val(pt_status[job_name]["tenacity"]);
+                    $("[name=pt_member" + (index + 1) + "_determination]").val(pt_status[job_name]["determination"]);
+                    $("[name=pt_member" + (index + 1) + "_mind]").val(pt_status[job_name]["mind"]);
+                    $("[name=pt_member" + (index + 1) + "_weapon_damage]").val(pt_status[job_name]["weapon_damage"]);
+                    $("[name=pt_member" + (index + 1) + "_Remain_hit_point]").val(pt_status[job_name]["Remain_hit_point"]);
+
+                });
+
+                // メンバーリスト更新
+                ptMemberListRefresh();
+
+                // 軽減タイムラインに
+                $(".left_menu4").trigger("click");
+
+                // タイムライン反映
+                saveDataLoad(data[2]);
+
+
+            })
+
+
+            // Ajaxリクエスト失敗時の処理
+            .fail(function (data) {
+                console.log("fall");
+
+            });
+
+    }
+
+
+    // タイムラインを反映
+    function saveDataLoad(save_url) {
+
+        $(".timeline_div").children().remove();
+
+        //ajaxでデータを受け渡し
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+
+        $.ajax({
+            //POST通信
+            type: "post",
+            //ここでデータの送信先URLを指定します。
+            url: "/buffsimulator/ajax_load_timelinedatadata",
+            dataType: "json",
+            data: {
+                save_url: save_url,
+            },
+        })
+            // Ajaxリクエスト成功時の処理
+            .done(function (data) {
+                console.log("done");
+
+                $(".timeline_div").append(data[0]);
+
+            })
+            // Ajaxリクエスト失敗時の処理
+            .fail(function (data) {
+                console.log("fall");
+
+
+            });
+
+
+    }
+
+
 
 
 

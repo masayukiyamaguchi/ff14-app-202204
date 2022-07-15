@@ -74,3 +74,7 @@ Route::post('/buffsimulator/ajax_access_skilldata', "buffsimulator\IndexControll
 Route::post('/buffsimulator/ajax_access_timeline', "buffsimulator\IndexController@Ajax_access_timeline");
 Route::post('/buffsimulator/ajax_access_skilldata_only', "buffsimulator\IndexController@Ajax_access_skilldata_only");
 Route::post('/buffsimulator/ajax_access_barrier', "buffsimulator\IndexController@Ajax_access_barrier");
+Route::post('/buffsimulator/ajax_save_data', "buffsimulator\IndexController@Ajax_save_data");
+Route::post('/buffsimulator/ajax_load_savedata', "buffsimulator\IndexController@Ajax_load_savedata");
+Route::post('/buffsimulator/ajax_load_timelinedatadata', "buffsimulator\IndexController@Ajax_load_timelinedata");
+Route::get('/buffsimulator/{save_id}', "buffsimulator\IndexController@index_saved");
