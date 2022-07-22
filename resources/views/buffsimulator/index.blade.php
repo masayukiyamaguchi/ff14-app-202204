@@ -48,10 +48,10 @@
                             {{-- メニューの固定 left_menu_active　を移動 --}}
                             <div class="left_menu0 left_menu_active" tags="contents0">PTジョブ設定</div>
                             <div class="left_menu4" tags="contents4">軽減タイムライン</div>
-                            <div class="left_menu1" tags="contents1">元ダメージ計算</div>
+                            {{-- <div class="left_menu1" tags="contents1">元ダメージ計算</div>
                             <div class="left_menu2" tags="contents2">ダメージ模擬計算</div>
                             <div class="left_menu3" tags="contents3">軽減比較</div>
-                            <div class="left_menu5" tags="contents5">元ダメージリスト</div>
+                            <div class="left_menu5" tags="contents5">元ダメージリスト</div> --}}
                         </div>
 
 
@@ -61,6 +61,7 @@
                             <div class="save_id_div">
                                 <div class="save_id_h">【セーブID】</div>
                                 <div class="save_id">{{ $save_id }}</div>
+                                <div class="save_ow"><button>上書き保存</button></div>
                             </div>
                         @endif
 
@@ -79,32 +80,52 @@
                                         <div class="pt_member_h member_heder">メンバー{{ $i }}</div>
                                         <div class="pt_member_h member_job">ジョブ</div>
 
-                                        <select class="pt_membere_select" name="pt_member{{ $i }}_job">
-                                            <option value="" selected disabled></option>
-                                            <option class="tank" value="paladin">ナイト</option>
-                                            <option class="tank" value="warrior">戦士</option>
-                                            <option class="tank" value="darkknight">暗黒騎士</option>
-                                            <option class="tank" value="gunbreaker">ガンブレイカー</option>
-                                            <option class="dps" value="monk">モンク</option>
-                                            <option class="dps" value="dragoon">竜騎士</option>
-                                            <option class="dps" value="ninja">忍者</option>
-                                            <option class="dps" value="samurai">侍</option>
-                                            <option class="dps" value="reaper">リーパー</option>
-                                            <option class="dps" value="bard">吟遊詩人</option>
-                                            <option class="dps" value="machinist">機工士</option>
-                                            <option class="dps" value="dancer">踊り子</option>
-                                            <option class="dps" value="blackmage">黒魔道士</option>
-                                            <option class="dps" value="summoner">召喚士</option>
-                                            <option class="dps" value="redmage">赤魔道士</option>
-                                            {{-- <option class="dps" value="bluemage">青魔道士</option> --}}
-                                            <option class="healer" value="whitemage">白魔道士</option>
-                                            <option class="healer" value="scholar">学者</option>
-                                            <option class="healer" value="astrologian">占星術師</option>
-                                            <option class="healer" value="sage">賢者</option>
-                                        </select>
-
-                                        <button class="member_button{{ $i }}">LV.90の適正値を反映</button>
-
+                                        @if ($i < 3)
+                                            <select class="pt_membere_select" name="pt_member{{ $i }}_job"
+                                                pt_id="{{ $i }}">
+                                                <option value="" selected disabled></option>
+                                                <option class="tank" value="paladin">ナイト</option>
+                                                <option class="tank" value="warrior">戦士</option>
+                                                <option class="tank" value="darkknight">暗黒騎士</option>
+                                                <option class="tank" value="gunbreaker">ガンブレイカー</option>
+                                            </select>
+                                        @elseif($i < 5)
+                                            <select class="pt_membere_select" name="pt_member{{ $i }}_job"
+                                                pt_id="{{ $i }}">
+                                                <option value="" selected disabled></option>
+                                                <option class="dps" value="monk">モンク</option>
+                                                <option class="dps" value="dragoon">竜騎士</option>
+                                                <option class="dps" value="ninja">忍者</option>
+                                                <option class="dps" value="samurai">侍</option>
+                                                <option class="dps" value="reaper">リーパー</option>
+                                            </select>
+                                        @elseif($i < 6)
+                                            <select class="pt_membere_select" name="pt_member{{ $i }}_job"
+                                                pt_id="{{ $i }}">
+                                                <option value="" selected disabled></option>
+                                                <option class="dps" value="bard">吟遊詩人</option>
+                                                <option class="dps" value="machinist">機工士</option>
+                                                <option class="dps" value="dancer">踊り子</option>
+                                            </select>
+                                        @elseif($i < 7)
+                                            <select class="pt_membere_select" name="pt_member{{ $i }}_job"
+                                                pt_id="{{ $i }}">
+                                                <option value="" selected disabled></option>
+                                                <option class="dps" value="blackmage">黒魔道士</option>
+                                                <option class="dps" value="summoner">召喚士</option>
+                                                <option class="dps" value="redmage">赤魔道士</option>
+                                                {{-- <option class="dps" value="bluemage">青魔道士</option> --}}
+                                            </select>
+                                        @else
+                                            <select class="pt_membere_select" name="pt_member{{ $i }}_job"
+                                                pt_id="{{ $i }}">
+                                                <option value="" selected disabled></option>
+                                                <option class="healer" value="whitemage">白魔道士</option>
+                                                <option class="healer" value="scholar">学者</option>
+                                                <option class="healer" value="astrologian">占星術師</option>
+                                                <option class="healer" value="sage">賢者</option>
+                                            </select>
+                                        @endif
                                         <div class="pt_member_h member_hp">HP</div>
                                         <input name="pt_member{{ $i }}_hit_point">
                                         <div class="pt_member_h">物理防御力</div>
@@ -120,7 +141,7 @@
                                         <div class="pt_member_h">物理（魔法）基本性能</div>
                                         <input name="pt_member{{ $i }}_weapon_damage">
 
-
+                                        <button class="member_button{{ $i }}">LV.90の適正値を反映</button>
 
                                     </div>
                                 @endfor
@@ -374,7 +395,8 @@
                                     <div class="timeline_select_phase_div_contents4">
                                         <div>フェーズ選択：</div>
                                         <div class="timeline_select_phase_contents4">
-                                            <select name="Dragonsongs_Reprise" select_id="Dragonsongs_Reprise">
+                                            <select name="Dragonsongs_Reprise" select_id="Dragonsongs_Reprise"
+                                                id="phase_name_4">
                                                 <option value="kyoukou1">教皇庁</option>
                                                 <option value="toldan1">トールダン</option>
                                                 <option value="neaz">ニーズヘッグ</option>
@@ -384,7 +406,7 @@
                                                 <option value="niten">二天竜</option>
                                                 <option value="toldan2">Pトールダン</option>
                                             </select>
-                                            <select name="test" select_id="test">
+                                            <select name="test" select_id="test" id="phase_name_4">
                                                 <option value="test">テスト</option>
                                                 <option value="test">テスト</option>
                                             </select>
@@ -410,15 +432,6 @@
                                     </div>
                                     <div class="button_data_save_div">
                                         <button class="button_data_save_div_button">現在の状態を保存する</button>
-                                    </div>
-                                </div>
-
-                                <div class="time_line_contents_option_div_forth">
-                                    <div class="button_data_load_div">
-                                        <button class="button_data_load_button">保存した内容を反映</button>
-                                    </div>
-                                    <div class="button_data_load_div">
-                                        <button class="button_data_load_button">保存した内容を反映</button>
                                     </div>
                                 </div>
 

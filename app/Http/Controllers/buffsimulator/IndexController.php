@@ -889,6 +889,12 @@ class IndexController extends Controller
         $timeline_data = $data["timeline_data"];
         $job_name_list = $data["job_name_list"];
 
+        $contents = $data["contents_name"];
+        $phase = $data["phase_name"];
+
+        $save_type = $data["save_type"];
+        $save_url = $data["save_url"];
+
         $all_job_status = array();
         for ($i = 1; $i < 9; $i++) {
             $all_job_status += array($job_name_list[$i - 1] => $data["all_job_status" . $i]);
@@ -896,29 +902,43 @@ class IndexController extends Controller
 
         $roop_bool = true;
 
-        for ($i = 0; $roop_bool; $i++) {
-            $str3 = uniqid();
-            //$str3 = "test";
 
-            // データベースにデータを保存
-            $search_data = Buffsimulator_savedata::where("save_url", $str3)->first();
 
-            if ($search_data) {
-                //データある場合
+        if ($save_type == "save_ow") {
+            // 上書き保存
+            $datas = Buffsimulator_savedata::where("save_url", $save_url)->first();
+            $str3 =  $save_url;
+        } else {
+
+            // 新規保存
+            for ($i = 0; $roop_bool; $i++) {
                 $str3 = uniqid();
-            } else {
-                //データない場合
-                $roop_bool = false;
+                //$str3 = "test";
+
+                // データベースにアクセス
+                $search_data = Buffsimulator_savedata::where("save_url", $str3)->first();
+
+                if ($search_data) {
+                    //データある場合
+                    $str3 = uniqid();
+                } else {
+                    //データない場合
+                    $roop_bool = false;
+                }
             }
+
+            $datas = new Buffsimulator_savedata();
         }
 
-        $datas = new Buffsimulator_savedata();
+        dump($datas);
 
 
         // データ保存、配列はjsonにして保存
         $datas->save_url = $str3;
         $datas->pt_job = json_encode($job_name_list);
         $datas->pt_status = json_encode($all_job_status);
+        $datas->contents = $contents;
+        $datas->phase = $phase;
 
         $datas->save();
 
@@ -929,6 +949,7 @@ class IndexController extends Controller
 
         $retrun_data = array();
         array_push($retrun_data, $str3);
+        array_push($retrun_data, $save_type);
         return $retrun_data;
     }
 
@@ -946,11 +967,16 @@ class IndexController extends Controller
         $pt_job = json_decode($load_data["pt_job"]);
         $pt_status = json_decode($load_data["pt_status"]);
 
+        $contents = $load_data["contents"];
+        $phase = $load_data["phase"];
+
         // リターンデータを作る
         $retrun_data = array();
         array_push($retrun_data, $pt_job);
         array_push($retrun_data, $pt_status);
         array_push($retrun_data, $save_url);
+        array_push($retrun_data, $contents);
+        array_push($retrun_data, $phase);
 
         return $retrun_data;
     }

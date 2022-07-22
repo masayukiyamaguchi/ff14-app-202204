@@ -48,6 +48,9 @@ $(function () {
     var total_buff_no;
 
 
+    // バリアスキル一覧を取得+ついでに全スキルのジョブごとの数も返してもらう
+    getBarrierSkillList();
+
     // セーブIDありなしでの動作
     if ($(".save_id").text() === "") {
         //ロード時の処理
@@ -65,12 +68,7 @@ $(function () {
     } else {
         var save_url = $(".save_id").text();
         ptMemberSaveDataLoad(save_url);
-
-
     }
-
-
-
 
     // ジョブをリスト化
     var tank_list = [];
@@ -142,7 +140,6 @@ $(function () {
     timeLineDisplay5($(".timeline_select_phase").children("select").val());
 
     // バリアスキル一覧を取得+ついでに全スキルのジョブごとの数も返してもらう
-    getBarrierSkillList();
     function getBarrierSkillList() {
 
         //ajaxでデータを受け渡し
@@ -182,6 +179,20 @@ $(function () {
 
             });
     }
+
+
+    // PTジョブ設定の不要なところグレーアウト
+    for (i = 3; i < 9; i++) {
+        $("[name=pt_member" + i + "_tenacity]").prop("disabled", true);
+    }
+    for (i = 3; i < 7; i++) {
+        $("[name=pt_member" + i + "_determination]").prop("disabled", true);
+        $("[name=pt_member" + i + "_mind]").prop("disabled", true);
+        $("[name=pt_member" + i + "_weapon_damage]").prop("disabled", true);
+    }
+
+
+
 
 
     // 左メニュークリック時の動作
@@ -244,6 +255,10 @@ $(function () {
 
         // メンバーリスト更新
         ptMemberListRefresh();
+
+        //LV.90の適正値を反映
+        var pt_id = $(this).attr("pt_id");
+        $('.member_button' + pt_id).trigger("click");
 
     });
 
@@ -1488,6 +1503,7 @@ $(function () {
                 $(".tline_skill_icon" + i).eq(j - 1).append($("<img src=" + dase_ual + job_eng + j + ".png" + ">"));
                 $(".tline_skill_icon" + i).eq(j - 1).append($("<div class='recast_time_text'>Recast</div>"));
                 $(".tline_skill_icon" + i).eq(j - 1).append($("<div class='recast_time_num'>120</div>"));
+
             }
         }
 
@@ -1540,7 +1556,7 @@ $(function () {
         // ジョブの設定
         job_key_no = 4;//列が増えたらここを編集
         damage_type = header_text_list.indexOf("type") + 1;
-        damage_resits = header_text_list.indexOf("resist") + 1;
+        damage_resits = header_text_list.indexOf("resits") + 1;
         damage_key_no = header_text_list.indexOf("damage") + 1;
         remainhp_key_no = header_text_list.indexOf("残HP予測") + 1;
         targettype_no = header_text_list.indexOf("targettype") + 1;
@@ -2445,8 +2461,6 @@ $(function () {
             job_name_list = [];
 
             // ダメージタイプhitのときのみ計算
-
-
             if ($(".tr" + target_tr + "td" + damage_resits).text() == "Magical") {
                 var damage_element = "magic";
             } else {
@@ -2795,7 +2809,23 @@ $(function () {
 
 
     // 現在の状態の保存する
-    $(".button_data_save_div_button").click(function () {
+    $(".button_data_save_div_button,.save_ow").click(function () {
+
+        var save_type = "save_new";
+        var save_url = "";
+
+        if ($(this).attr("class") == "save_ow") {
+
+            var result = window.confirm('上書き保存です。\n以前のデータは削除されますがよろしいですか？');
+
+            if (result) {
+                save_type = "save_ow";
+                save_url = $(".save_id").text();
+            } else {
+                return 0;
+            }
+
+        }
 
         // タイムラインのhtmlを取得
         var timeline_data = $(".timeline_div").html();
@@ -2811,6 +2841,10 @@ $(function () {
         var job_status5 = pt_data[0][pt_data[1][5]];
         var job_status6 = pt_data[0][pt_data[1][6]];
         var job_status7 = pt_data[0][pt_data[1][7]];
+
+        // フェーズとコンテンツ名
+        var contents_name = $("#timeline_select_contents4").val();
+        var phase_name = $("[select_id=" + contents_name + "]").val();
 
         //ajaxでデータを受け渡し
         $.ajaxSetup({
@@ -2835,12 +2869,25 @@ $(function () {
                 all_job_status6: job_status5,
                 all_job_status7: job_status6,
                 all_job_status8: job_status7,
+                contents_name,
+                phase_name,
+                save_type,
+                save_url,
             },
         })
             // Ajaxリクエスト成功時の処理
             .done(function (data) {
+
                 console.log("done");
-                alert("http://localhost:8000/buffsimulator/" + data[0]);
+
+                if (data[1] == "save_ow") {
+                    alert("上書き保存しました。");
+                } else {
+
+                    alert("保存しました。URLは\nhttp://localhost:8000/buffsimulator/" + data[0]);
+                }
+
+
 
 
             })
@@ -2849,6 +2896,8 @@ $(function () {
                 console.log("fall");
             });
     })
+
+
 
 
     // 状態保存で必要な情報を集める
@@ -2936,11 +2985,18 @@ $(function () {
 
                 });
 
+                var contents_name = data[3];
+                var phase_name = data[4];
+
                 // メンバーリスト更新
                 ptMemberListRefresh();
 
                 // 軽減タイムラインに
                 $(".left_menu4").trigger("click");
+
+                // コンテンツとフェーズを調整
+                var contents_name = $("#timeline_select_contents4").val(contents_name);
+                var phase_name = $("#phase_name_4").val(phase_name);
 
                 // タイムライン反映
                 saveDataLoad(data[2]);
@@ -2991,8 +3047,8 @@ $(function () {
             .fail(function (data) {
                 console.log("fall");
 
-
             });
+
 
 
     }
