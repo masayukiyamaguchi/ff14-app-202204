@@ -930,9 +930,6 @@ class IndexController extends Controller
             $datas = new Buffsimulator_savedata();
         }
 
-        dump($datas);
-
-
         // データ保存、配列はjsonにして保存
         $datas->save_url = $str3;
         $datas->pt_job = json_encode($job_name_list);

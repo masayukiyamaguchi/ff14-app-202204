@@ -9,10 +9,53 @@
     width: 10%;
 }
 
+
+.close_button {
+    background-color: rgb(33, 33, 33);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-align: center;
+    width: 30px;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.close_button:hover {
+    transition: 0.1s;
+    background-color: rgb(87, 87, 87);
+    color: rgb(255, 255, 255);
+    cursor: pointer
+}
+
+.open_button_div {
+    position: fixed;
+    top: 55px;
+    left: 8px;
+    z-index: 10;
+    display: none;
+}
+
+.open_button {
+    background-color: rgb(33, 33, 33);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-align: center;
+    width: 30px;
+
+}
+
+.open_button:hover {
+    transition: 0.1s;
+    background-color: rgb(87, 87, 87);
+    color: rgb(255, 255, 255);
+    cursor: pointer
+}
+
+
+
 .left_menu {
     text-align: center;
     color: white;
-    margin-top: 20px;
 }
 
 .left_menu div {
@@ -31,6 +74,8 @@
     color: rgb(255, 255, 255);
     cursor: pointer
 }
+
+
 
 
 
@@ -65,6 +110,11 @@ input {
 .mainContents_container_center {
     width: 90%;
     background-color: rgb(87, 87, 87);
+
+    border: solid;
+    border: 3px;
+    border-left: white;
+
 }
 
 /* テキストカーソルの非表示 */
@@ -99,10 +149,13 @@ input {
 }
 
 .pt_membere_select {
-    display: block;
+
     text-align: center;
-    margin-left: 25px;
     width: 125px;
+}
+
+.member_job {
+    text-align: center;
 }
 
 
@@ -131,6 +184,7 @@ input {
     color: white;
     padding-top: 10px;
     padding-left: 10px;
+    padding-right: 10px;
 }
 
 .contents0_div>div {
@@ -827,8 +881,6 @@ td[class^="tr0"] {
         width: 70%;
     }
 }
-
-
 
 
 

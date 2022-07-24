@@ -41,11 +41,23 @@
             <div class="backgroundimage">
                 <div class="mainContents_container">
 
+                    {{-- openボタン --}}
+                    <div class="open_button_div">
+                        <div class="open_button" tags="close">▶▶</div>
+                    </div>
+
                     <!-- レフト　-->
                     <div class="mainContents_container_left">
 
+                        <div class="close_button_div">
+                            <div class="close_button" tags="close">×</div>
+                        </div>
+
+
+
                         <div class="left_menu">
                             {{-- メニューの固定 left_menu_active　を移動 --}}
+
                             <div class="left_menu0 left_menu_active" tags="contents0">PTジョブ設定</div>
                             <div class="left_menu4" tags="contents4">軽減タイムライン</div>
                             {{-- <div class="left_menu1" tags="contents1">元ダメージ計算</div>
@@ -428,7 +440,7 @@
 
                                 <div class="time_line_contents_option_div_third">
                                     <div class="button_all_remain_hp_calc_div">
-                                        <button class="button_all_remain_hp_calc_button">全ての残HPを計算</button>
+                                        <button class="button_all_remain_hp_calc_button">残HPを再計算する</button>
                                     </div>
                                     <div class="button_data_save_div">
                                         <button class="button_data_save_div_button">現在の状態を保存する</button>
@@ -543,6 +555,29 @@
                                     </table>
                                 </div>
                             </div>
+
+
+
+
+
+                            <div id="copied">
+                                <dl>
+                                    <dt>コピー：</dt>
+                                    <dd><input class="copy" type="text" value="Into the Program" readonly></dd>
+                                    <dt>ペースト：</dt>
+                                    <dd><input class="paste" type="text" value="" readonly></dd>
+                                </dl>
+                            </div>
+
+
+
+
+
+
+
+
+
+
                         </div>
 
                         {{-- 残HP --}}

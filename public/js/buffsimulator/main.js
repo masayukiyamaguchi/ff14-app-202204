@@ -47,6 +47,15 @@ $(function () {
     var total_barrier_no;
     var total_buff_no;
 
+    // 左メニュー
+    // アクティブかどうか
+    var same_button_click_bool = false;
+
+    // PTジョブを変更したかどうか
+    var select_job_change_bool = true;
+    var select_job_change_num = [];
+
+
 
     // バリアスキル一覧を取得+ついでに全スキルのジョブごとの数も返してもらう
     getBarrierSkillList();
@@ -165,12 +174,16 @@ $(function () {
 
                 // ジョブ別スキルの数を格納
                 all_skill_data_job_num = data[2];
+                //スキルアイコンを読み込む（↑がないと先行で読み込んでしまう）
+                loadSkillIcon();
 
                 // バリアのリストをまとめる
                 barrier_skill_list = data[0];
                 barrier_skill_list.forEach(element => {
                     barrier_skill_list_job_num.push(element["job_e"] + element["skill_no"]);
                 });
+
+
 
             })
             // Ajaxリクエスト失敗時の処理
@@ -199,7 +212,6 @@ $(function () {
     $(".left_menu").children("div").click(function () {
 
         // ボタン押したらどこが表示されるか
-
         if ($(this).attr("tags") == "contents1") {
             var tags = $(this).attr("tags");
             contents1MemuClick();
@@ -215,9 +227,21 @@ $(function () {
         $("." + tags).css("display", "block");
 
         // 左メニューの動作
+        // クラスを取得
         var clickClass = $(this).attr("class");
+
+        if (clickClass.indexOf("left_menu_active") > -1) {
+            same_button_click_bool = true;
+        } else {
+            same_button_click_bool = false;
+        }
+
+        // いったんアクティブを消す
         $(".left_menu").children().removeClass("left_menu_active");
-        $("." + clickClass).addClass("left_menu_active");
+        // クリックされたメニューにアクティブをつける
+        var classVals = clickClass.split(' '); //クラスを配列に
+        $("." + classVals[0]).addClass("left_menu_active");
+
 
     });
 
@@ -237,10 +261,35 @@ $(function () {
         $(".pt_member_remain_hp").addClass("contents_visibility_hidden");
     }
 
+    // ×ボタン動作
+    $(".close_button").click(function () {
+        $(".mainContents_container_left").fadeOut(1);
+        $(".open_button_div").css("display", "block");
+    });
+
+    // openボタン動作
+    $(".open_button").click(function () {
+        $(".mainContents_container_left").fadeIn();
+        $(".open_button_div").css("display", "none");
+    })
+
+    // ptジョブ設定メニュー
+    $(".left_menu0").click(function () {
+        // 初回
+        if (select_job_change_bool && same_button_click_bool) {
+
+            // それ以外
+        } else {
+            select_job_change_bool = false;
+            select_job_change_num = [];
+        }
+    })
+
 
     //PTジョブ設定
     $(".pt_membere_select").change(function () {
         var array_select_job = [];
+        select_job_change_bool = true;
 
         for (i = 1; i < 9; i++) {
             if ($("[name=pt_member" + i + "_job]").val() != null) {
@@ -260,6 +309,7 @@ $(function () {
         var pt_id = $(this).attr("pt_id");
         $('.member_button' + pt_id).trigger("click");
 
+        select_job_change_num.push(Number($(this).attr("pt_id")));
     });
 
 
@@ -1241,13 +1291,16 @@ $(function () {
         $("[select_id=" + content_name + "]").css("display", "inline-block");
 
         // 初期化
-        //$(".timeline_table_table").empty();
+        select_job_change_num = [1, 2, 3, 4, 5, 6, 7, 8];
+        timeLineDisplay($(this).val());
         $("[select_id=" + content_name + "]").val("");
 
     })
 
     // フェーズに変更があると、内容を変更する
     $(".timeline_select_phase_contents4").children("select").change(function () {
+        //初期化
+        select_job_change_num = [1, 2, 3, 4, 5, 6, 7, 8];
         timeLineDisplay($(this).val());
 
     })
@@ -1279,11 +1332,20 @@ $(function () {
                 var table_length = $(".time_line_timekeyper_table").find("tr").length;
                 // 初期化
                 $(".time_line_timekeyper_table").find("tr").css("visibility", "visible");
+
                 for (i = 1; i < table_length + 1; i++) {
                     for (j = 1; j < 20; j++) {
                         // 列が増えたらここを編集
                         if (j != 12) {
-                            $(".tr" + i + "td" + j).empty();
+
+                            // PTリストで変更がなかったジョブはスキルを空にしない（ジョブ頭が４番目だから４）
+                            if (j < 4 || j > 12) {
+                                $(".tr" + i + "td" + j).empty();
+                            } else if ($.inArray(j - 3, select_job_change_num) < 0) {
+                            } else {
+                                $(".tr" + i + "td" + j).empty();
+                            }
+
                         } else {
                             $(".tr" + i + "td" + j).find("[class^='ptmem_hp_']").css("display", "none");
                         }
@@ -1388,6 +1450,9 @@ $(function () {
                     $(".time_line_timekeyper_table").find("tr").eq(i).css("visibility", "hidden");
                 }
 
+                // 残HPの計算
+                allRemainHpCalc();
+
             })
             // Ajaxリクエスト失敗時の処理
             .fail(function (data) {
@@ -1462,108 +1527,110 @@ $(function () {
     // メニューを開いた動作
     $(".left_menu4").click(function () {
 
-        timeLineDisplay($(".timeline_select_phase").children("select").val());
+        // アクティブかどうかの判断
+        if (!same_button_click_bool && select_job_change_bool) {
+            timeLineDisplay($(".timeline_select_phase").children("select").val());
 
-        var job_name_list = [];
-        var job_name_list_eng = [];
+            var job_name_list = [];
+            var job_name_list_eng = [];
 
-        $(".time_line_timekeyper_table").find('td:nth-child(16)').css("visibility", "hidden");
-        $(".time_line_timekeyper_table").find('td:nth-child(17)').css("visibility", "hidden");
-        $(".time_line_timekeyper_table").find('td:nth-child(18)').css("visibility", "hidden");
-        $(".time_line_timekeyper_table").find('td:nth-child(19)').css("visibility", "hidden");
+            $(".time_line_timekeyper_table").find('td:nth-child(16)').css("visibility", "hidden");
+            $(".time_line_timekeyper_table").find('td:nth-child(17)').css("visibility", "hidden");
+            $(".time_line_timekeyper_table").find('td:nth-child(18)').css("visibility", "hidden");
+            $(".time_line_timekeyper_table").find('td:nth-child(19)').css("visibility", "hidden");
 
-        for (i = 1; i < 9; i++) {
+            for (i = 1; i < 9; i++) {
 
-            var job_name = $(".pt_membere_select option:selected").eq(i - 1).text();
-            var job_name_eng = $(".pt_membere_select").eq(i - 1).val();
+                var job_name = $(".pt_membere_select option:selected").eq(i - 1).text();
+                var job_name_eng = $(".pt_membere_select").eq(i - 1).val();
 
-            //ジョブ名だけリスト化し渡す。
-            job_name_list.push(job_name);
-            job_name_list_eng.push(job_name_eng);
-        }
-
-
-        // ヘッダーリストの調整
-        job_name_list.unshift("time", "スキル名", "対象");
-
-
-        var img = new Image();
-
-        //スキルアイコン読み込み
-        for (i = 1; i < 9; i++) {
-            $(".tline_skill_icon" + i).children().remove();// 初期化
-            var dase_ual = "/images/buffsimulator/skillicon/";
-            var job_eng = $("[name=pt_member" + i + "_job]").val();
-
-            //あとはここを1-12で回して、画像を設置する
-            for (j = 1; j < all_skill_data_job_num[job_eng] + 1; j++) {
-
-                img.src = dase_ual + job_eng + j + ".png";
-
-                $(".tline_skill_icon" + i).eq(j - 1).append($("<img src=" + dase_ual + job_eng + j + ".png" + ">"));
-                $(".tline_skill_icon" + i).eq(j - 1).append($("<div class='recast_time_text'>Recast</div>"));
-                $(".tline_skill_icon" + i).eq(j - 1).append($("<div class='recast_time_num'>120</div>"));
-
+                //ジョブ名だけリスト化し渡す。
+                job_name_list.push(job_name);
+                job_name_list_eng.push(job_name_eng);
             }
+
+
+            // ヘッダーリストの調整
+            job_name_list.unshift("time", "スキル名", "対象");
+
+
+            var img = new Image();
+
+            //スキルアイコン読み込み
+            for (i = 1; i < 9; i++) {
+                $(".tline_skill_icon" + i).children().remove();// 初期化
+                var dase_ual = "/images/buffsimulator/skillicon/";
+                var job_eng = $("[name=pt_member" + i + "_job]").val();
+
+                //あとはここを1-12で回して、画像を設置する
+                for (j = 1; j < all_skill_data_job_num[job_eng] + 1; j++) {
+
+                    img.src = dase_ual + job_eng + j + ".png";
+
+                    $(".tline_skill_icon" + i).eq(j - 1).append($("<img src=" + dase_ual + job_eng + j + ".png" + ">"));
+                    $(".tline_skill_icon" + i).eq(j - 1).append($("<div class='recast_time_text'>Recast</div>"));
+                    $(".tline_skill_icon" + i).eq(j - 1).append($("<div class='recast_time_num'>120</div>"));
+
+                }
+            }
+
+            //ジョブ名挿入
+            for (j = 1; j < 12; j++) {
+                $(".tr0td" + j).text(job_name_list[j - 1]);
+            }
+            $(".tr0td" + 12).text("残HP予測");
+            $(".tr0td" + 13).text("damage");
+            $(".tr0td" + 14).text("総バリア量");
+            $(".tr0td" + 15).text("総軽減率");
+            $(".tr0td" + 16).text("resits");
+            $(".tr0td" + 17).text("type");
+            $(".tr0td" + 18).text("targettype");
+            $(".tr0td" + 19).text("targetjob");
+
+            // ジョブアイコン挿入
+            var trtd_hp_div = $(".trtd_hp").html();
+            var tr_length = $(".time_line_timekeyper_table").find("tr").length;
+
+            for (i = 1; i < tr_length; i++) {
+                $(".tr" + i + "td12").children().remove();
+                $(".tr" + i + "td12").append(trtd_hp_div);
+            }
+
+            // 画像変更(残HPと対象)
+            for (i = 1; i < 9; i++) {
+                $(".ptmem_hp_" + i).children("img").attr("src", "/images/buffsimulator/skillicon/" + job_name_list_eng[i - 1] + "_jobicon.png");
+                $(".tline_job_icon" + i).children("img").attr("src", "/images/buffsimulator/skillicon/" + job_name_list_eng[i - 1] + "_jobicon.png");
+                $(".tline_job_icon" + i).children("img").attr("jobicon_id", job_name_list_eng[i - 1]);
+            }
+
+
+            // ターゲット対象リスト作成
+            // タイムラインの内容が変わったらここを修正！！
+
+            // スキル対象リストを初期化
+            $("[name=timeline_skill_targetselect] > option").remove();
+            $("[name=timeline_skill_targetselect]").append($('<option selected disabled>').html("").val(""));
+
+            for (i = 0; i < 8; i++) {
+                $("[name=timeline_skill_targetselect]").append($('<option>').html(job_name_list[i + 3]).val(job_name_list_eng[i]));
+            }
+
+            // ヘッダー情報を格納
+            for (i = 0; i < $(".time_line_timekeyper_table")[0].rows[0].cells.length; i++) {
+                header_text_list.push($(".tr0td" + (i + 1)).text());
+            }
+
+            // ジョブの設定
+            job_key_no = 4;//列が増えたらここを編集
+            damage_type = header_text_list.indexOf("type") + 1;
+            damage_resits = header_text_list.indexOf("resits") + 1;
+            damage_key_no = header_text_list.indexOf("damage") + 1;
+            remainhp_key_no = header_text_list.indexOf("残HP予測") + 1;
+            targettype_no = header_text_list.indexOf("targettype") + 1;
+            targetjob_no = header_text_list.indexOf("targetjob") + 1;
+            total_barrier_no = header_text_list.indexOf("総バリア量") + 1;
+            total_buff_no = header_text_list.indexOf("総軽減率") + 1;
         }
-
-        //ジョブ名挿入
-        for (j = 1; j < 12; j++) {
-            $(".tr0td" + j).text(job_name_list[j - 1]);
-        }
-        $(".tr0td" + 12).text("残HP予測");
-        $(".tr0td" + 13).text("damage");
-        $(".tr0td" + 14).text("総バリア量");
-        $(".tr0td" + 15).text("総軽減率");
-        $(".tr0td" + 16).text("resits");
-        $(".tr0td" + 17).text("type");
-        $(".tr0td" + 18).text("targettype");
-        $(".tr0td" + 19).text("targetjob");
-
-        // ジョブアイコン挿入
-        var trtd_hp_div = $(".trtd_hp").html();
-        var tr_length = $(".time_line_timekeyper_table").find("tr").length;
-
-        for (i = 1; i < tr_length; i++) {
-            $(".tr" + i + "td12").children().remove();
-            $(".tr" + i + "td12").append(trtd_hp_div);
-        }
-
-        // 画像変更(残HPと対象)
-        for (i = 1; i < 9; i++) {
-            $(".ptmem_hp_" + i).children("img").attr("src", "/images/buffsimulator/skillicon/" + job_name_list_eng[i - 1] + "_jobicon.png");
-            $(".tline_job_icon" + i).children("img").attr("src", "/images/buffsimulator/skillicon/" + job_name_list_eng[i - 1] + "_jobicon.png");
-            $(".tline_job_icon" + i).children("img").attr("jobicon_id", job_name_list_eng[i - 1]);
-        }
-
-
-        // ターゲット対象リスト作成
-        // タイムラインの内容が変わったらここを修正！！
-
-        // スキル対象リストを初期化
-        $("[name=timeline_skill_targetselect] > option").remove();
-        $("[name=timeline_skill_targetselect]").append($('<option selected disabled>').html("").val(""));
-
-        for (i = 0; i < 8; i++) {
-            $("[name=timeline_skill_targetselect]").append($('<option>').html(job_name_list[i + 3]).val(job_name_list_eng[i]));
-        }
-
-        // ヘッダー情報を格納
-        for (i = 0; i < $(".time_line_timekeyper_table")[0].rows[0].cells.length; i++) {
-            header_text_list.push($(".tr0td" + (i + 1)).text());
-        }
-
-        // ジョブの設定
-        job_key_no = 4;//列が増えたらここを編集
-        damage_type = header_text_list.indexOf("type") + 1;
-        damage_resits = header_text_list.indexOf("resits") + 1;
-        damage_key_no = header_text_list.indexOf("damage") + 1;
-        remainhp_key_no = header_text_list.indexOf("残HP予測") + 1;
-        targettype_no = header_text_list.indexOf("targettype") + 1;
-        targetjob_no = header_text_list.indexOf("targetjob") + 1;
-        total_barrier_no = header_text_list.indexOf("総バリア量") + 1;
-        total_buff_no = header_text_list.indexOf("総軽減率") + 1;
-
 
     })
 
@@ -2884,7 +2951,19 @@ $(function () {
                     alert("上書き保存しました。");
                 } else {
 
-                    alert("保存しました。URLは\nhttp://localhost:8000/buffsimulator/" + data[0]);
+                    var url_data = "https://ff14-app.com/buffsimulator/" + data[0];
+                    //var url_data = "http://localhost:8000/buffsimulator/" + data[0];
+
+
+                    navigator.clipboard.writeText(url_data)
+                        .then(() => {
+                            console.log('成功');
+                        })
+                        .catch(err => {
+                            console.error('ユーザが拒否、もしくはなんらかの理由で失敗');
+                        });
+
+                    alert("保存しました。URLは\n" + url_data + "\n\nクリップボードへコピーしました。\nそのまま「貼り付け」してください！");
                 }
 
 
@@ -2896,7 +2975,6 @@ $(function () {
                 console.log("fall");
             });
     })
-
 
 
 
@@ -2967,7 +3045,6 @@ $(function () {
         })
             // Ajaxリクエスト成功時の処理
             .done(function (data) {
-                console.log("done");
 
                 var pt_job = data[0];
                 var pt_status = data[1];
@@ -2991,7 +3068,7 @@ $(function () {
                 // メンバーリスト更新
                 ptMemberListRefresh();
 
-                // 軽減タイムラインに
+                // 軽減タイムラインに（今後ここが遅いとスキルアイコンが反映されないかも？）
                 $(".left_menu4").trigger("click");
 
                 // コンテンツとフェーズを調整
@@ -3000,7 +3077,6 @@ $(function () {
 
                 // タイムライン反映
                 saveDataLoad(data[2]);
-
 
             })
 
@@ -3012,6 +3088,33 @@ $(function () {
             });
 
     }
+
+    //スキルアイコン読み込み(スキルの数をajaxしてから読み込む。seve用の読み込み)
+    function loadSkillIcon() {
+
+        var img = new Image();
+
+        //スキルアイコン読み込み
+        for (i = 1; i < 9; i++) {
+            $(".tline_skill_icon" + i).children().remove();// 初期化
+            var dase_ual = "/images/buffsimulator/skillicon/";
+            var job_eng = $("[name=pt_member" + i + "_job]").val();
+
+            //あとはここを1-12で回して、画像を設置する
+            for (j = 1; j < all_skill_data_job_num[job_eng] + 1; j++) {
+
+                img.src = dase_ual + job_eng + j + ".png";
+
+                $(".tline_skill_icon" + i).eq(j - 1).append($("<img src=" + dase_ual + job_eng + j + ".png" + ">"));
+                $(".tline_skill_icon" + i).eq(j - 1).append($("<div class='recast_time_text'>Recast</div>"));
+                $(".tline_skill_icon" + i).eq(j - 1).append($("<div class='recast_time_num'>120</div>"));
+
+            }
+        }
+
+    }
+
+
 
 
     // タイムラインを反映
@@ -3052,8 +3155,6 @@ $(function () {
 
 
     }
-
-
 
 
 
