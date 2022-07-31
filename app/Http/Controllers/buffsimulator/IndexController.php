@@ -83,6 +83,8 @@ class IndexController extends Controller
             $select_skill_sub = array_merge($select_skill_sub, $data);
         }
 
+
+
         $key = array_keys($select_skill_sub);
         $count = 0;
 
@@ -120,8 +122,6 @@ class IndexController extends Controller
             $select_skill_data_alljob = array_merge($select_skill_data_alljob, $select_skill_data);
             $loop++;
         }
-
-
 
         // データベース調整
         // 整理されたサブターゲットをtarget_oneに設置
@@ -162,7 +162,7 @@ class IndexController extends Controller
                         }
                 }
             }
-        } else {
+        } else if ($damage_element == "physics") {
             foreach ($select_skill_data_alljob as $data) {
                 switch ($data["skill_name"]) {
                     case "牽制":
@@ -180,6 +180,32 @@ class IndexController extends Controller
                             $exist_adoll = true;
                             break;
                         }
+                    case "ダークマインド":
+                    case "ダークミッショナリー":
+                    case "ハート・オブ・ライト":
+                        $data["efect_size"] = 0.0;
+                        break;
+
+                    case "バマジク":
+                        if ($data["element"] == "magic_damege_reduct")
+                            $data["efect_size"] = 0.0;
+                        break;
+                }
+            }
+        } else {
+            foreach ($select_skill_data_alljob as $data) {
+                switch ($data["skill_name"]) {
+                    case "牽制":
+                    case "アドル":
+                    case "ダークマインド":
+                    case "ダークミッショナリー":
+                    case "ハート・オブ・ライト":
+                        $data["efect_size"] = 0.0;
+                        break;
+                    case "バマジク":
+                        if ($data["element"] == "magic_damege_reduct")
+                            $data["efect_size"] = 0.0;
+                        break;
                 }
             }
         }
@@ -200,8 +226,31 @@ class IndexController extends Controller
         }
 
 
+        // ターゲットできるかどうかによる調整
+
+        // ターゲットできるかどうかの情報を取得
+        $target_on = $datas["target_on"];
+
+        if ($target_on == "off") {
+            foreach ($select_skill_data_alljob as $data) {
+                switch ($data["skill_name"]) {
+                    case "牽制":
+                    case "アドル":
+                    case "リプライザル":
+                        $data["efect_size"] = 0.0;
+                        break;
+                }
+            }
+        } else {
+        }
+
+
+
+
+
+
         // バフ類一覧などを定義
-        $buff_base_list = ["f_BUF" => [], "f_BAR" => [], "f_HP" => [], "f_HEALE" => [], "f_HEALV" => [], "f_BRR" => [], "f_BRR" => []];
+        $buff_base_list = ["f_BUF" => [], "f_BAR" => [], "f_HP" => [], "f_HEALE" => [], "f_HEALV" => [], "f_BRR" => [], "f_BRR" => [], "f_INV" => []];
         $de_buff_boss = ["f_DBUF" => []];
         $f_ten = [];
         $heal_status = ["f_PTC" => 1, "f_WD" => 1, "f_HMP" => 1, "f_DET" => 1, "f_TNC" => 1, "f_SP" => 1, "f_CHR" => 1, "f_RND" => 1];
@@ -290,6 +339,10 @@ class IndexController extends Controller
                     break;
 
                 case "special_ability":
+                    break;
+
+                case "invinsible_ability":
+                    $all_buff_list = $this->invisibleAbirityDone($who, $target, $efect_size, $datas["job_name_list"], $all_buff_list, $target_one);
                     break;
             }
         }
@@ -656,6 +709,13 @@ class IndexController extends Controller
 
                 return  $all_buff_list;
         }
+    }
+
+    // 無敵技の調整
+    public function invisibleAbirityDone($who, $target, $efect_size, $datas, $all_buff_list, $target_one)
+    {
+        array_push($all_buff_list[$who]["f_INV"], 1);
+        return  $all_buff_list;
     }
 
 

@@ -75,8 +75,15 @@
     cursor: pointer
 }
 
+.left_menu6 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 
-
+.contents6_menu_img img {
+    width: 20px;
+}
 
 
 .save_id_div {
@@ -453,13 +460,11 @@ div[class^="use_skl_bg"] {
     display: block;
 }
 
-
-
-
-
-.time_line_timekeyper tr:nth-child(odd) {
-    background-color: rgb(108, 108, 108)
+.button_all_remain_hp_calc_button {
+    visibility: hidden;
 }
+
+
 
 .time_line_timekeyper td {
     position: relative;
@@ -586,7 +591,7 @@ td[class^="tr0"] {
     /* width: 20px; */
     padding: 0px;
     margin-right: 1px;
-    z-index: 5;
+    z-index: 4;
 }
 
 .time_line_timekeyper_table tr {
@@ -882,6 +887,148 @@ td[class^="tr0"] {
     }
 }
 
+.tr0 th {
+    text-align: center;
+    background-color: rgb(218, 142, 54);
+}
+
+.tr0td4,
+.tr0td5 {
+    background-color: #4156BC !important;
+}
+
+.tr0td6,
+.tr0td7,
+.tr0td8,
+.tr0td9 {
+    background-color: #713234 !important;
+}
+
+.tr0td10,
+.tr0td11 {
+    background-color: #487A39 !important;
+}
+
+.tr0td12 {
+    color: black;
+    background-color: #ffffff !important;
+}
+
+
+.time_line_timekeyper_table td:nth-of-type(12),
+.time_line_timekeyper_table td:nth-of-type(14),
+.time_line_timekeyper_table td:nth-of-type(15) {
+    text-align: right;
+}
+
+.time_line_timekeyper_table td:nth-of-type(13) {
+    text-align: center;
+}
+
+
+/* ヘッダー固定 */
+.time_line_timekeyper_table thead th {
+    /* 縦スクロール時に固定する */
+    position: -webkit-sticky;
+    position: sticky;
+    top: 55px;
+    /* tbody内のセルより手前に表示する */
+    z-index: 10;
+}
+
+.time_line_timekeyper tr:nth-child(odd) {
+    background-color: rgb(108, 108, 108)
+}
+
+.contents6 {
+    display: none;
+    background-color: #3f3f3f;
+}
+
+.contents6 img {
+    margin-left: 10px;
+}
+
+
+.contents6_div {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.contents6_div h1 img {
+    width: 50px;
+
+}
+
+.contents6_div h1 {
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.contents6_div h2 {
+    color: rgb(0, 116, 218);
+    font-size: 30px;
+
+}
+
+.contents6_div h3 {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.contents6_ul li {
+    color: white;
+}
+
+.contents6_text {
+    margin-top: -20px;
+    margin-bottom: 50px;
+    color: white;
+    padding-left: 20px;
+}
+
+.tutorial_group001 {
+    display: flex;
+}
+
+.tutorial_group001_div2 {
+    padding-left: 20px;
+    padding-top: 70px;
+}
+
+.tutorial_group003 {}
+
+.tutorial_group003_div2 {
+    padding-left: 30px;
+}
+
+.tutorial_group004 img {
+    vertical-align: top;
+}
+
+.contents6_index {
+    color: white;
+    margin-top: -20px;
+    margin-left: 20px;
+    margin-bottom: 50px;
+
+}
+
+.contents6_index_h3 {
+    margin-left: 20px;
+}
+
+.contents6_index a {
+    color: white;
+}
+
+.contents6_index a:hover {
+    color: rgb(0, 104, 232);
+}
 
 
 

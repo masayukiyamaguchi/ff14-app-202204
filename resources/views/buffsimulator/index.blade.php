@@ -16,7 +16,10 @@
 
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/js/buffsimulator/main.js"></script>
+
+
 
 
 
@@ -64,6 +67,14 @@
                             <div class="left_menu2" tags="contents2">ダメージ模擬計算</div>
                             <div class="left_menu3" tags="contents3">軽減比較</div>
                             <div class="left_menu5" tags="contents5">元ダメージリスト</div> --}}
+                            <div class="left_menu6" tags="contents6">
+                                <div class="contents6_menu_img">
+                                    <img src="\images\buffsimulator\skillicon\tutrialmark.png" alt="">
+                                </div>
+                                <div class="contents6_menu_text">
+                                    使い方
+                                </div>
+                            </div>
                         </div>
 
 
@@ -542,40 +553,32 @@
                                 <div class="time_line_timekeyper">
                                     <table class="time_line_timekeyper_table">
 
-                                        @for ($i = 0; $i < 200; $i++)
-                                            <tr class="tr{{ $i }}">
-                                                @for ($j = 1; $j < 20; $j++)
-                                                    <td class="tr{{ $i }}td{{ $j }}"></td>
+                                        <thead>
+                                            <tr class="tr0">
+                                                @for ($j = 1; $j < 21; $j++)
+                                                    <th class="tr0td{{ $j }}"></th>
                                                 @endfor
                                             </tr>
-                                        @endfor
+                                        </thead>
 
+                                        <tbody>
+                                            @for ($i = 1; $i < 200; $i++)
+                                                <tr class="tr{{ $i }}">
 
+                                                    @for ($j = 1; $j < 2; $j++)
+                                                        <th class="tr{{ $i }}td{{ $j }}"></th>
+                                                    @endfor
+                                                    @for ($j = 2; $j < 21; $j++)
+                                                        <td class="tr{{ $i }}td{{ $j }}"></td>
+                                                    @endfor
+
+                                                </tr>
+                                            @endfor
+                                        </tbody>
 
                                     </table>
                                 </div>
                             </div>
-
-
-
-
-
-                            <div id="copied">
-                                <dl>
-                                    <dt>コピー：</dt>
-                                    <dd><input class="copy" type="text" value="Into the Program" readonly></dd>
-                                    <dt>ペースト：</dt>
-                                    <dd><input class="paste" type="text" value="" readonly></dd>
-                                </dl>
-                            </div>
-
-
-
-
-
-
-
-
 
 
                         </div>
@@ -692,6 +695,289 @@
                                 <table class="timeline_table_table">
 
                                 </table>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="contents6">
+
+                            <div class="contents6_div">
+                                <h1>
+                                    <img src="\images\buffsimulator\skillicon\tutrialmark.png" alt="">
+                                    <div>使い方の紹介</div>
+                                </h1>
+
+                                <h2>
+                                    ０．もくじ
+                                </h2>
+
+                                <div class="contents6_index">
+
+                                    <div class="contents6_index_h2"><a href="#area-1">１．このサイトでできること! </a></div>
+                                    <div class="contents6_index_h2"><a href="#area-2">２．初期設定 </a></div>
+                                    <div class="contents6_index_h2"><a href="#area-3">３．軽減タイムライン</a></div>
+                                    <div class="contents6_index_h3"><a href="#area-3-1">３－１.基本的な使い方 </a></div>
+                                    <div class="contents6_index_h3"><a href="#area-3-2">３－２.効果時間/リキャストタイム</a></div>
+                                    <div class="contents6_index_h3"><a href="#area-3-3">３－３.対象を選択するスキル</a> </div>
+                                    <div class="contents6_index_h3"><a href="#area-3-4">３－４.被ダメージ対象を変更する</a> </div>
+                                    <div class="contents6_index_h3"><a href="#area-3-5">３－５.データを保存する</a> </div>
+                                    <div class="contents6_index_h3"><a href="#area-3-6">３－６.データを上書きする</a> </div>
+                                    <div class="contents6_index_h3"><a href="#area-3-7">３－７.その他</a> </div>
+
+                                </div>
+
+                                <section id="area-1">
+                                    <h2>
+                                        １．このサイトでできること!
+                                    </h2>
+                                </section>
+
+                                <div class="contents6_text">
+                                    <ul class="contents6_ul">
+                                        <li>
+                                            コンテンツのタイムラインがわかる!
+                                        </li>
+                                        <li>
+                                            攻撃の威力（ダメージ）がわかる!
+                                        </li>
+                                        <li>
+                                            軽減（バリア）スキルを使った時の、残りHPがわかる!
+                                        </li>
+                                        <li>
+                                            攻撃の属性（魔法/物理）がわかる!
+                                        </li>
+                                        <li>
+                                            スキルのタイムラインが組める!
+                                        </li>
+                                        <li>
+                                            組んだタイムラインを共有できる!
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                                <section id="area-2">
+                                    <h2>
+                                        ２．初期設定
+                                    </h2>
+                                </section>
+
+                                <div class="contents6_text">
+                                    まずは、「PTジョブ設定」の項目でPTのジョブ設定を行います。<br><br>
+                                    左のメニューから「PTジョブ設定」を選択します。<br>
+                                    開いたページの「ジョブ」の項目でＰＴのジョブを選択します。<br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial001.png" alt=""><br><br>
+
+                                    「ジョブ」を選択すると自動的に「ステータス」が挿入されます。<br>
+                                    これは「最大レベル」(パッチ6.XならLV90)における、最新パッチの「最終装備」を想定したステータスになります。<br>
+                                    必要があれば、各項目を「手動で」編集してください！<br>
+
+                                    <div class="tutorial_group001">
+                                        <div class="tutorial_group001_div1">
+                                            <img src="\images\buffsimulator\tutorial\tutorial002.png"
+                                                alt=""><br><br>
+                                        </div>
+                                        <div class="tutorial_group001_div2">
+                                            設定不要なステータスは「グレーアウト」されます。<br>
+                                            <img src="\images\buffsimulator\tutorial\tutorial003.png"
+                                                alt=""><br><br>
+
+                                            「情報をブラウザに保存」ボタンをおせば、記録しておくことができます。<br>
+                                            <img src="\images\buffsimulator\tutorial\tutorial004.png"
+                                                alt=""><br><br>
+
+                                            現在（2022/8）は同ジョブPT構成には対応をしていませんのでご注意ください！
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <section id="area-3">
+                                    <h2>
+                                        ３．軽減タイムライン
+                                    </h2>
+                                </section>
+
+                                <div class="contents6_text">
+                                    ここでは、各コンテンツのタイムラインにそって、軽減バフを選択することで<br>
+                                    各攻撃を受けた際の「残HP予想」を確認することができます。<br><br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial005.png"
+                                        alt=""><br><br><br>
+
+                                    <section id="area-3-1">
+                                        <h3>３－１.基本的な使い方</h3>
+                                    </section>
+
+                                    右上の項目で「コンテンツ」と「フェーズ」を選択できます。<br><br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial006.png"
+                                        alt=""><br><br><br>
+
+
+                                    タイムラインの攻撃に対して、各ジョブの「マス」をクリックすると「スキルリスト」が表示されます。<br><br>
+                                    <div class="tutorial_group002">
+                                        <div class="tutorial_group002_div1">
+
+                                            <img src="\images\buffsimulator\tutorial\tutorial007.png"
+                                                alt=""><br><br><br>
+                                        </div>
+
+                                        <div class="tutorial_group002_div2">
+                                            スキルアイコンをクリックすると、タイムラインにスキルアイコンが表示されます。<br>
+                                            ※もう一度クリックすると消えます。<br><br>
+                                            <img src="\images\buffsimulator\tutorial\tutorial009.png"
+                                                alt=""><br><br><br>
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                    バフが選択されると自動的に「残HP予測」が計算されます。<br><br>
+                                    <div class="tutorial_group003">
+                                        <div class="tutorial_group003_div1">
+                                            <img src="\images\buffsimulator\tutorial\tutorial010.png"
+                                                alt=""><br><br>
+                                        </div>
+
+                                        <div class="tutorial_group003_div2">
+                                            最大HPを超えてダメージを受ける場合は「マイナス」で表示されます。<br>
+                                            <img src="\images\buffsimulator\tutorial\tutorial011.png"
+                                                alt=""><br><br>
+
+                                            「残HP予想」がマイナスにならないように、バフを組み合わせよう！<br>
+                                            <img src="\images\buffsimulator\tutorial\tutorial012.png"
+                                                alt=""><br><br><br>
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <section id="area-3-2">
+                                        <h3>３－２.効果時間/リキャストタイム</h3>
+                                    </section>
+
+                                    スキルの効果時間は「青いライン」で表示されます。<br>
+                                    このラインまではバフの効果が効いています。<br><br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial013.png"
+                                        alt=""><br><br><br>
+
+                                    上部メニューの「リキャストタイムを表示」にチェックを入れると、リキャストタイムが表示されます。<br><br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial014.png"
+                                        alt=""><br><br><br>
+
+                                    リキャストタイムは「赤いライン」で表示されます。<br><br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial015.png"
+                                        alt=""><br><br><br>
+
+                                    また、リキャスト中の場合、スキルリスト内でもの残りのクールタイムが表示されます。<br><br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial016.png"
+                                        alt=""><br><br><br>
+
+
+                                    <section id="area-3-3">
+                                        <h3>３－３.対象を選択するスキル</h3>
+                                    </section>
+                                    PTメンバー１人を対象とする場合は、選択肢が表示されます。<br>
+                                    プルダウンから１人選んで下さい。<br>
+                                    ※選びなおす場合は、「スキルリスト」からスキルをクリックして「一度消してから」再度選択してください！<br>
+                                    ※「自分以外のPTメンバー」という条件が適応されていないのでご注意ください（調整中）<br><br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial017.png"
+                                        alt=""><br><br><br>
+
+                                    <section id="area-3-4">
+                                        <h3>３－４.被ダメージ対象を変更する</h3>
+                                    </section>
+                                    初期設定では「PTジョブ設定」で設定した順に自動で選択されています<br>
+                                    攻略に合わせて、変更をしてください！<br><br>
+
+                                    変更方法は、まず「対象」の「ジョブアイコン」をクリックします。「ジョブリスト」が表示されます。<br><br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial018.png"
+                                        alt=""><br><br><br>
+
+                                    外したいジョブをクリックします（アイコンが消えます）<br><br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial019.png"
+                                        alt=""><br><br><br>
+
+                                    対象としたいジョブアイコンをクリックします（アイコンが追加されます）<br><br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial020.png"
+                                        alt=""><br><br><br>
+
+                                    通常、対象となりえないジョブはグレーアウトされています。<br><br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial021.png"
+                                        alt=""><br><br><br>
+
+                                    通常の攻略法で受けるべきジョブが選択できるようになっています。<br>
+                                    制限を解除できる仕様を調整中です。<br>
+                                    ※頭割り攻撃は、人数を減らしても１人当たりのダメージは変わりません（調整中）基本的な必要人数選んでください。<br><br><br>
+
+
+
+                                    <section id="area-3-5">
+                                        <h3>３－５.データを保存する</h3>
+                                    </section>
+                                    上部メニューの「現在の状態を保存する」をクリックすると現在の内容が再現できる「URLが発行されます」<br>
+                                    URLは「コピー」された状態になるので、どこかへ「貼り付け」をして、保管してください。<br><br>
+                                    <div class="tutorial_group004">
+                                        <img src="\images\buffsimulator\tutorial\tutorial022.png" alt="">
+                                        <img src="\images\buffsimulator\tutorial\tutorial023.png"
+                                            alt=""><br><br><br>
+
+
+                                    </div>
+
+                                    【保存されるもの】<br>
+                                    ・「PTジョブ設定」<br>
+                                    ・選択された「タイムライン」<br>
+                                    ・選択した「スキル」<br>
+                                    ・選択した「対象」<br>
+                                    ※各フェーズごとに保存が必要です。<br>
+                                    保存前にフェーズを変更すると内容が失われますのでご注意ください。<br><br><br>
+
+
+                                    <section id="area-3-6">
+                                        <h3>３－６.データを上書きする</h3>
+                                    </section>
+                                    発行されたURLにアクセスすると、「左メニュー」に「セーブID」と「上書き保存」ボタンが表示されます。<br>
+                                    「上書き保存」ボタンをクリックすると、現在のURLに保存されている内容が上書きされます。<br>
+                                    ※元には戻せないのでご注意ください。<br>
+                                    <img src="\images\buffsimulator\tutorial\tutorial024.png"
+                                        alt=""><br><br><br>
+
+
+                                    <section id="area-3-7">
+                                        <h3>３－７.その他</h3>
+                                    </section>
+                                    リストの各ヘッダーはマウスを乗せるとその項目の詳細が確認できます。<br>
+                                    ※調整中
+                                    {{-- <img src="\images\buffsimulator\tutorial\tutorial025.png"
+                                        alt=""><br><br><br> --}}
+                                    <br><br><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+
+
+
+
                             </div>
 
                         </div>
