@@ -2,7 +2,7 @@
 <html lang="jp">
 
 <head>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -12,7 +12,7 @@
 
     @component('components.meta.top.topmeta')
     @endcomponent
-    
+
 
 </head>
 
@@ -25,7 +25,7 @@
     <div id="mainContents">
         <div class="backgroundimage">
             <div class="mainContents_container">
-                
+
                 <!-- レフト　-->
                 <div class="mainContents_container_left"></div>
 
@@ -35,9 +35,9 @@
                     <div class="mainContents_container_center_outer">
 
                         <h1>WEBアプリ</h1>
-                        
+
                         <div class="mainContents_container_center_inner">
-                            
+
                             <ul class="contents_card">
                                 {{-- <li class="contents_card_li">
                                     <a href="/ccard">
@@ -61,11 +61,11 @@
                                     <p>リーヴ券がいつ溢れてしまうかを計算してくれるツールです！</p>
                                 </li>
                                 <li class="contents_card_li">
-                                    <a href="/">
-                                        <img src="\images\Top\nowcreating.jpg" alt="">
+                                    <a href="/buffsimulator">
+                                        <img src="\images\Top\buffsimulatorsamneil.png" alt="">
                                     </a>
-                                    <h2>Comming Soon</h2>
-                                    <p>現在制作中！</p>
+                                    <h2>バフ/軽減 作戦ルーム</h2>
+                                    <p>コンテンツのタイムラインに合わせて、バフ/軽減のシミュレーションができます！</p>
                                 </li>
                                 <li class="contents_card_li">
                                     <a href="/">
@@ -75,14 +75,14 @@
                                     <p>現在制作中！</p>
                                 </li>
                             </ul>
-                            
+
                         </div>
 
 
                         <h1>木人練習場</h1>
-                        
+
                         <div class="mainContents_container_center_inner">
-                            
+
                             <ul class="contents_card">
                                 <li class="contents_card_li">
                                     <a href="/avoidsnakes" target="_blank">
@@ -113,12 +113,12 @@
                                     <p>現在制作中！</p>
                                 </li>
                             </ul>
-                            
+
                         </div>
 
 
                     </div>
-                    
+
                 </div>
 
                 <!-- ライト　-->
@@ -132,7 +132,8 @@
     <!--共通フッター-->
     @component('components.commonFooterMenu')
     @endcomponent
-    
+
 
 </body>
+
 </html>

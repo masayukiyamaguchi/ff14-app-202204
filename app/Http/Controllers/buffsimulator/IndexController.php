@@ -83,6 +83,12 @@ class IndexController extends Controller
             $select_skill_sub = array_merge($select_skill_sub, $data);
         }
 
+        // 経過時間
+        // なければダミーを挿入
+        if (!array_key_exists("all_done_skill_list_time", $datas)) {
+            $datas["all_done_skill_list_time"] = [];
+        }
+        $pass_time = $datas["all_done_skill_list_time"];
 
 
         $key = array_keys($select_skill_sub);
@@ -246,6 +252,39 @@ class IndexController extends Controller
 
 
 
+
+
+        //複数のバフがつくスキルの調整
+        foreach ($select_skill_data_alljob as $data) {
+
+            switch ($data["skill_name"]) {
+                case "インターベンション":
+                case "ハート・オブ・コランダム":
+                    $skill_num = $data["job_e"] . $data["skill_no"];
+
+                    // 経過時間が効果時間より小さければ効果0とする
+                    if ($data["efect_time"] < $pass_time[$skill_num]) {
+                        $data["efect_size"] = 0;
+                    }
+                    break;
+
+
+                case "原初の猛り":
+                    $skill_num = $data["job_e"] . $data["skill_no"];
+
+                    dump($pass_time[$skill_num]);
+
+                    if ($data["element"] == "barrier" && $pass_time[$skill_num] > 0) {
+                        $data["efect_size"] = 0;
+                        break;
+                    }
+
+                    if ($data["efect_time"] < $pass_time[$skill_num]) {
+                        $data["efect_size"] = 0;
+                    }
+                    break;
+            }
+        }
 
 
 

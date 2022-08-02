@@ -86,6 +86,11 @@
 }
 
 
+.left_menu7 {
+    margin-top: 50px;
+}
+
+
 .save_id_div {
     padding-top: 30px;
 }
@@ -990,6 +995,25 @@ td[class^="tr0"] {
     color: white;
     padding-left: 20px;
 }
+
+.contents7 {
+    display: none;
+}
+
+.contents7_div {
+    padding-top: 10px;
+    padding-left: 30px;
+    color: white;
+}
+
+.contents7_div h3 {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+
+
 
 .tutorial_group001 {
     display: flex;

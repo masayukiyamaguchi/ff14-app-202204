@@ -2312,6 +2312,9 @@ $(function () {
             for (i = 0; use_time_next - use_time_num < skill_efect_time; use_time_next_tr++) {
 
 
+                // 使ってから何秒後か
+                var use_time_elapased = use_time_next - use_time_num;
+
 
                 // バリアの場合、ダメージがあったら終わり
                 var skill_job_num = job_name + skill_num;
@@ -2344,7 +2347,7 @@ $(function () {
 
                 // スキル挿入よりも前にスキルがある場合の処理
                 if (count_skill_num <= count_inv_skill_num) {
-                    $(".tr" + inv_skill_tr + "td" + inv_skill_td).children("[class^='tline_skill_icon_']").eq(count_skill_num - 1).before("<div class='tline_skill_icon_inv' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/" + job_name + skill_num + ".png></div>");
+                    $(".tr" + inv_skill_tr + "td" + inv_skill_td).children("[class^='tline_skill_icon_']").eq(count_skill_num - 1).before("<div class='tline_skill_icon_inv' pass_time='" + use_time_elapased + "' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/skilliconnull.png></div>");
                     bool_prev_skill = true;
 
                     var loop_bool = true;
@@ -2356,7 +2359,8 @@ $(function () {
 
                         if (temp_trtd_eqi.attr("class") == "tline_skill_icon_inv" && temp_trtd_eqi.attr("prepend_id") == "copy") {
                             temp_trtd_eqi.attr("inv_id", job_name + skill_num);
-                            temp_trtd_eqi.children("img").attr("src", "/images/buffsimulator/skillicon/" + job_name + skill_num + ".png");
+                            temp_trtd_eqi.attr("pass_time", use_time_elapased);
+                            temp_trtd_eqi.children("img").attr("src", "/images/buffsimulator/skilliconnull.png");
 
                         } else {
 
@@ -2371,13 +2375,13 @@ $(function () {
                     // スタンダードに効果時間のinvを挿入する部分
                     for (i = count_inv_skill_num; i < count_skill_num; i++) {
                         if (i < count_skill_num - 1) {
-                            $(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/skilliconnull.png></div>"));
-                            //$(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/" + job_name + skill_num + ".png></div>"));
+                            $(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv' pass_time='" + use_time_elapased + "' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/skilliconnull.png></div>"));
+                            //$(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv' pass_time='" + use_time_elapased + "' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/" + job_name + skill_num + ".png></div>"));
                             // デバッグ用
 
                         } else {
-                            $(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/skilliconnull.png></div>"));
-                            //$(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/" + job_name + skill_num + ".png></div>"));
+                            $(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv' pass_time='" + use_time_elapased + "' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/skilliconnull.png></div>"));
+                            //$(".tr" + inv_skill_tr + "td" + inv_skill_td).append($("<div class='tline_skill_icon_inv' pass_time='" + use_time_elapased + "' inv_id='" + job_name + skill_num + "' ><img src=/images/buffsimulator/skillicon/" + job_name + skill_num + ".png></div>"));
                             // デバッグ用
                         }
 
@@ -2508,10 +2512,10 @@ $(function () {
 
     function barrierListExist(skill_job_num) {
 
-        if (barrier_skill_list_job_num.indexOf(skill_job_num) > -1) {
-            return true;
-        } else {
+        if (barrier_skill_list_job_num.indexOf(skill_job_num) < 0 || skill_job_num == "warrior4" || skill_job_num == "gunbreaker5") {
             return false;
+        } else {
+            return true;
         }
 
     }
@@ -2547,6 +2551,7 @@ $(function () {
             target_tr = element;
             all_done_skill_list = [];
             all_done_skill_list_sub = [];
+            all_done_skill_list_time = {};
             job_name_list = [];
             target_on = "";
 
@@ -2587,6 +2592,10 @@ $(function () {
                     var dict = { [skill_no]: target };
                     skill_no_list_sub.push(dict);
 
+                    // 経過時間
+
+                    all_done_skill_list_time[job_name + skill_no] = "0";
+
                 });
 
                 // 表示されているスキルアイコンをもとに抽出(inv)
@@ -2617,6 +2626,9 @@ $(function () {
                     }
                     var dict = { [skill_no]: target };
                     skill_no_list_sub.push(dict);
+
+                    // 経過時間
+                    all_done_skill_list_time[job_name + skill_no] = $(this).attr("pass_time");
 
                 });
 
@@ -2653,7 +2665,7 @@ $(function () {
 
                 // 対象だけ表示する用のリスト
                 var target_job_list = targetCharHpDisplay(target_tr);
-                await timeLineDataAjax(all_done_skill_list, all_done_skill_list_sub, job_name_list, damage_element, all_job_status, target_tr, damage_key_no, remainhp_key_no, target_job_list, target_on);
+                await timeLineDataAjax(all_done_skill_list, all_done_skill_list_sub, job_name_list, damage_element, all_job_status, target_tr, damage_key_no, remainhp_key_no, target_job_list, target_on, all_done_skill_list_time);
 
             } else {
                 // hitではなかった時の処理
@@ -2667,7 +2679,7 @@ $(function () {
 
 
 
-    async function timeLineDataAjax(all_done_skill_list, all_done_skill_list_sub, job_name_list, damage_element, all_job_status, target_tr, damage_key_no, remainhp_key_no, target_job_list, target_on) {
+    async function timeLineDataAjax(all_done_skill_list, all_done_skill_list_sub, job_name_list, damage_element, all_job_status, target_tr, damage_key_no, remainhp_key_no, target_job_list, target_on, all_done_skill_list_time) {
 
         //ajaxでデータを受け渡し
         $.ajaxSetup({
@@ -2688,6 +2700,7 @@ $(function () {
                 damage_element,
                 all_job_status,
                 target_on,
+                all_done_skill_list_time,
             },
         })
             // Ajaxリクエスト成功時の処理
