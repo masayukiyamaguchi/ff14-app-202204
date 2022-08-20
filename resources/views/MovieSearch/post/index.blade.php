@@ -50,17 +50,16 @@
 
                             <div class="error_messase">
                                 @if ($errors->any())
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-
-                                    <li>{{ $error }}</li>
-
-                                    @endforeach
-                                </ul>
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
                                 @endif
                             </div>
 
-                            <form action="/moviesearch/postcontents/create" method="post" class="formfield_inputfield_form">
+                            <form action="/moviesearch/postcontents/create" method="post"
+                                class="formfield_inputfield_form">
 
                                 @csrf
 
@@ -122,7 +121,7 @@
 
                                 <div class="bool_clear">
                                     <div class="bool_clear_input">
-                                        <input type="checkbox" name="bool_clear" id="bool_clear">
+                                        <input type="checkbox" name="bool_clear" id="bool_clear" checked>
                                         <div class="bool_clear_text">
                                             クリアー動画
                                         </div>
@@ -191,42 +190,95 @@
 
                                     <div class="contents_input_contentsname">
                                         <select name="contentsname" id="contentsname">
-                                            <option value="UltimateDragoonWar" class="endwalker displaynone">絶・竜詩戦争</option>
+                                            <option value="UltimateDragoonWar" class="endwalker displaynone">絶・竜詩戦争
+                                            </option>
                                             <option value="Asphodelos" class="endwalker displaynone">辺獄編</option>
-                                            <option value="EndwalkerExtreme" class="endwalker displaynone">極討滅戦</option>
-                                            <option value="EdensPromise" class="shadowbringers displaynone">再生編</option>
+
+                                            <option value="Purgatory" class="endwalker displaynone">煉獄編</option>
+
+                                            <option value="EndwalkerExtreme" class="endwalker displaynone">極討滅戦
+                                            </option>
+                                            <option value="EndwalkerUnreal" class="endwalker displaynone">幻討滅戦
+                                            </option>
+                                            <option value="EdensPromise" class="shadowbringers displaynone">再生編
+                                            </option>
                                             <option value="EdensVerse" class="shadowbringers displaynone">共鳴編</option>
                                             <option value="EdensGate" class="shadowbringers displaynone">覚醒編</option>
                                             <option value="Alphascape" class="stormblood displaynone">アルファ編</option>
                                             <option value="Sigmascape" class="stormblood displaynone">シグマ編</option>
                                             <option value="Deltascape" class="stormblood displaynone">デルタ編</option>
-                                            <option value="TheSouloftheCreator" class="heavensward displaynone">天動編</option>
-                                            <option value="TheBurdenoftheSon" class="heavensward displaynone">律動編</option>
-                                            <option value="TheFistoftheFather" class="heavensward displaynone">起動編</option>
-                                            <option value="TheFinalCoilofBahamut" class="arealmreborn displaynone">真成編</option>
-                                            <option value="TheSecondCoilofBahamut" class="arealmreborn displaynone">侵攻編</option>
-                                            <option value="TheBindingCoilofBahamut" class="arealmreborn displaynone">邂逅編</option>
+                                            <option value="TheSouloftheCreator" class="heavensward displaynone">天動編
+                                            </option>
+                                            <option value="TheBurdenoftheSon" class="heavensward displaynone">律動編
+                                            </option>
+                                            <option value="TheFistoftheFather" class="heavensward displaynone">起動編
+                                            </option>
+                                            <option value="TheFinalCoilofBahamut" class="arealmreborn displaynone">真成編
+                                            </option>
+                                            <option value="TheSecondCoilofBahamut" class="arealmreborn displaynone">
+                                                侵攻編</option>
+                                            <option value="TheBindingCoilofBahamut" class="arealmreborn displaynone">
+                                                邂逅編</option>
                                         </select>
                                     </div>
 
                                     <div class="contents_input_contents">
                                         <select name="contents" id="contents">
-                                            <option value="UltimateDragoonWar01" class="UltimateDragoonWar displaynone">開幕</option>
+                                            <option value="UltimateDragoonWar00"
+                                                class="UltimateDragoonWar displaynone">全フェーズ（通し）</option>
+                                            <option value="UltimateDragoonWar01"
+                                                class="UltimateDragoonWar displaynone">蒼天騎士</option>
+                                            <option value="UltimateDragoonWar02"
+                                                class="UltimateDragoonWar displaynone">トールダン</option>
+                                            <option value="UltimateDragoonWar03"
+                                                class="UltimateDragoonWar displaynone">ニーズヘッグ</option>
+                                            <option value="UltimateDragoonWar04"
+                                                class="UltimateDragoonWar displaynone">邪眼</option>
+                                            <option value="UltimateDragoonWar05"
+                                                class="UltimateDragoonWar displaynone">教皇庁if</option>
+                                            <option value="UltimateDragoonWar06"
+                                                class="UltimateDragoonWar displaynone">偽典トールダン</option>
+                                            <option value="UltimateDragoonWar07"
+                                                class="UltimateDragoonWar displaynone">二天竜</option>
+                                            <option value="UltimateDragoonWar08"
+                                                class="UltimateDragoonWar displaynone">Pトールダン</option>
+
                                             <option value="Asphodelos01" class="Asphodelos displaynone">1層</option>
                                             <option value="Asphodelos02" class="Asphodelos displaynone">2層</option>
                                             <option value="Asphodelos03" class="Asphodelos displaynone">3層</option>
                                             <option value="Asphodelos04" class="Asphodelos displaynone">4層前半</option>
                                             <option value="Asphodelos05" class="Asphodelos displaynone">4層後半</option>
                                             <option value="Asphodelos06" class="Asphodelos displaynone">4層前後半</option>
-                                            <option value="EndwalkerExtreme01" class="EndwalkerExtreme displaynone">極ゾディアーク</option>
-                                            <option value="EndwalkerExtreme02" class="EndwalkerExtreme displaynone">極ハイデリン</option>
-                                            <option value="EndwalkerExtreme03" class="EndwalkerExtreme displaynone">終焉を謳うもの</option>
-                                            <option value="EdensPromise01" class="EdensPromise displaynone">1層</option>
-                                            <option value="EdensPromise02" class="EdensPromise displaynone">2層</option>
-                                            <option value="EdensPromise03" class="EdensPromise displaynone">3層</option>
-                                            <option value="EdensPromise04" class="EdensPromise displaynone">4層前半</option>
-                                            <option value="EdensPromise05" class="EdensPromise displaynone">4層後半</option>
-                                            <option value="EdensPromise06" class="EdensPromise displaynone">4層前後半</option>
+
+                                            <option value="Purgatory01" class="Purgatory displaynone">1層</option>
+                                            <option value="Purgatory02" class="Purgatory displaynone">2層</option>
+                                            <option value="Purgatory03" class="Purgatory displaynone">3層</option>
+                                            <option value="Purgatory04" class="Purgatory displaynone">4層前半</option>
+                                            <option value="Purgatory05" class="Purgatory displaynone">4層後半</option>
+                                            <option value="Purgatory06" class="Purgatory displaynone">4層前後半</option>
+
+                                            <option value="EndwalkerExtreme01" class="EndwalkerExtreme displaynone">
+                                                極ゾディアーク</option>
+                                            <option value="EndwalkerExtreme02" class="EndwalkerExtreme displaynone">
+                                                極ハイデリン</option>
+                                            <option value="EndwalkerExtreme03" class="EndwalkerExtreme displaynone">
+                                                終焉を謳うもの</option>
+                                            <option value="EndwalkerExtreme04" class="EndwalkerExtreme displaynone">
+                                                ？？？？？</option>
+                                            <option value="EndwalkerUnreal01" class="EndwalkerUnreal displaynone">
+                                                幻魔人セフィロト</option>
+                                            <option value="EdensPromise01" class="EdensPromise displaynone">1層
+                                            </option>
+                                            <option value="EdensPromise02" class="EdensPromise displaynone">2層
+                                            </option>
+                                            <option value="EdensPromise03" class="EdensPromise displaynone">3層
+                                            </option>
+                                            <option value="EdensPromise04" class="EdensPromise displaynone">4層前半
+                                            </option>
+                                            <option value="EdensPromise05" class="EdensPromise displaynone">4層後半
+                                            </option>
+                                            <option value="EdensPromise06" class="EdensPromise displaynone">4層前後半
+                                            </option>
                                             <option value="EdensVerse01" class="EdensVerse displaynone">1層</option>
                                             <option value="EdensVerse02" class="EdensVerse displaynone">2層</option>
                                             <option value="EdensVerse03" class="EdensVerse displaynone">3層</option>
@@ -253,30 +305,54 @@
                                             <option value="Deltascape04" class="Deltascape displaynone">4層前半</option>
                                             <option value="Deltascape05" class="Deltascape displaynone">4層後半</option>
                                             <option value="Deltascape06" class="Deltascape displaynone">4層前後半</option>
-                                            <option value="TheSouloftheCreator01" class="TheSouloftheCreator displaynone">1層</option>
-                                            <option value="TheSouloftheCreator02" class="TheSouloftheCreator displaynone">2層</option>
-                                            <option value="TheSouloftheCreator03" class="TheSouloftheCreator displaynone">3層</option>
-                                            <option value="TheSouloftheCreator04" class="TheSouloftheCreator displaynone">4層</option>
-                                            <option value="TheBurdenoftheSon01" class="TheBurdenoftheSon displaynone">1層</option>
-                                            <option value="TheBurdenoftheSon02" class="TheBurdenoftheSon displaynone">2層</option>
-                                            <option value="TheBurdenoftheSon03" class="TheBurdenoftheSon displaynone">3層</option>
-                                            <option value="TheBurdenoftheSon04" class="TheBurdenoftheSon displaynone">4層</option>
-                                            <option value="TheFistoftheFather01" class="TheFistoftheFather displaynone">1層</option>
-                                            <option value="TheFistoftheFather02" class="TheFistoftheFather displaynone">2層</option>
-                                            <option value="TheFistoftheFather03" class="TheFistoftheFather displaynone">3層</option>
-                                            <option value="TheFistoftheFather04" class="TheFistoftheFather displaynone">4層</option>
-                                            <option value="TheFinalCoilofBahamut01" class="TheFinalCoilofBahamut displaynone">1層</option>
-                                            <option value="TheFinalCoilofBahamut02" class="TheFinalCoilofBahamut displaynone">2層</option>
-                                            <option value="TheFinalCoilofBahamut03" class="TheFinalCoilofBahamut displaynone">3層</option>
-                                            <option value="TheFinalCoilofBahamut04" class="TheFinalCoilofBahamut displaynone">4層</option>
-                                            <option value="TheSecondCoilofBahamut01" class="TheSecondCoilofBahamut displaynone">1層</option>
-                                            <option value="TheSecondCoilofBahamut02" class="TheSecondCoilofBahamut displaynone">2層</option>
-                                            <option value="TheSecondCoilofBahamut03" class="TheSecondCoilofBahamut displaynone">3層</option>
-                                            <option value="TheSecondCoilofBahamut04" class="TheSecondCoilofBahamut displaynone">4層</option>
-                                            <option value="TheBindingCoilofBahamut01" class="TheBindingCoilofBahamut displaynone">1層</option>
-                                            <option value="TheBindingCoilofBahamut02" class="TheBindingCoilofBahamut displaynone">2層</option>
-                                            <option value="TheBindingCoilofBahamut03" class="TheBindingCoilofBahamut displaynone">3層</option>
-                                            <option value="TheBindingCoilofBahamut04" class="TheBindingCoilofBahamut displaynone">4層</option>
+                                            <option value="TheSouloftheCreator01"
+                                                class="TheSouloftheCreator displaynone">1層</option>
+                                            <option value="TheSouloftheCreator02"
+                                                class="TheSouloftheCreator displaynone">2層</option>
+                                            <option value="TheSouloftheCreator03"
+                                                class="TheSouloftheCreator displaynone">3層</option>
+                                            <option value="TheSouloftheCreator04"
+                                                class="TheSouloftheCreator displaynone">4層</option>
+                                            <option value="TheBurdenoftheSon01" class="TheBurdenoftheSon displaynone">
+                                                1層</option>
+                                            <option value="TheBurdenoftheSon02" class="TheBurdenoftheSon displaynone">
+                                                2層</option>
+                                            <option value="TheBurdenoftheSon03" class="TheBurdenoftheSon displaynone">
+                                                3層</option>
+                                            <option value="TheBurdenoftheSon04" class="TheBurdenoftheSon displaynone">
+                                                4層</option>
+                                            <option value="TheFistoftheFather01"
+                                                class="TheFistoftheFather displaynone">1層</option>
+                                            <option value="TheFistoftheFather02"
+                                                class="TheFistoftheFather displaynone">2層</option>
+                                            <option value="TheFistoftheFather03"
+                                                class="TheFistoftheFather displaynone">3層</option>
+                                            <option value="TheFistoftheFather04"
+                                                class="TheFistoftheFather displaynone">4層</option>
+                                            <option value="TheFinalCoilofBahamut01"
+                                                class="TheFinalCoilofBahamut displaynone">1層</option>
+                                            <option value="TheFinalCoilofBahamut02"
+                                                class="TheFinalCoilofBahamut displaynone">2層</option>
+                                            <option value="TheFinalCoilofBahamut03"
+                                                class="TheFinalCoilofBahamut displaynone">3層</option>
+                                            <option value="TheFinalCoilofBahamut04"
+                                                class="TheFinalCoilofBahamut displaynone">4層</option>
+                                            <option value="TheSecondCoilofBahamut01"
+                                                class="TheSecondCoilofBahamut displaynone">1層</option>
+                                            <option value="TheSecondCoilofBahamut02"
+                                                class="TheSecondCoilofBahamut displaynone">2層</option>
+                                            <option value="TheSecondCoilofBahamut03"
+                                                class="TheSecondCoilofBahamut displaynone">3層</option>
+                                            <option value="TheSecondCoilofBahamut04"
+                                                class="TheSecondCoilofBahamut displaynone">4層</option>
+                                            <option value="TheBindingCoilofBahamut01"
+                                                class="TheBindingCoilofBahamut displaynone">1層</option>
+                                            <option value="TheBindingCoilofBahamut02"
+                                                class="TheBindingCoilofBahamut displaynone">2層</option>
+                                            <option value="TheBindingCoilofBahamut03"
+                                                class="TheBindingCoilofBahamut displaynone">3層</option>
+                                            <option value="TheBindingCoilofBahamut04"
+                                                class="TheBindingCoilofBahamut displaynone">4層</option>
                                         </select>
                                     </div>
                                 </div>
