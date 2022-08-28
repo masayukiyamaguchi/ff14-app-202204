@@ -1,126 +1,271 @@
-@media screen and (min-width: 767px) { /*ウィンドウ幅が767px以上の場合に適用*/
+@media screen and (min-width: 767px) {
+    /*ウィンドウ幅が767px以上の場合に適用*/
 
 
-/*フォント*/
-@import url('https://fonts.googleapis.com/css2?family=Wire+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap');
+    /*フォント*/
+    @import url('https://fonts.googleapis.com/css2?family=Wire+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap');
 
 
-/*ページ*/
-#body
-{
-    margin:0;
-    background-color: rgb(33, 33, 33);  
-}
+    /*ページ*/
+    #body {
+        margin: 0;
+        background-color: rgb(33, 33, 33);
+    }
 
 
-/*メインコンテンツ*/
-#mainContents
-{
-    position: initial;
-}
+    /*メインコンテンツ*/
+    #mainContents {
+        position: initial;
+    }
 
-.backgroundimage
-{
-    background-color: rgb(24, 24, 24);    
+    .backgroundimage {
+        background-color: rgb(24, 24, 24);
 
-}
+    }
 
-.mainContents_container
-{
-    display: flex;
-    padding-top: 55px;
-    display: -webkit-flex;
-}
+    .mainContents_container {
+        display: flex;
+        padding-top: 55px;
+        display: -webkit-flex;
+    }
 
 
 
-/*レフトコンテンツ*/
-.mainContents_container_left
-{
-    width: 12.5%;
-    height: 1500px;
-    color: white;
-}
+    /*レフトコンテンツ*/
+    .mainContents_container_left {
+        width: 12.5%;
+        height: 1250px;
+        color: white;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
 
 
 
-/*中央コンテンツ*/
-.mainContents_container_center
-{
-    width: 87.5%;
-    background-color: rgb(33, 33, 33);
-    color: white;
-}
+    /*中央コンテンツ*/
+    .mainContents_container_center {
+        width: 87.5%;
+        background-color: rgb(33, 33, 33);
+        color: white;
+    }
 
-.formfield_h1
-{
-    margin-left: 10px;
-}
+    .formfield_h1 {
+        margin-left: 10px;
+    }
 
-.error_messase
-{
-    color: red;
-}
+    .error_messase {
+        color: red;
+    }
 
 
-.formfield_inputfield_form > div
-{
-    margin-top: 10px;
-    margin-left: 30px;
-}
+    .formfield_inputfield_form>div {
+        margin-top: 10px;
+        margin-left: 30px;
+    }
 
-.input_movie_url,.bool_vc_input,.bool_guide_input,.bool_clear_input,.bool_act_input,.play_job,.contents,.string_guide_input,.language_input
-{
-    display: flex;
-}
+    .input_movie_url,
+    .bool_vc_input,
+    .bool_guide_input,
+    .bool_clear_input,
+    .bool_act_input,
+    .play_job,
+    .contents,
+    .string_guide_input,
+    .language_input {
+        display: flex;
+    }
 
-.tank
-{
-    background-color: rgb(154, 154, 255);
-}
+    .tank {
+        background-color: rgb(154, 154, 255);
+    }
 
-.dps{
-    background-color: rgb(255, 152, 152);
-}
+    .dps {
+        background-color: rgb(255, 152, 152);
+    }
 
-.healer
-{
-    background-color: rgb(166, 255, 158);
-}
-
-
-/* スクロールバー */
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-    background: rgb(24, 24, 24);    
-  }
-   
-  ::-webkit-scrollbar-thumb {
-    background: #c7c7c7;
-    border-radius: 5px;
-  }
+    .healer {
+        background-color: rgb(166, 255, 158);
+    }
 
 
-.displaynone{
-    display: none;
-}
+    /* スクロールバー */
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        background: rgb(24, 24, 24);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #c7c7c7;
+        border-radius: 5px;
+    }
 
 
-
-
-
-}/*ウィンドウ幅が767px以上の場合に適用*/
-
-
-
-@media screen and (max-width : 599px) { /*ウィンドウ幅が最大479pxまでの場合に適用*/
-
-    #pop{
+    .displaynone {
         display: none;
     }
 
 
-}/*ウィンドウ幅が最大479pxまでの場合に適用*/
+
+    /* 一括登録 */
+    .main_contents_div {
+        padding-left: 10px;
+        padding-top: 20px;
+        padding-bottom: 30px;
+        text-align: center;
+    }
+
+    .search_word_input_div input {
+        width: 300px;
+        height: 20px;
+    }
+
+    .search_word_div {
+        display: flex;
+        justify-content: center;
+    }
+
+    .search_word_text {
+        color: white;
+        font-size: 20px;
+        padding-right: 5px;
+    }
+
+    .search_word_button_div {
+        padding-left: 5px;
+    }
+
+    .check_box_list,
+    .pull_down_list {
+        display: flex;
+    }
+
+    .check_box_list div,
+    .pull_down_list div {
+        padding-right: 10px;
+    }
+
+    .formfield_inputfield_div {
+        display: flex;
+        padding-bottom: 20px;
+        padding-right: 20px;
+
+    }
+
+    .formfield {
+        background-color: rgb(67, 67, 67);
+
+    }
+
+    #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+    }
+
+    #target {
+        position: absolute;
+        top: -250px;
+        left: -320px
+    }
+
+    .play_moniter {
+        text-align: center;
+        padding-bottom: 20px;
+
+    }
+
+
+    /* leftメニュー */
+    [class^="samneil_div"] img {
+        width: 100%;
+    }
+
+
+    [class^="channnel_samneil"] img {
+        width: 40px;
+        padding-right: 2px;
+    }
+
+    [class^="playlist_contents"] {
+        padding-bottom: 10px;
+    }
+
+    [class^="playlist_detail_datas"] {
+        display: flex;
+    }
+
+    [class^="playlist_title"] {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    [class^="playlist_detail_title"] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    [class^="playlist_detail_data_text"] {
+        white-space: nowrap;
+    }
+
+    [class^="playlist_detail_data_text_num"] {
+        display: flex;
+    }
+
+    [class^="playlist_detail_data_text_num"] div {
+        padding-right: 5px;
+    }
+
+    [class^="play_time"] {
+        margin-top: -31px;
+        color: rgb(255, 0, 0);
+    }
+
+
+    [class^="view_url"] {
+        display: none;
+    }
+
+    [class^="movie_id"] {
+        display: none;
+    }
+
+
+    .ajax_done {
+        display: none;
+        color: rgb(255, 255, 0);
+    }
+
+    .ajax_error,
+    .search_ajax_error {
+        display: none;
+        color: rgb(255, 0, 0);
+    }
+
+
+
+
+}
+
+/*ウィンドウ幅が767px以上の場合に適用*/
+
+
+
+@media screen and (max-width : 599px) {
+    /*ウィンドウ幅が最大479pxまでの場合に適用*/
+
+    #pop {
+        display: none;
+    }
+
+
+}
+
+/*ウィンドウ幅が最大479pxまでの場合に適用*/

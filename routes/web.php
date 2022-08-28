@@ -37,6 +37,10 @@ Route::post('/moviesearch/moviesearchajax', "MovieSearch\IndexController@ajax");
 //投稿画面
 Route::get('/moviesearch/postcontents', "MovieSearch\MoviePostController@Index");
 Route::post('/moviesearch/postcontents/create', "MovieSearch\MoviePostController@InsertData");
+Route::get('/moviesearch/postlist', "MovieSearch\MoviePostController@Postlist");
+Route::post('/moviesearch/postlistdataaccess', "MovieSearch\MoviePostController@Postlistdataaccess");
+
+
 
 //データアップデートアクセス
 Route::get('/moviesearch/dataupdataaccess', "MovieSearch\MoviePostController@DataUpdateBach");
@@ -57,14 +61,23 @@ Route::get('/moviesearch/test', "MovieSearch\IndexController@test");
 Route::get('/moviesearch/{movie_id}', "MovieSearch\MoviePlayController@index");
 
 
+
+
+
 //Avoidsnakesルート
 Route::get('/avoidsnakes', "avoidsnakes\IndexController@index");
+
+
+
 
 
 //Checkleve
 Route::get('/checkleve', "checkleve\IndexController@index");
 Route::post('/checkleve/download', "checkleve\IndexController@download");
 Route::post('/checkleve/post', "checkleve\IndexController@post");
+
+
+
 
 
 //buffsimulator

@@ -103,19 +103,21 @@
                                 <p class="left_menu_h2 endwalker"> <span data-activePart="Purgatory"
                                         class="left_menu_h2_span">万魔殿パンデモニウム：煉獄編</span> </p>
                                 <ul class="left_menu_ul">
-                                    <li data-contents="Purgatory01"><img
-                                            src="\images\moviesearch\boss\bossimagesecret.png" alt="？？？？">？？？？
+                                    <li data-contents="Purgatory01"><img src="\images\moviesearch\boss\bossimage071.png"
+                                            alt="プロトカーバンクル">プロトカーバンクル
                                     </li>
-                                    <li data-contents="Purgatory02"><img
-                                            src="\images\moviesearch\boss\bossimagesecret.png" alt="？？？？">？？？？
+                                    <li data-contents="Purgatory02"><img src="\images\moviesearch\boss\bossimage072.png"
+                                            alt="ヘーゲモネー">ヘーゲモネー
                                     </li>
-                                    <li data-contents="Purgatory03"><img
-                                            src="\images\moviesearch\boss\bossimagesecret.png" alt="？？？？">？？？？</li>
-                                    <li data-contents="Purgatory04"><img
-                                            src="\images\moviesearch\boss\bossimagesecret.png" alt="？？？？">？？？？
+                                    <li data-contents="Purgatory03"><img src="\images\moviesearch\boss\bossimage073.png"
+                                            alt="アグディスティス">アグディスティス
+                                    </li>
+                                    <li data-contents="Purgatory04"><img src="\images\moviesearch\boss\bossimage074.png"
+                                            alt="ヘファイストス">ヘファイストス
                                     </li>
                                     <li data-contents="Purgatory05"><img
-                                            src="\images\moviesearch\boss\bossimagesecret.png" alt="？？？？">？？？？
+                                            src="\images\moviesearch\boss\bossimagesecret.png"
+                                            alt="ヘファイストス">ヘファイストス（後半）
                                     </li>
                                 </ul>
 

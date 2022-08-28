@@ -264,7 +264,7 @@
                                             <option value="EndwalkerExtreme03" class="EndwalkerExtreme displaynone">
                                                 終焉を謳うもの</option>
                                             <option value="EndwalkerExtreme04" class="EndwalkerExtreme displaynone">
-                                                ？？？？？</option>
+                                                極バルバリシア</option>
                                             <option value="EndwalkerUnreal01" class="EndwalkerUnreal displaynone">
                                                 幻魔人セフィロト</option>
                                             <option value="EdensPromise01" class="EdensPromise displaynone">1層
@@ -361,6 +361,10 @@
                                 <div class="formfield_submit">
                                     <input type="submit" value="送信">
                                 </div>
+
+
+
+
                             </form>
 
                         </div>
